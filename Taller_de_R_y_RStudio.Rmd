@@ -613,3 +613,6 @@ file: Es el directorio donde está ubicada la tabla. Para ello debes indicar la 
 header: Si la tabla tiene encabezado (nombres de columnas) entonces utiliza **TRUE**
 
 sep: Es el tipo de separador de datos que se emplea. Si los datos están separados por tabuladores usa `\t`, si están separados por comas usa `,`
+
+# Listas
+
