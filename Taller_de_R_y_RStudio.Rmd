@@ -14,12 +14,14 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, include = TRUE, eval = TRUE)
 ```
 
+<img src="Images/Rstudio.png" style="margin: 0 0;" width=200px>
+
 # RStudio
 
 RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **R**. La ventana de RStudio se conforma de 4 cuadrantes:
 
 ```{r, fig.align='center', out.width="400", echo=FALSE}
-knitr::include_graphics("./rstudiolayout.jpeg")
+knitr::include_graphics("./Images/rstudiolayout.jpeg")
 ```
 
 
@@ -191,7 +193,7 @@ paste("Ayer compré", litros, "litros de nive de limon o", conv, "galones")
 ```
 
 
-# Ejercicio 1
+## Ejercicio 1
 
 1. Declara o crea cuatro variables que se llamen *altura* con un valor **1.50**, *masa* **47**, *unidad1* **metros** y *unidad2* **kilogramos**
 2. Obten el índice de masa corporal dividiendo la masa entre el cuadrado de la altura y almacena este valor en una nueva variable llamada **IMC**
@@ -206,7 +208,7 @@ En R puedes manejar estructuras de datos más complejas. Esto es útil al moment
 - Data frames
 - Listas
 
-## Vectores
+# Vectores
 Los vectores son grupos de datos acomodados en **una sola dimensión**. Pueden ser descritos como una lista de datos numéricos, lógicos, de texto o combinaciones entre ellos. Para crear un vector utiliza la función `c()` y dentro del parentesis coloca los datos separados por comas:
 
 ```{r}
@@ -242,7 +244,7 @@ localizaciones <- c(c("Mexico", "Guatemala", "Belice", "Canada", "EUA"),
 localizaciones
 ```
 
-### Propiedades de los vectores
+## Propiedades de los vectores
 Los vectores al ser listas de datos tienen asociadas ciertas propiedades que son útiles al momento de de analizar datos. Por ejemplo, **la clase** de datos que contiene se obtiene con la función `class()`:
 ```{r}
 class(volumenes)
@@ -286,7 +288,7 @@ sort(escencias, decreasing = T)
 sort(localizaciones, decreasing = T)
 ```
 
-### Manipulación de vectores
+## Manipulación de vectores
 Al trabajar con datos, resulta útil extraer elementos de un vector de acuerdo a su posición dentro del vector o a un criterio. A esta operación de extracción se le conoce como *subset* y analizaremos el primer caso.
 Los elementos dentro de un vector se encuentran numerados o indexados. Al número que hace referencia a la posición de los elementos se le conoce como **índice**. La numeración siempre comienza desde **1**.  
 Para extraer elementos de un vector de acuerdo a su **posición** es necesario colocar entre corchetes `[]` la posición del elemento que queremos extraer:
@@ -358,7 +360,7 @@ numeros[numeros <= 5 | numeros >= 15]
 ```
 
 
-# Ejercicio 2
+## Ejercicio 2
 1. Declara una variable que se llame "rios" nueva que contenga un vector con los siguientes datos: Balsas, Usumacinta, Grijalva, Lerma, Balsas, Bravo, Grijalva, Balsas, Lerma y Bravo
 2. Obten la clase, longitud, proporción y elementos únicos.
 3. Ordena los elementos alfabéticamente (A a la Z)
@@ -366,7 +368,7 @@ numeros[numeros <= 5 | numeros >= 15]
 5. Extrae los elementos del 2 al 9
 6. Extrae los elementos que coincidan con Balsas o Lerma
 
-## Matrices
+# Matrices
 Las matrices en R representan arreglos en **dos dimensiones** n y m, en donde: 
 **n** es el número de filas y **m** de columnas.
 
@@ -399,7 +401,7 @@ rbind(x, y, z, a)
 cbind(x, y, z, a)
 ```
 
-### Propiedades de las matrices
+## Propiedades de las matrices
 Al igual que los vectores, las matrices presentan propiedades muy características que nos permitirán manipularlas. De manera análoga a la longitud de los vectores, las matrices tienen un numero de **dimensiones** (renglones y columnas) que podemos obtener con la función `dim()`:
 
 ```{r}
@@ -432,7 +434,7 @@ rownames(mi_matriz)
 colnames(mi_matriz)
 ```
 
-### Manipulación de matrices
+## Manipulación de matrices
 Al igual que los vectores, es posible extraer datos o hacer "subseting" en una matriz. Los datos a extraer pueden ser individuales, filas o columnas enteras. Para ello, usaremos el mismo procedimiento que con los vectores. En corchetes colocamos el índice de las **filas** seguido por el índice de las **columnas** y separados por comas:
 ```{r}
 #Extrae la primera fila de la matriz
@@ -482,14 +484,14 @@ mi_matriz
 t(mi_matriz)
 ```
 
-# Ejercicio 3
+## Ejercicio 3
 1. Genera una matriz con los números del 5 al 24 de 5 filas x 4 columnas
 2. Asigna el nombre de las filas y de las columnas a la matriz. Las filas nombralas como f1, f2, f3, etcétera y las columnas como c1, c2, c3, ...
 3. Extrae los elementos de la fila 2 y los de la columna 4
 4. Extrae los elementos de la fila 3 menores o iguales a 15
 5. Extrae los elementos de la columna 2 menores a 14 y mayores a 11
 
-## Data Frame
+# Data Frame
 
 Los cuadros de datos o *data frames* son tablas que contienen datos distribuidos en dos dimensiones, es decir, en **filas** y en **columnas**. De manera similar a las matrices, los data frames pueden ser visualizados como una concatenación o conjunción de venctores. A diferencia de las matrices, los data frames pueden contener datos de diferente clase, por lo que son estructuras heterogéneas.  Estrictamente, en un data frame los renglones representan individuos o casos y las columnas variables o rasgos.
 
@@ -504,7 +506,7 @@ Si incumplimos con la condición anterior, el número de elementos de los vector
 data.frame(numero = c(1, 2, 3, 4, 5), factor = c("a", "b", "c", "d"), decimal = c(1.1, 2.2, 3.3, 4.4), logico = c(T, F, F, T))
 ```
 
-### Propiedades de los data frames
+## Propiedades de los data frames
 Al igual que las matrices, los data frames presentan una clase particular, dimensiones, nombres de filas y columnas. Con las funciones `class()`, `dim()`, `rownames()` y `colnames()` se obtienen estos atributos:
 ```{r}
 ##Crea un data frame y asignalo a una variable
@@ -526,7 +528,7 @@ names(mi_matriz)
 ```
 De lo contrario, en una matriz la función `names()` nos devuelve un objeto nulo o vacío
 
-### Manipulación de los data frames
+## Manipulación de los data frames
 Manipular data frames resulta una operación común en el análisis de datos. Como se mencionó previamente, los data frames resultan ser estructuras preferidas sobre las matrices por la flexibilidad en su manipulación. Al igual que las matrices, es posible obtener todos los elementos de una fila o columna en particular utilizando corchetes:
 ```{r}
 #Obten la fila 1 del data frame
@@ -580,7 +582,7 @@ mi_df$logaritmo <- log(mi_df$decimal)
 mi_df
 ```
 
-# Ejercicio 4
+## Ejercicio 4
 1. Emplea el data frame instalado por default llamado *iris* y visualizalo
 2. Obten las dimensiones del data frame e indica cuantas filas y columnas contiene
 3. Obten el nombre de las columnas del data frame y asignlas a un vector que se llame *columnas_iris*
@@ -616,3 +618,96 @@ sep: Es el tipo de separador de datos que se emplea. Si los datos están separad
 
 # Listas
 
+Las listas de R son vectores cuyos elementos son estructuras de datos (vectores, matrices o cuadros de datos) **homogéneas** (de la misma clase) o **heterogéneas** (diferente clase). Las listas resultan útiles cuando almacenamos estructuras de datos que se encuentran relacionadas entre si, es decir, contienen información similar entre ellas y por lo tanto serán sujetas al mismo flujo de trabajo.  
+Para crear una lista usarémos la función `list()` instalada por default dentro de las utilidades de R:
+```{r}
+#Crear tres matrices las cuales serán almacenadas en una lista
+a <- matrix(1:20, nrow = 5, ncol = 4)
+b <- matrix(21:40, nrow = 5, ncol = 4)
+c <- matrix(41:60, nrow = 5, ncol = 4)
+
+#Usar la función list para guardar las tres matrices en una lista
+mi_lista <- list(a, b, c)
+
+#Imprimir el resultado
+mi_lista
+```
+
+## Propiedades de las listas
+
+De manera similar a los vectores, las listas son arreglos unidimensionales que cuentan con un largo y que es el número de elementos almacenados. La función `length()` permite conocer este valor:
+```{r}
+#Obtener la longitud de la lista
+length(mi_lista)
+```
+
+Las listas también poseen una clase la cual se obtiene con la función `class()`:
+```{r}
+#Obten la clase de una lista
+class(mi_lista)
+```
+
+## Manipulación de listas
+
+Para acceder a los elementos de una lista, utilizaremos una sintaxis muy similar a la de los vectores. Empleando corchetes `[]` y los índices de los elementos podemos extraer los datos dentro de ellas. Un aspecto importante es que dentro de las listas existe una jerarquía. El uso de un solo corchete extrae una *sub-lista* que contiene el elemento seleccionado con clase de lista:
+```{r}
+#Extrae la sub-lista del primer elemento de la lista
+mi_lista[1]
+mi_lista[2]
+
+#Verificar la clase del resultado
+class(mi_lista[1])
+```
+
+Para acceder por completo a cada elemento es necesario emplear **dos corchetes**:
+```{r}
+#Acceder a la primer matriz contenida en la lista
+mi_lista[[1]]
+
+#Verificar la clase del resultado
+class(mi_lista[[1]])
+```
+
+Cuando los elementos de la lista están nombrados, el acceso a los elementos de la lista es más sencillo. Usando las mismas matrices y una notación similar a los cuadros de datos crearemos una lista nombrada:
+```{r}
+#Crea la lista nombrando cada uno los elementos
+mi_lista_nombres <- list(A = a, B = b, C = c)
+
+#Verifica el resultado
+mi_lista_nombres
+
+#Accede a los elementos empleando el operador $
+mi_lista_nombres$A
+```
+Cada elemento de la lista fue nombrado con las letras *A, B y C* 
+
+### Funciones sobre elementos de las listas
+
+Aplicar funciones que evaluen a cada uno de los elementos de las listas es posible mediante el uso de `lapply()` y `sapply()`. La sintaxis es la siguiente:
+
+**lapply(lista, funcion)**
+
+Estas funciones aplican una función sobre todos los elementos de una lista con dos posibles resultados. `lapply()` nos devuelve un resultado con clase de lista:
+```{r}
+#Obtener el promedio total de las matrices dentro de la lista
+lapply(mi_lista, mean)
+
+#Evaluar la clase del resultado
+class(lapply(mi_lista, mean))
+```
+
+Por otro lado, `sapply()` nos devolverá el resultado **vectorizado**, es decir un vector:
+```{r}
+#Obtener el promedio total de las matrices dentro de la lista
+sapply(mi_lista, mean)
+
+#Evaluar la clase del resultado
+class(sapply(mi_lista, mean))
+```
+
+Sin embargo, no es posible emplear argumentos adicionales de la función que se va a evaluar. Para ello requerímos hacer uso de paquetes
+
+## Ejercicio 5
+1. Crea una lista nombrada que contenga 5 vectores. Cada vector deberá contener 5 letras del abecedario
+2. Extrae los primeros 3 elementos de la lista
+3. Obten la clase, en forma de vector, de cada elemento de la lista
