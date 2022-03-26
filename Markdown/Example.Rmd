@@ -1,0 +1,21 @@
+---
+title: "Example"
+author: "Rodolfo Chavez"
+date: "3/25/2022"
+output: 
+  rmarkdown::html_document:
+    css: "my_css.css"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<p class="red">amarillo</p>  
+<p class="back_blue">
+Este texto es color azul
+</p>
+
+<p class="blockquote">
+quote
+</p>
