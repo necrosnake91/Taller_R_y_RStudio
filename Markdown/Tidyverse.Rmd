@@ -1,0 +1,179 @@
+---
+title: "Tidyverse"
+author: "Rodolfo Chavez"
+date: "3/24/2022"
+knit: (function(inputFile, encoding) { 
+      out_dir <- "../HTML";
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), out_dir, 'Tidyverse')) })
+output: 
+  rmarkdown::html_document:
+    css: "my_css.css"
+    toc: true
+    toc_float: true
+    highlight: pygments
+editor_options:
+  chunk_output_style: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = T, include = T)
+```
+
+<img src="../Images/tidyverse.png" style="margin: 0 0;" width=200px>
+
+# Tidyverse
+
+**Tidyverse** es una colección de paquetes que nos permiten manipular juegos de datos para hacer análisis simples, reproducibles y ordenados. Constantemente los paquetes dentro de tidyverse son actualizados, para ello te recomiendo visitar la página de [tidyverse](https://www.tidyverse.org/) para estar al día con las noticias. Para instalar tidyverse en tu equipo corre la siguiente linea de código:
+
+```{r, eval=F}
+install.packages("tidyverse")
+```
+
+Sigue las instrucciones en la consola de R y una vez que se haya instalado carga los paquetes usando la siguiente línea de código:
+
+```{r}
+library(tidyverse)
+```
+
+En la consola de R observa como es que se han cargado los paquetes de **ggplot, tibble, tidyr, readr, purr, dplyr, stringr y forcats**.
+
+<div class="alert alert-warning">
+Solo necesitas instalar una sola vez el paquete de tidyverse.Cada vez que inicies una nueva sesión en RStudio, no es necesario que lo vuelvas a instalar.
+
+</div>
+
+# Dplyr
+
+El paquete de **dplyr** utiliza una sintaxis a base *verbos* (en inglés) que permiten manipular cuadros de datos o *tibbles* para extraer información de una manera amigable. Existen diversas funciones (o verbos) en el paquete dplyr y son:
+
+- `select()` Selecciona columnas de cuadros de datos o tibbles de manera específica
+- `filter()` Filtra datos de una o varias columnas que cumplen o no alguna condición 
+- `mutate()` Crea nuevas columnas a partir de datos existentes
+- `arrange()` Ordena los datos de manera ascendente o descendente de acuerdo a una columna
+
+Aunque estas sean las funciones más empleadas de dplyr existen otras que de manera más específica nos permiten manipular y analizar los datos. En el transcurso las irémos mencionando.  
+Una de las principales utilidades de dplyr (y de todos los paquetes de tidyverse) es que podemos hacer uso de **tuberias** o *pipes* para ligar los resultados de forma consecutiva al aplicar varias funciones. En dplyr el operador pipe se escribe como `%>%` y la sintaxis es la siguiente:
+
+> `funcion_1(objeto) %>% funcion_2() %>% funcion_3()`
+
+El resultado de la función 1 se transfiere y evalúa con la función 2. Posteriormente, el resultado de la función 2 se transfiere a la función 3. En los argumentos de la función 1 se evalúa el objeto (data frame o tibble) y se omite en las siguientes funciones. Es muy importante que haya una lógica en la secuencia de las funciones para que el pipe no se rompa.
+
+
+## Select
+
+La función `select()` permite extraer una o varias columnas de un cuadro de datos o tibble para su análisis en concreto. La sintaxis es la siguiente:
+
+> `select(objeto, columna1, columna2, columna3, ..., columnaN)`
+
+Revisemos las columnas del juego de datos de *star wars* y seleccionemos algunas usando la función `select()`
+```{r}
+#Visualiza los nombres de las columnas de starwars
+names(starwars)
+
+#Selecciona las que corresponden al nombre, color de cabello, sexo, genero, especie y lugar de residencia
+select(starwars, name, hair_color, sex, gender, species, homeworld)
+```
+
+El resultado es un nuevo data frame o tibbe con los datos de las columnas seleccionadas
+
+<div class="alert alert-warning">
+Ninguna de las funciones de dplyr están vectorizadas, es decir el resultado no es un vector.
+</div>
+
+En ocasiones queremos realizar la operación inversa, es decir omitir ciertas columnas. Por ejemplo, eliminemos las últimas tres columnas de starwars:
+```{r}
+#Para eliminar columnas coloca los nombres dentro de un vector y un signo negativo o guión alto antes del vector
+select(starwars, -c(films, vehicles, starships))
+```
+
+Nota como dentro del vector los nombres de las columnas, a pesar de ser caracteres, no fue necesario utilizar comillas. Esta es una característica de los paquetes de tidyverse que dentro de su sintaxis omiten el uso de comillas para datos que ya se encuentran dentro del pipe.
+
+## Filter
+`filter()` es una alternativa más amigable a las funciones `which()` y `subset()` para extraer datos que cumplan con ciertas condiciones. La sintaxis es la siguiente:
+
+> `filter(objeto, condicion_1, condicion_2, condicion_3, ..., condicion_N)`
+
+El resultado de aplicar `filter()` es un data frame o tibble con las filas que cumplen la o las condiciones. Por ejemplo, extraigamos los datos de aquellos personajes de starwars con una altura mayor a 150m y que sean humanos:
+```{r}
+#Filtra los datos empleando la función filter
+filter(starwars, height > 150 & species == "Human")
+```
+
+<blockquote class="blockquote">
+HINT  
+Recuerda hacer uso de los operadores **==, !=, >, <, >=, <=** y de los nexos **| y &** para comparar condiciones
+</blockquote>
+
+Ejemplo de un pipe ocupando estas las dos funciones `filter()` y `select()`:  
+```{r}
+filter(starwars, height > 150 & species == "Human") %>% #Filtra los datos empleando la función filter
+  select(name, height, species, sex) #Selecciona las columnas name, height, species y sex
+```
+
+La función `filter()` puede tener diferentes resultados dependiendo de la pregunta que tengamos en mente. Por ejemplo, nos puede interesar seleccionar aquellos datos que cumplan una condición grupal. En el juego de datos de *starwars* estamos interesados en seleccionar aquelos personajes que tengan una **masa** por arriba del promedio de su **genero**:
+```{r}
+#Visualiza cuantos generos existen en el dataframe de starwars
+unique(starwars$gender)
+
+#Obten la media de la masa por cada genero
+group_by(starwars, gender) %>%  #Agrupa los datos por genero usando la función group_by
+  summarise(media_masa = mean(mass, na.rm = T)) #La funcion summarise genera un dataframe con una columna en la cual se resumen los resultados de cada grupo del parametro que se mide (promedio de la masa)
+
+#Emplea la función group_by para agrupar los datos por genero
+group_by(starwars, gender) %>% 
+  filter(mass > mean(mass, na.rm = T)) #Filtra los datos seleccionando aquellos que esten por arriba de la media de la masa tratando a cada genero por separado
+```
+
+La función `group_by()` identifica los grupos en variables categóricas y con funciones de dplyr subsecuentes podemos conocer las características de cada grupo.
+
+## Mutate
+
+`mutate()` es una función de dplyr que permite crear nuevas columnas o modificar las existentes. Es una manera alternativa al uso del operador <strong class="red">$</strong> para crear o modificar columnas. La sintaxis es:
+
+> `mutate(objeto, nueva_columna = operaciones)
+
+Por ejemplo, calculemos el índice de masa corporal de los personajes de *starwars*:
+```{r, eval=F}
+#Usa la función mutate() para calcular y generar el índice de masa corporal de los personajes de starwars
+#Modifica la columna de la altura y convierte los valores de cm a m
+mutate(starwars, height = height/100) %>%
+  mutate(IMC = mass/height^2) #Genera una columna llamada IMC y calcula el valor
+```
+
+```{r, echo=F}
+mutate(starwars, height = height/100) %>%
+  mutate(IMC = mass/height^2) %>%
+  select(-c(films, vehicles, starships, homeworld, species, gender))
+```
+
+
+Nota como dentro del pipe no fue necesario colocar el nombre del juego de datos en el segundo `mutate()`.
+
+El ejemplo anterior nos permitió crear una columna o variable a partir de columnas existentes en el juego de datos. Sin embargo ¿qué sucede si queremos adicionar una columna con variable categórica? Por ejemplo, de acuerdo al IMC crear una columna que nos informe si el personaje etsá bajo de peso, normal o con sobrepeso. La función `if_else()` nos permite generar este tipo de columnas. La sintaxis es:
+
+> `if_else(objeto, condición, valor_si_cumple, valor_no_cumple)`
+
+<li class="back_green">valor_si_cumple: Es el valor de la nueva variable si cumple con la condición</li>
+<li class="back_red">valor_no_cumple: Es el valor cuando la nueva variable no cumple con la condicion</li>
+
+```{r, eval=F}
+#Calcula el IMC de cada personaje
+mutate(starwars, height = height/100) %>%
+  mutate(IMC = mass/height^2) %>%
+  mutate(Condicion = if_else(IMC < 16, "bajo_peso", #personajes con IMC < 16 tienen bajo peso, sino cumplen
+                             if_else(IMC >= 16 & IMC < 25, "normal", #Personajes con IMC entre 16 y 25 tienen condicion normal,  sino 
+                                     if_else(IMC >= 25, "sobrepeso", "NA")))) #Personajes con IMC mayor o igual a 25 sobrepeso
+```
+
+```{r, echo=F}
+mutate(starwars, height = height/100) %>%
+  mutate(IMC = mass/height^2) %>%
+  mutate(Condicion = if_else(IMC < 16, "bajo_peso", #personajes con IMC < 16 tienen bajo peso, sino cumplen
+                             if_else(IMC >= 16 & IMC < 25, "normal", #Personajes con IMC entre 16 y 25 tienen condicion normal,  sino 
+                                     if_else(IMC >= 25, "sobrepeso", "NA"))))%>%
+  select(-c(films, vehicles, starships, homeworld, species, gender, hair_color))
+```
+
+
