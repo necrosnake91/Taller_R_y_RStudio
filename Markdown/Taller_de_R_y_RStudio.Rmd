@@ -2,8 +2,14 @@
 title: "Taller R y RStudio"
 author: "Rodolfo Chavez"
 date: "`r Sys.Date()`"
+knit: (function(inputFile, encoding) { 
+      out_dir <- "../HTML";
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), out_dir, 'Taller_de_R_y_RStudio')) })
 output:
   rmarkdown::html_document:
+    css: "my_css.css"
     toc: true
     toc_float: true
     highlight: pygments
@@ -14,14 +20,14 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, include = TRUE, eval = TRUE)
 ```
 
-<img src="Images/Rstudio.png" style="margin: 0 0;" width=200px>
+<img src="../Images/Rstudio.png" style="margin: 0 0;" width=200px>
 
 # RStudio
 
 RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **R**. La ventana de RStudio se conforma de 4 cuadrantes:
 
 ```{r, fig.align='center', out.width="400", echo=FALSE}
-knitr::include_graphics("./Images/rstudiolayout.jpeg")
+knitr::include_graphics("../Images/rstudiolayout.jpeg")
 ```
 
 
@@ -193,12 +199,14 @@ paste("Ayer compré", litros, "litros de nive de limon o", conv, "galones")
 ```
 
 
-> **Ejercicio 1**
 
->1. Declara o crea cuatro variables que se llamen *altura* con un valor **1.50**, *masa* **47**, *unidad1* **metros** y *unidad2* **kilogramos**
-2. Obten el índice de masa corporal dividiendo la masa entre el cuadrado de la altura y almacena este valor en una nueva variable llamada **IMC**
-3. Verifica la clase que tienen las variables *altura*, *masa*, *unidad1* e *IMC*
+<blockquote class="blockquote">
+**Ejercicio 1**  
+1. Declara o crea cuatro variables que se llamen *altura* con un valor **1.50**, *masa* **47**, *unidad1* **metros** y *unidad2* **kilogramos**  
+2. Obten el índice de masa corporal dividiendo la masa entre el cuadrado de la altura y almacena este valor en una nueva variable llamada **IMC**  
+3. Verifica la clase que tienen las variables *altura*, *masa*, *unidad1* e *IMC*  
 4. Imprime el mensaje *El sujeto sano 1 tiene una altura de 1.50 metros, una masa de 47 kilogramos y un IMC de x* usando los valores de las variables
+</blockquote>
 
 # Datos complejos
 En R puedes manejar estructuras de datos más complejas. Esto es útil al momento de analizar tablas, matrices o listas de datos. Las principales estructures complejas de datos son:
@@ -359,15 +367,15 @@ numeros[numeros > 10 & numeros < 15]
 numeros[numeros <= 5 | numeros >= 15]
 ```
 
-
-> **Ejercicio 2**
-
->1. Declara una variable que se llame "rios" nueva que contenga un vector con los siguientes datos: Balsas, Usumacinta, Grijalva, Lerma, Balsas, Bravo, Grijalva, Balsas, Lerma y Bravo
-2. Obten la clase, longitud, proporción y elementos únicos.
-3. Ordena los elementos alfabéticamente (A a la Z)
-4. Extrae los elementos 1, 3, 7 y 8
-5. Extrae los elementos del 2 al 9
+<blockquote class="blockquote">
+**Ejercicio 2**  
+1. Declara una variable que se llame "rios" que contenga un vector con los siguientes datos: Balsas, Usumacinta, Grijalva, Lerma, Balsas, Bravo, Grijalva, Balsas, Lerma y Bravo  
+2. Obten la clase, longitud, proporción y elementos únicos.  
+3. Ordena los elementos alfabéticamente (A a la Z)  
+4. Extrae los elementos 1, 3, 7 y 8  
+5. Extrae los elementos del 2 al 9  
 6. Extrae los elementos que coincidan con Balsas o Lerma
+</blockquote>
 
 # Matrices
 Las matrices en R representan arreglos en **dos dimensiones** n y m, en donde: 
@@ -467,15 +475,20 @@ mi_matriz[mi_matriz > 8]
 
 Sin embargo, cuando queremos extraer datos de una matriz por fila o columna y además cumplan una condición, tendremos que usar la función `which()`. Esta función nos devuelve los índices de las filas o columnas que cumplen o no cierta condición:
 ```{r}
-#Obten los índices de los elementos de la columna 1 que sean distintos de tres usando la función which
+#Obten los índices de los elementos (filas) de la columna 1 que sean distintos de tres usando la función which
 which(mi_matriz[, 1] != 3)
-#Obten los índices de los elementos de la fila 1 que sean menores a 9
+#Obten los índices de los elementos (columnas) de la fila 1 que sean menores a 9
 which(mi_matriz[1, ] < 9)
 
-#Extrae los datos
+#Extrae los datos de la matriz original
 mi_matriz[which(mi_matriz[, 1] != 3), 1]
 mi_matriz[1, which(mi_matriz[1, ] < 9)]
 ```
+
+Como lo habras notado la función `which()` nos devuelve resultados de manera *contraria* o *encontrada*. Es decir:
+
+- Cuando preguntas cuáles elementos de una <em class="red">columna</em> cumplen o no una condición el resultado son índices de <em class="green">filas</em>  
+- Cuando preguntas cuáles elementos de una <em class="red">fila</em> cumplen o no una condición el resultado son índices de <em class="green">columnas</em>  
 
 En ocasiones, resulta útil **transponer** los datos en una matriz, es decir, convertir filas en columnas y viceversa. La función `t()` nos permite realizar dicha operación:
 ```{r}
@@ -485,13 +498,14 @@ mi_matriz
 t(mi_matriz)
 ```
 
-> **Ejercicio 3**
-
->1. Genera una matriz con los números del 5 al 24 de 5 filas x 4 columnas
-2. Asigna el nombre de las filas y de las columnas a la matriz. Las filas nombralas como f1, f2, f3, etcétera y las columnas como c1, c2, c3, ...
-3. Extrae los elementos de la fila 2 y los de la columna 4
-4. Extrae los elementos de la fila 3 menores o iguales a 15
-5. Extrae los elementos de la columna 2 menores a 14 y mayores a 11
+<blockquote class="blockquote">
+**Ejercicio 3**  
+1. Genera una matriz con los números del 5 al 24 de 5 filas x 4 columnas  
+2. Asigna el nombre de las filas y de las columnas a la matriz. Las filas nombralas como f1, f2, f3, etcétera y las columnas como c1, c2, c3, ...  
+3. Extrae los elementos de la fila 2 y los de la columna 4  
+4. Extrae los elementos de la fila 3 menores o iguales a 15  
+5. Extrae los elementos de la columna 2 menores a 14 y mayores a 11  
+</blockquote>
 
 # Data Frame
 
@@ -521,7 +535,7 @@ rownames(mi_df)
 colnames(mi_df)
 ```
 
-Adicionalmente, los nombres de las columnas de un data frame se obtienen con la función `names()`. Recuerda que esta función solamente es **aplicable exclusivamente** a los data frames:
+Adicionalmente, los nombres de las columnas de un data frame se obtienen con la función `names()`. Recuerda que esta función solamente es **exclusiva** de los data frames:
 ```{r}
 #Obten el nombre de las columnas del data frame usando la función names
 names(mi_df)
@@ -539,7 +553,7 @@ mi_df[1, ]
 mi_df[, 3]
 ```
 
-Existe un método exclusivo de los data frames para seleccionar columnas y obtener sus elementos. Solo requerimos escribir el nombre del data frame y después agregar el signo **$**. Esto nos desplegará un menú con los nombres de las columnas. Seleccionamos el que deseamos y concluimos:
+Existe un método exclusivo de los data frames para seleccionar columnas y obtener sus elementos. Solo requerimos escribir el nombre del data frame y después agregar el signo <strong class="red">$</strong>. Esto nos desplegará un menú con los nombres de las columnas. Seleccionamos el que deseamos y concluimos:
 ```{r}
 #Selecciona la columna correspondiente a factor
 mi_df$factor
@@ -547,7 +561,8 @@ mi_df$factor
 mi_df$decimal
 ```
 
-¿Cuál método se te facilitó más? ... Emplea ese método 
+¿Cuál método se te facilitó más? ... Emplea ese método  
+
 Si deseas seleccionar múltiples filas o columnas hazlo de forma similar a las matrices. Dentro de los corchetes agrega dentro de un vector los índices de filas o columnas que deseas seleccionar:
 ```{r}
 #Selecciona las dos primeras filas
@@ -564,19 +579,23 @@ which(mi_df[, 3] < 3)
 mi_df[which(mi_df[, 3] < 3), ]
 ```
 
-Sin embargo, para evitar usar la función `which()` y confundirnos con la sintaxis, existe la función `subset()` que nos permitirá extraer datos de un data frame de una manera más amigable:
+Sin embargo, para evitar usar la función `which()` y confundirnos con la sintaxis, existe la función `subset()` que nos permitirá extraer datos de un data frame de una manera más amigable. La sintaxis es:
+
+<blockquote>`subset(dataframe, Columna Condicion)`</blockquote>
+
 ```{r}
-#Extrae los elementos que sean menores a 3 de la columna 3
+#Extrae los elementos que sean menores a 3 de la columna decimal
 subset(mi_df, decimal < 3)
 ```
 ¿Cuál método te pareció más útil? 
+
 Los data frames al igual que las matrices se transponen usando la función `t()`
 ```{r}
 #Transpon el data frame
 t(mi_df)
 ```
 
-En ocasiones requerimos adicionar nuevas columnas cuyos valores dependen de una operación en otra columna. Para adicionar nuevas columnas al data frame tendrás que asignar la nueva columna usando el símbolo de $ y escribiendo el nombre:
+En ocasiones requerimos adicionar nuevas columnas cuyos valores dependen de una operación en otra columna. Para adicionar nuevas columnas al data frame tendrás que asignar la nueva columna usando el símbolo de <strong class="red">$</strong> y escribiendo el nombre de la nueva columna:
 ```{r}
 #Agrega una nueva columna que sea igual al logaritmo base 10 de los valores de decimal
 mi_df$logaritmo <- log(mi_df$decimal)
@@ -584,22 +603,24 @@ mi_df$logaritmo <- log(mi_df$decimal)
 mi_df
 ```
 
-> **Ejercicio 4**
->1. Emplea el data frame instalado por default llamado *iris* y visualizalo
-2. Obten las dimensiones del data frame e indica cuantas filas y columnas contiene
-3. Obten el nombre de las columnas del data frame y asignlas a un vector que se llame *columnas_iris*
-4. Extrae las primeras 50 filas del data frame
-5. Extrae las columnas con valores numericos
-6. Obten el número de datos que pertencen a cada especie
-7. Obten los datos exclusivos de la especie *setosa*
+<blockquote class="blockquote">
+**Ejercicio 4**  
+1. Emplea el data frame instalado por default llamado *iris* y visualizalo  
+2. Obten las dimensiones del data frame e indica cuantas filas y columnas contiene  
+3. Obten el nombre de las columnas del data frame y asignlas a un vector que se llame *columnas_iris*  
+4. Extrae las primeras 50 filas del data frame  
+5. Extrae las columnas con valores numericos  
+6. Obten el número de datos que pertencen a cada especie  
+7. Obten los datos exclusivos de la especie *setosa*  
+</blockquote>
 
-# Lecturas de datos
+# Lectura de datos
 
-Habitualmente, las tablas de datos se generan en un procesador de textos distinto a R y para analizarlos requerimos importar los datos al ambiente de R. Cuando generes tablas hazlo desde excel o empleando un **procesador de texto plano**. Al generar las tablas ten en mente lo siguiente:
+Las tablas de datos que se generan en un procesador de textos distinto a R requieren ser importadas ambiente de R. Cuando generes tablas hazlo desde excel o empleando un **procesador de texto plano**. Al generar las tablas ten en mente lo siguiente:
 
-- Evita usar nombres para las columnas con espacios en blanco o caracteres especiales (acentos, ñ, diérsis...)
+- Evita usar nombres para las columnas con espacios en blanco o caracteres especiales (acentos, ñ, diéresis...)
 
-- Evita dejar celdas en blanco. Si no tienes valores, llena la celda con **NA**
+- Evita dejar celdas en blanco. Si no tienes los valores, llena la celda con **NA**
 
 - Guarda los archivos en formato **.txt** o **.csv**. Aunque R tiene una función para leer archivos **.xls** evita guardarlos en este formato
 
@@ -616,7 +637,9 @@ file: Es el directorio donde está ubicada la tabla. Para ello debes indicar la 
 
 header: Si la tabla tiene encabezado (nombres de columnas) entonces utiliza **TRUE**
 
-sep: Es el tipo de separador de datos que se emplea. Si los datos están separados por tabuladores usa `\t`, si están separados por comas usa `,`
+sep: Es el tipo de separador de las columnas en los datos. Si los datos están separados por tabuladores usa `\t`, si están separados por comas usa `,`
+
+Cuando la tabla sea importada a R se hará en formato de data frame
 
 # Listas
 
@@ -709,8 +732,10 @@ class(sapply(mi_lista, mean))
 
 Sin embargo, no es posible emplear argumentos adicionales de la función que se va a evaluar. Para ello requerímos hacer uso de paquetes
 
-> **Ejercicio 5**
+<blockquote class="blockquote">
+**Ejercicio 5**
 
->1. Crea una lista nombrada que contenga 5 vectores. Cada vector deberá contener 5 letras del abecedario
+1. Crea una lista nombrada que contenga 5 vectores. Cada vector deberá contener 5 letras del abecedario
 2. Extrae los primeros 3 elementos de la lista
 3. Obten la clase, en forma de vector, de cada elemento de la lista
+</blockquote>
