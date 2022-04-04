@@ -12,25 +12,73 @@ output:
     css: "my_css.css"
     toc: true
     toc_float: true
+    number_sections: true
     highlight: pygments
 editor_options:
   chunk_output_style: console
+bibliography: biblio.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = T, include = T)
+
+#Load the required packages
+packages <- c("tidyverse", "bibtex")
+
+# install if needed and loading packages
+to_install <- packages[! packages %in% installed.packages()[, "Package"]]
+if (length(to_install)) { 
+  install.packages(to_install, repos = "https://cloud.r-project.org")
+}
+invisible(lapply(packages, library, character.only = TRUE))
+
+# get the packages version 
+packages_versions <- function(p) {
+  paste(packageDescription(p)$Package, packageDescription(p)$Version, sep = " ")
+}
+
+# Get the packages references
+write.bib(packages, "packages.bib")
+
+# merge the zotero references and the packages references
+cat(paste("% Automatically generated", Sys.time()), "\n% DO NOT EDIT",
+    { readLines("Taller.bib") %>% 
+      paste(collapse = "\n") },
+    { readLines("packages.bib") %>% 
+      paste(collapse = "\n") },
+    file = "biblio.bib",
+    sep = "\n")
+
+# Some packages reference keys must be modified
+# (their key is not the package name)
+# check in packages.bib
+packages_keys <- packages %>% 
+  enframe() %>% 
+  mutate(value = case_when(value == "knitr" ~ "@knitr1",
+                           #value == "boot" ~ "@boot1",
+                           TRUE ~ paste0("@", value)))
 ```
 
-<img src="../Images/tidyverse.png" style="margin: 0 0;" width=200px>
 
+
+<body>
+<div class="container">
+<div class="image">
+<img src="../Images/tidyverse.png" width="100px">
+</div>
+<div class="text">
 # Tidyverse
+</div>
+</div>
+</body>
 
-**Tidyverse** es una colección de paquetes que nos permiten manipular juegos de datos para hacer análisis simples, reproducibles y ordenados. Constantemente los paquetes dentro de tidyverse son actualizados, para ello te recomiendo visitar la página de [tidyverse](https://www.tidyverse.org/) para estar al día con las noticias. Para instalar tidyverse en tu equipo corre la siguiente linea de código:
+**Tidyverse** [@wickhamWelcomeTidyverse2019] es una colección de paquetes que nos permiten manipular juegos de datos para hacer análisis simples, reproducibles y ordenados. Constantemente los paquetes dentro de tidyverse son actualizados, para ello te recomiendo visitar la página de [tidyverse](https://www.tidyverse.org/) para estar al día con las noticias.
+
+Para instalar tidyverse en tu equipo corre la siguiente linea de código:
 
 ```{r, eval=F}
 install.packages("tidyverse")
 ```
-
 Sigue las instrucciones en la consola de R y una vez que se haya instalado carga los paquetes usando la siguiente línea de código:
 
 ```{r}
@@ -41,12 +89,72 @@ En la consola de R observa como es que se han cargado los paquetes de **ggplot, 
 
 <div class="alert alert-warning">
 Solo necesitas instalar una sola vez el paquete de tidyverse.Cada vez que inicies una nueva sesión en RStudio, no es necesario que lo vuelvas a instalar.
-
 </div>
 
-# Dplyr
 
-El paquete de **dplyr** utiliza una sintaxis a base *verbos* (en inglés) que permiten manipular cuadros de datos o *tibbles* para extraer información de una manera amigable. Existen diversas funciones (o verbos) en el paquete dplyr y son:
+<body>
+<div class="container">
+<div class="image">
+<img src="../Images/tibble.png" width="100px">
+</div>
+<div class="text">
+# Tibble
+</div>
+</div>
+</body>
+
+En tidyverse los dataframes son "problematicos" para el análisis de datos porque presentan los siguientes defectos:
+- Al teclear su nombre se despliegan las primeras 1000 o 999 filas  
+- Las columnas con datos de clase **caracter** son codificadas a *factores* lo cual dificulta su manejo  
+- Las columnas o variables no pueden ser nombradas con caracteres o símbolos especiales  
+- Almacenan nombres de filas o `rownames()` lo cual incrementa su complejidad  
+- Problemas con datos faltantes   
+
+
+Para solucionar estos "problemas" tidyverse desarrolló una tabla de datos más flexible conocida como `tibble()` con el slogan *Tibbles hacen menos y se comportan mejor*. Para generar un tibble, existen dos maneras:
+
+
+Generando un tibble con la función `tibble()`
+```{r}
+#Genera un tibble de manera similar al dataframe
+tibble(nombre = c("Don Gato", "Pantera rosa", "Birdman", "SportBilly"), horario = c(1, 2, 3, 4), preferencia = c("Favorita", "Favorita", "Me gusta", "No me gusta"), canal = 5)
+```
+Observa como para la columna del canal no fue necesario repetir 4 veces "5". `tibble()` entiende que se trata del mismo valor para todas las filas
+
+Convirtiendo un dataframe existente a un tibble usando la función `as_tibble()` 
+```{r}
+#Revisa la clase del dataframe iris
+class(iris)
+
+#Convierte el dataframe a un tibble
+as_tibble(iris)
+
+#Guarda los datos de manera permanente como tibble
+iris_tibble <- as_tibble(iris)
+```
+
+Por default, al imprimir o visualizar un tibble en la consola de R se nos muestran **las primeras 10 filas**. También, en la parte superior del tibble se nos imprime el número de filas y columnas que lo conforman. Por debajo del nombre de cada columna se nos indica la clase del dato que la conforma (caracter, entero *dbl* o número real, factor o lista). Los tibbles carecen de nombres de filas para disminuir la cantidad de información dentro de la tabla y solo se muestran los índices de las filas.
+
+```{r}
+#Verifica el nombre de las filas de un tibble
+rownames(iris_tibble)
+```
+
+¿Cuál tabla te pareció más útil? ¿Dataframe? ¿Tibble? Utiliza la que creas más conveniente para tus análisis
+
+
+<body>
+<div class="container">
+<div class="image">
+<img src="../Images/dplyr.png" width="100px">
+</div>
+<div class="text">
+# Dplyr
+</div>
+</div>
+</body>
+
+El paquete de **dplyr** utiliza una sintaxis a base *verbos* (en inglés) que permiten manipular cuadros de datos o tibbles para extraer información de una manera amigable. Existen diversas funciones (o verbos) en el paquete dplyr y son:
 
 - `select()` Selecciona columnas de cuadros de datos o tibbles de manera específica
 - `filter()` Filtra datos de una o varias columnas que cumplen o no alguna condición 
@@ -60,14 +168,15 @@ Una de las principales utilidades de dplyr (y de todos los paquetes de tidyverse
 
 El resultado de la función 1 se transfiere y evalúa con la función 2. Posteriormente, el resultado de la función 2 se transfiere a la función 3. En los argumentos de la función 1 se evalúa el objeto (data frame o tibble) y se omite en las siguientes funciones. Es muy importante que haya una lógica en la secuencia de las funciones para que el pipe no se rompa.
 
-
 ## Select
 
 La función `select()` permite extraer una o varias columnas de un cuadro de datos o tibble para su análisis en concreto. La sintaxis es la siguiente:
 
 > `select(objeto, columna1, columna2, columna3, ..., columnaN)`
 
-Revisemos las columnas del juego de datos de *star wars* y seleccionemos algunas usando la función `select()`
+<img src="../Images/select.png">
+
+Revisemos las columnas del juego de datos de *starwars* y seleccionemos algunas usando la función `select()`
 ```{r}
 #Visualiza los nombres de las columnas de starwars
 names(starwars)
@@ -78,10 +187,6 @@ select(starwars, name, hair_color, sex, gender, species, homeworld)
 
 El resultado es un nuevo data frame o tibbe con los datos de las columnas seleccionadas
 
-<div class="alert alert-warning">
-Ninguna de las funciones de dplyr están vectorizadas, es decir el resultado no es un vector.
-</div>
-
 En ocasiones queremos realizar la operación inversa, es decir omitir ciertas columnas. Por ejemplo, eliminemos las últimas tres columnas de starwars:
 ```{r}
 #Para eliminar columnas coloca los nombres dentro de un vector y un signo negativo o guión alto antes del vector
@@ -90,10 +195,38 @@ select(starwars, -c(films, vehicles, starships))
 
 Nota como dentro del vector los nombres de las columnas, a pesar de ser caracteres, no fue necesario utilizar comillas. Esta es una característica de los paquetes de tidyverse que dentro de su sintaxis omiten el uso de comillas para datos que ya se encuentran dentro del pipe.
 
+<div class="alert alert-warning">
+La función `select() no está vectorizada, es decir el resultado no es un vector.
+</div>
+
+Cuando queremos seleccionar una columna de un data frame o tibble y que el resultado sea un vector, usemos la función `pull()`:
+```{r}
+#Selecciona la columna del nombre de los personajes de starwars y que el resultado sea un vector
+pull(starwars, name)
+
+#Compara el resultado con el uso del operador $
+starwars$name
+
+#Compara el resultado con select
+select(starwars, name)
+```
+
+Otra operación común con las columnas de un dataframe o tibble es el reordenamiento de columnas. dplyr nos ofrece una alternativa más sencilla a la sintaxis primitiva de R con la función `relocate()`. La sintaxis es la siguiente:
+
+> `relocate(objeto, columna_1, columna_2, ..., columna_N)`
+
+En donde nosotros podemos indicarle a dplyr cuál es el nuevo orden de las columnas en el data frame. Ejemplo, reordena tabla de starwars de manera que el genero y el sexo de los personajes sean las primeras dos columnas:
+
+```{r}
+relocate(starwars, gender, sex)
+```
+
 ## Filter
 `filter()` es una alternativa más amigable a las funciones `which()` y `subset()` para extraer datos que cumplan con ciertas condiciones. La sintaxis es la siguiente:
 
 > `filter(objeto, condicion_1, condicion_2, condicion_3, ..., condicion_N)`
+
+<img src="../Images/filter.png">
 
 El resultado de aplicar `filter()` es un data frame o tibble con las filas que cumplen la o las condiciones. Por ejemplo, extraigamos los datos de aquellos personajes de starwars con una altura mayor a 150m y que sean humanos:
 ```{r}
@@ -132,7 +265,9 @@ La función `group_by()` identifica los grupos en variables categóricas y con f
 
 `mutate()` es una función de dplyr que permite crear nuevas columnas o modificar las existentes. Es una manera alternativa al uso del operador <strong class="red">$</strong> para crear o modificar columnas. La sintaxis es:
 
-> `mutate(objeto, nueva_columna = operaciones)
+> `mutate(objeto, nueva_columna = operaciones)`
+
+<img src="../Images/mutate.png">
 
 Por ejemplo, calculemos el índice de masa corporal de los personajes de *starwars*:
 ```{r, eval=F}
@@ -148,16 +283,25 @@ mutate(starwars, height = height/100) %>%
   select(-c(films, vehicles, starships, homeworld, species, gender))
 ```
 
-
 Nota como dentro del pipe no fue necesario colocar el nombre del juego de datos en el segundo `mutate()`.
 
-El ejemplo anterior nos permitió crear una columna o variable a partir de columnas existentes en el juego de datos. Sin embargo ¿qué sucede si queremos adicionar una columna con variable categórica? Por ejemplo, de acuerdo al IMC crear una columna que nos informe si el personaje etsá bajo de peso, normal o con sobrepeso. La función `if_else()` nos permite generar este tipo de columnas. La sintaxis es:
+El ejemplo anterior nos permitió crear una columna o variable a partir de columnas existentes en el juego de datos. Sin embargo ¿qué sucede si queremos adicionar una columna con variable categórica? Por ejemplo, de acuerdo al IMC crear una columna que nos informe si el personaje etsá *bajo de peso, normal* o con *sobrepeso*. La función `if_else()` nos permite generar este tipo de columnas. La sintaxis es:
 
-> `if_else(objeto, condición, valor_si_cumple, valor_no_cumple)`
+> `if_else(condición, valor_si_cumple, valor_no_cumple)`
 
 <li class="back_green">valor_si_cumple: Es el valor de la nueva variable si cumple con la condición</li>
 <li class="back_red">valor_no_cumple: Es el valor cuando la nueva variable no cumple con la condicion</li>
 
+Hagamos un ejemplo sencillo. Asignemos **"Humano"** si la especie del personaje es "Human", sino se cumple la condición entonces **"marciano"**
+```{r}
+#Visualiza los valores únicos de la columna species en starwars
+unique(starwars$species)
+
+#Evalua el vector de la columna species asignando los valores humano o marciano
+if_else(starwars$species == "Human", "Humano", "Marciano")
+```
+
+Asignemos las categorías *bajo de peso, normal* o con *sobrepeso* a los personajes de acuerdo al IMC:
 ```{r, eval=F}
 #Calcula el IMC de cada personaje
 mutate(starwars, height = height/100) %>%
@@ -165,6 +309,12 @@ mutate(starwars, height = height/100) %>%
   mutate(Condicion = if_else(IMC < 16, "bajo_peso", #personajes con IMC < 16 tienen bajo peso, sino cumplen
                              if_else(IMC >= 16 & IMC < 25, "normal", #Personajes con IMC entre 16 y 25 tienen condicion normal,  sino 
                                      if_else(IMC >= 25, "sobrepeso", "NA")))) #Personajes con IMC mayor o igual a 25 sobrepeso
+#Guarda el dataframe con las nuevas columnas
+starwars <- mutate(starwars, height = height/100) %>%
+  mutate(IMC = mass/height^2) %>%
+  mutate(Condicion = if_else(IMC < 16, "bajo_peso", 
+                             if_else(IMC >= 16 & IMC < 25, "normal",  
+                                     if_else(IMC >= 25, "sobrepeso", "NA")))) 
 ```
 
 ```{r, echo=F}
@@ -174,6 +324,131 @@ mutate(starwars, height = height/100) %>%
                              if_else(IMC >= 16 & IMC < 25, "normal", #Personajes con IMC entre 16 y 25 tienen condicion normal,  sino 
                                      if_else(IMC >= 25, "sobrepeso", "NA"))))%>%
   select(-c(films, vehicles, starships, homeworld, species, gender, hair_color))
+
+#Guarda el dataframe con las nuevas columnas
+starwars <- mutate(starwars, height = height/100) %>%
+  mutate(IMC = mass/height^2) %>%
+  mutate(Condicion = if_else(IMC < 16, "bajo_peso", 
+                             if_else(IMC >= 16 & IMC < 25, "normal",  
+                                     if_else(IMC >= 25, "sobrepeso", "NA")))) 
 ```
+
+Observa como para cada condición categórica se colocó la condición, el resultado si cumple la condición y el resultado cuando no la cumple. En este caso, cuando no cumple la condición de *bajo peso* se utilizó otro `if_else()` para establecer una nueva condición y entonces se produjeran el resultado *normal*. A esta acción se le conoce como **anidadar**.
+
+## Arrange
+ La función `arrange()` es equivalente a `sort()` de la unidad de **vectores**. Con `arrange()` podemos organizar datos de manera ascendente o descendente respecto a una columna del data frame o tibble. La sintaxis es la siguiente:
+ 
+> `arrange(objeto, columna)` 
+ 
+Por default, los datos se ordenan de forma ascendente respecto a la columna seleccionada. Por ejemplo, ordenemos los datos de acuerdo al IMC:
+```{r}
+#Usa la función arrange para ordenar los datos de menor a mayor IMC
+arrange(starwars, IMC)
+```
+
+Para ordenar los datos de manera descendente usa la siguiente sintaxis:
+
+> `arrange(objeto, desc(columna))`
+
+La función `desc()` ordena los datos de manera descendente respecto a la columna indicada. Por ejemplo, ordenemos los datos del IMC en los personajes de starwars
+
+```{r}
+#Utiliza la función desc() para ordenar los datos de forma descenente respecto al IMC
+arrange(starwars, desc(IMC))
+```
+
+
+<blockquote class="blockquote">
+Hint:  
+La opción `desc()` es equivalente a `decreasing = ` de la función `sort()`
+</blockquote>
+
+Como lo hemos visto dplyr es un paquete al cual se le puede extraer mucho jugo para realizar análisis de datos. Gracias a su sintaxis simple y al uso de pipes los análisis se vuelven altamente reproducibles y simples.
+
+
+<body>
+<div class="container">
+<div class="image">
+<img src="../Images/tidyr.png" width="100px">
+</div>
+<div class="text">
+# Tidyr
+</div>
+</div>
+</body>
+
+Tidyr es otro paquete de tidyverse que permite estructurar y organizar datos de una manera más simple. Como lo hemos visto, una tabla de datos organizada se analiza con una facilidad mayor. Además, su estructura organizada nos permite entender o comprender su contenido. Recuerda que una de las metas de la ciencia de datos es preservar la reproducibilidad de los datos. 
+
+Tidyr nos ofrece una serie de funciones para estructurar nuestros datos en tibbles. Exploremos algunas de sus funciones:
+
+## Pivot wider y pivot longer
+`pivot_wider()` convierte observaciones de variables categóricas a columnas y se les asigna un valor de otra columna. Por ejemplo, usemos el juego de datos *starwars* para convertir los valores de la columna *gender* a nuevas columnas. Las nuevas columnas, cada género por separado, contienen la masa del personaje:
+```{r}
+#Convirtamos los valores de la columna status a nuevas columnas
+pivot_wider(starwars, names_from = gender, values_from = mass)
+```
+
+La operación inversa, convertir columnas a observaciones se realiza con la función `pivot_longer()`:
+```{r}
+#Guardemos el resultado de la línea de código anterior
+starwars_1 <- pivot_wider(starwars, names_from = gender, values_from = mass)
+
+#La función pivot_longer() convierte las columnas del genero en observaciones
+pivot_longer(starwars_1, cols = 15:17, names_to = "gender", values_to =  "mass" )
+```
+La función de las opciones son:  
+- `col`: permite seleccionar con indices las columnas que se convertiran a observaciones
+- `names_to`: es el nombre que recibirá la nueva columna que colapsará las columnas anteriores
+- `values_to`: es el nombre de la columna que contendrá los valores que originalmente se encontraban en las columnas colapsadas
+
+<div class="alert alert-warning">
+Nota como el último resultado no nos devolvió la tabla original. Esto se debe a que en la tabla original, la columna de *gender* contenía valores *NA*
+</div>
+
+¿Cómo se pueden trabajar los datos con *NA*?
+
+## Drop_na
+
+Tidyr nos ofrece una serie de funciones para trabajar con datos faltantes o *NA*. `drop_na()` es una función que al detectar un *NA* en alguna observación, esta se elimina por completo. La sintaxis es:
+
+> `drop_na(objeto)`
+
+Con el cuadro de datos de starwars verifiquémos su función:
+```{r}
+# Visualiza el objeto starwars (Presta atención en el número de filas)
+starwars
+
+#Elimina observaciones (personajes) con datos faltantes en cualquier columna
+drop_na(starwars)
+```
+
+Como lo has observado `drop_na()` es una función muy astringente que elimina por completo observaciones con datos faltantes. Esto puede llegar a ser un inconveniente para nuestros análisis porque habrá muchas observaciones valiosas. Una alternativa para resolver este problema es recodificar las celdas con valores *NA* y tidyr nos ofrece dos opciones:
+
+- `fill()` reemplaza los valores *NA* empleando el valor previo o posterior en la columna: 
+```{r}
+#Selecciona una columna con valores NA de starwars
+select(starwars, name, hair_color)
+
+#Reemplaza los NA con el valor que lo precede en la columna
+select(starwars, name, hair_color) %>%
+  fill(hair_color)
+```
+
+- `replace_na()` reemplaza los valores *NA* empleando un valor personalizado
+```{r}
+#Selecciona una columna con valores NA de starwars
+select(starwars, name, hair_color)
+
+#Reemplaza los NA con el valor "other
+select(starwars, name, hair_color) %>%
+  replace_na(list(hair_color = "other"))
+```
+
+Nota como las funciones de los paquetes que hemos visto de tidyverse nos ayudan a mantener mejor estructurado el contenido de nuestras tablas y por lo tanto los análisis se vuelven más **reproducibles**. Si deseas exporar con mayor detalle cada una de las funciones de los paquetes que hemos visto de tidyverse, visita la página web de <strong class="red">[tidyverse](https://www.tidyverse.org/)</strong>.
+
+# Ejercicios
+
+
+# Referencias
 
 
