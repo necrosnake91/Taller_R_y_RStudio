@@ -11,6 +11,7 @@
 
 <meta name="author" content="Rodolfo Chavez" />
 
+<meta name="date" content="2022-04-03" />
 
 <title>Tidyverse</title>
 
@@ -348,7 +349,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Tidyverse</h1>
 <h4 class="author">Rodolfo Chavez</h4>
-<h4 class="date">3/24/2022</h4>
+<h4 class="date">2022-04-03</h4>
 
 </div>
 
@@ -612,6 +613,27 @@ Una de las principales utilidades de dplyr (y de todos los paquetes de tidyverse
 ## 10 masculine male  Obi-…    182    77 auburn, w… fair       blue-gray       57  
 ## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
 ## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<blockquote class="blockquote">
+<p>Ejercicio 1<br />
+Emplea el juego de datos <em>storms</em> instalado por tidyverse y:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Obten el nombre de las columnas del tibble<br />
+</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Selecciona las columnas relacionadas con el nombre, fecha, coordenadas y estatus<br />
+</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Selecciona las todas columnas excepto las que se asocian con el diametro de la tormenta usando el método negativo. Guarda este objeto como <em>storms_1</em><br />
+</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Relocaliza la columna del estatus entre el nombre y el año de las tormentas del objeto <em>storms_1</em></li>
+</ol></li>
+</ul>
+</blockquote>
 </div>
 <div id="filter" class="section level2" number="3.2">
 <h2 number="3.2"><span class="header-section-number">3.2</span> Filter</h2>
@@ -696,6 +718,30 @@ Recuerda hacer uso de los operadores <strong>==, !=, &gt;, &lt;, &gt;=, &lt;=</s
 ## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>La función <code>group_by()</code> identifica los grupos en variables categóricas y con funciones de dplyr subsecuentes podemos conocer las características de cada grupo.</p>
+<blockquote class="blockquote">
+<p>Ejercicio 2<br />
+Utiliza el objeto <em>storms_1</em> y realiza lo siguiente:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Filtra todas las tormentas que hayan ocurrido ente 1980 y el año 2000</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Del resultado anterior filtra todas aquellas que hayan tenido una categoría mayor a 0</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Del resultado anterior, filtra aquellas tormentas con una presión menor o igual a la media de la presión</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Selecciona los nombres únicos de las tormentas filtradas de los pasos anteriores y almacénalas dentro de un vector que se llame <em>tormentas_milenial</em></li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Repite los pasos 1 y 2. Posteriormente, filtra las tormentas que estén por debajo de la media de la presión por estatus</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: decimal">
+<li>Selecciona los nombres unicos de las tormentas filtradas del paso 5 y comparalos con los obtenidos en el paso 4 ¿son los mismos?</li>
+</ol></li>
+</ul>
+</blockquote>
 </div>
 <div id="mutate" class="section level2" number="3.3">
 <h2 number="3.3"><span class="header-section-number">3.3</span> Mutate</h2>
@@ -1018,6 +1064,9 @@ La opción <code>desc()</code> es equivalente a <code>decreasing =</code> de la 
 ## 10 Obi-Wan Kenobi     auburn, white
 ## # … with 77 more rows</code></pre>
 <p>Nota como las funciones de los paquetes que hemos visto de tidyverse nos ayudan a mantener mejor estructurado el contenido de nuestras tablas y por lo tanto los análisis se vuelven más <strong>reproducibles</strong>. Si deseas exporar con mayor detalle cada una de las funciones de los paquetes que hemos visto de tidyverse, visita la página web de <strong class="red"><a href="https://www.tidyverse.org/">tidyverse</a></strong>.</p>
+</div>
+<div id="ejercicios" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Ejercicios</h1>
 </div>
 <div id="referencias" class="section level1 unnumbered">
 <h1 class="unnumbered">Referencias</h1>

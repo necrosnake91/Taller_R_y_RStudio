@@ -1,7 +1,7 @@
 ---
 title: "Tidyverse"
 author: "Rodolfo Chavez"
-date: "3/24/2022"
+date: "`r Sys.Date()`"
 knit: (function(inputFile, encoding) { 
       out_dir <- "../HTML";
       rmarkdown::render(inputFile,
@@ -221,6 +221,16 @@ En donde nosotros podemos indicarle a dplyr cuál es el nuevo orden de las colum
 relocate(starwars, gender, sex)
 ```
 
+<blockquote class="blockquote">
+Ejercicio 1  
+Emplea el juego de datos *storms* instalado por tidyverse y:
+
+* 1. Obten el nombre de las columnas del tibble  
+* 2. Selecciona las columnas relacionadas con el nombre, fecha, coordenadas y estatus  
+* 3. Selecciona las todas columnas excepto las que se asocian con el diametro de la tormenta usando el método negativo. Guarda este objeto como *storms_1*  
+* 4. Relocaliza la columna del estatus entre el nombre y el año de las tormentas del objeto *storms_1*
+</blockquote>
+
 ## Filter
 `filter()` es una alternativa más amigable a las funciones `which()` y `subset()` para extraer datos que cumplan con ciertas condiciones. La sintaxis es la siguiente:
 
@@ -260,6 +270,19 @@ group_by(starwars, gender) %>%
 ```
 
 La función `group_by()` identifica los grupos en variables categóricas y con funciones de dplyr subsecuentes podemos conocer las características de cada grupo.
+
+<blockquote class="blockquote">
+Ejercicio 2  
+Utiliza el objeto *storms_1* y realiza lo siguiente:
+
+* 1. Filtra todas las tormentas que hayan ocurrido ente 1980 y el año 2000
+* 2. Del resultado anterior filtra todas aquellas que hayan tenido una categoría mayor a 0
+* 3. Del resultado anterior, filtra aquellas tormentas con una presión menor o igual a la media de la presión
+* 4. Selecciona los nombres únicos de las tormentas filtradas de los pasos anteriores y almacénalas dentro de un vector que se llame *tormentas_milenial*
+* 5. Repite los pasos 1 y 2. Posteriormente, filtra las tormentas que estén por debajo de la media de la presión por categoría
+* 6. Selecciona los nombres unicos de las tormentas filtradas del paso 5 y comparalos con los obtenidos en el paso 4 ¿son los mismos?
+
+</blockquote>
 
 ## Mutate
 
