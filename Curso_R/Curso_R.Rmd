@@ -1,0 +1,128 @@
+---
+title: "Curso_R"
+author: "Rodolfo Chavez"
+date: "2024-01-22"
+output: 
+  html_document:
+    css: "My_css.css"
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h1>Introduccion</h1>
+
+R es un <strong class="red">**lenguaje**</strong> de programación para el análisis y modelaje de datos. R se creo para análisis estadístico. Se requieren de conocimientos básicos y teóricos para dar sustento a cada análisis (estadístico, bioinformático, numérico...)
+Se puede descargar desde [aquí.](https://www.r-project.org/)
+
+<div class="row">
+<div class="side">
+<h2>Pros</h2>
+
+* Programa de libre acceso
+* Lenguaje abierto (se pueden verificar cómo están construidas las funciones)
+* Frecuentemente utilizado
+* Infinidad de foros de discusión [Stackoverflow](https://stackoverflow.com/), [Rpubs](https://rpubs.com/), [R-bloggers](https://www.r-bloggers.com/)
+* Al no utilizar interfaz gráfica, <strong class="red">*corre*</strong> más rápido
+* Todos los análisis son repetibles (y reproducibles) por medio de <strong clas="red">*scripts*</strong>
+* Funciona con todos los sistemas operativos
+* Se pueden crear funcioneas customizadas
+* Generar gráficos con calidad de publicación
+* Facilita la generación de reportes
+* Trabaja bien con otros lenguajes
+</div>
+
+<div class="main">
+<h2>Contras</h2>
+
+* Requiere del conocimiento de programación
+* Algunos análisis consumen muchos recursos computacionales
+* Limitado para el desarrollo de programas para el manejo de datos masivos (bioinformática)
+</div>
+</div>
+
+<h2>Mejoras</h2>
+
+Implementación de [RStudio](https://posit.co/download/rstudio-desktop/). Es una interfaz de desarrollo integrado (IDE) para facilitar el uso de **R**. Ahora permite trabajar en la nube con [RStudio Cloud](https://posit.cloud/content/yours?sort=name_asc).
+
+<h2>Tips</h2>
+
+Al programar y escribir en <strong class=red>*scripts*</strong> evita el uso de:
+
+* Espacios
+* Acentos
+* "ñ"
+* Símbolos especiales
+
+Algunas recomendaciones:
+
+* Tener paciencia, perseverancia, agudeza visual
+* Tolerancia a la frustración
+* Desarrollar la capacidad de colaborar (solicitar apoyo)
+* Practicar para reforzar
+* Reforzar conocimientos teóricos (estadística, programación, ...)
+
+<h2>Scripts</h2>
+Para crear objetos se utiliza el símbolo de asignación `<-`
+La sintaxis es la siguiente:
+```{r, echo=T}
+# Crear un objeto que contenga los números 1 y 2
+x <- c(1, 2)
+```
+
+El comando `c()` permite crear <strong class="green">vectores</strong> y se le conoce como comando <strong class="green">concatenar</strong>
+Al objeto **x** se le conoce como objeto o <strong class="green">variable</strong>
+
+R permite realizar una serie de operaciones aritméticas y algebraicas entre números y objetos que contengan <strong class="green">números</strong>, por ejemplo:
+```{r, eval=T}
+#Genera dos objetos que contengan numeros
+x <- c(1, 2)
+y <- c(2, 3)
+
+#Suma los dos objetos
+x+y
+
+
+#Ahora multiplica los objetos
+x*y
+```
+
+<h2>Consola</h2>
+
+La <strong class="green">consola</strong> es en donde se ejecutan en tiempo real los scripts o los comandos. Ejecutar, correr, llamar se utilizan de forma indistinta. 
+La consola permite comunicarse con R para visualizar los resultados de ejecutar un comando o una serie de comandos. También, aquí se pueden visualizar los errores que se producen por cometer una equivocación en la sintaxis.
+El símbolo `>` indica que la consola está *lista* para ejecutar una instrucción o comando.
+Las teclas <strong class="green">arriba</strong> o <strong class="green">abajo</strong> nos permiten desplazarnos en el historial de comandos utilizados en la sesión.
+
+<h2>Objetos</h2>
+
+Cualquier tipo de dato se puede guardar en un objeto. Para ello se utiliza el símbolo de <strong class="green">asignación</strong> `<-`. Es posible guardar datos numéricos, caracteres (letras y palabras), matrices, tablas y funciones.
+Las <strong class="green">funciones</strong> o <strong class="green">comandos</strong> son instrucciones. Los <strong class="green">argumentos</strong> de un comando son todos los elementos (dentro del paréntesis) que se requieren para que corra o se ejecute de forma correcta.
+
+```{r, eval=FALSE, error=F}
+#Dentro del paréntesis se colocan los argumentos para que funcione un comando
+comando(argumentos)
+```
+
+
+<h2>Paquetes</h2>
+
+Contienen un grupo de funciones agrupadas para realizar o ejecutar análisis. En pocas palabras, se descargan scripts que contienen las funciones.
+Para instalar un paquete se utiliza la función `install.packages` y dentro del paréntesis se escribe entre comillas el nombre del paquete
+```{r, eval=F}
+install.packages("ggplot2")
+```
+ Una vez instalado, el paquete se carga con la función `library`
+```{r, eval=F}
+library(ggplot2)
+```
+
+
+
+
+
+
+
