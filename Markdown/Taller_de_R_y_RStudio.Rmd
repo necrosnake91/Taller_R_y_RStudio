@@ -22,11 +22,14 @@ knitr::opts_chunk$set(echo = TRUE, include = TRUE, eval = TRUE)
 
 <img src="../Images/Rstudio.png" style="margin: 0 0;" width=200px>
 
-# RStudio
+<div class="alert alert-warning">Para realizar esta práctica es necesario que tengas instalado [R](https://cran.itam.mx/) y [RStudio](https://posit.co/download/rstudio-desktop/) o bien generes una cuenta en [Positcloud](https://login.posit.cloud/login?redirect=%2F) para hacer uso de la nube.
+</div>
+
+<h1>RStudio</h1>
 
 RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **R**. La ventana de RStudio se conforma de 4 cuadrantes:
 
-```{r, fig.align='center', out.width="400", echo=FALSE}
+```{r, fig.align='center', out.width="700", echo=FALSE}
 knitr::include_graphics("../Images/rstudiolayout.jpeg")
 ```
 
@@ -41,7 +44,7 @@ knitr::include_graphics("../Images/rstudiolayout.jpeg")
 
 Desde el menú principal puedes crear, salvar o abrir un nuevo script. Asímismo, es posible buscar funciones, comandos u objetos dentro del script dando click en la lupa.
 
-# Tipos de datos
+<h1>Tipos de datos</h1>
 
 Una de las principales funciones de R es el manejo y análisis de una diversidad de datos. Para ello R los clasifica en tres principales grupos:
 
@@ -49,85 +52,85 @@ Una de las principales funciones de R es el manejo y análisis de una diversidad
 - Lógicos
 - Caracteres
 
-## Datos numéricos
+<h2>Datos numéricos</h2>
 
 Existen dos principales tipos de datos nuéricos: los números **enteros** o *integer* con valores positivos o negativos y los números **decimales** o *numeric* con valores positivos o negativos:
 
 ```{r, eval=FALSE}
-#Número entero positivo
+##Número entero positivo
 4
 
-#Número entero negativo
+##Número entero negativo
 -36
 
-#Número decimal positivo
+##Número decimal positivo
 7.65
 
-#Número decimal negativo 
+##Número decimal negativo 
 -5.47
 ```
 
 Con los valores numéricos es posible realizar todo tipo de operaciones algebraicas:
 
 ```{r}
-#Suma
+##Suma
 3+4
 
-#Resta
+##Resta
 100-60
 
-#Multiplicación
+##Multiplicación
 9.7*6
 
-#División
+##División
 450/9
 
-#Potencias 
+##Potencias 
 2^5
 
-#Raices
+##Raices
 sqrt(121)
 
-#Logaritmos
+##Logaritmos
 log10(100)
 ```
 
-## Datos lógicos
+<h2>Datos lógicos</h2>
 Son datos que toman el valor de una variable dicotómica, es decir con dos categorías: verdadero *TRUE* (T) o falso *FALSE* (F). También se le conoce como valores *boleanos* o *logical*. Siempre se esciben con letras MAYUSCULAS
 
 ```{r}
-#Valor verdadero
+##Valor verdadero
 TRUE
-#Valor verdadero abreviado
+##Valor verdadero abreviado
 T
 
-#Valor falso
+##Valor falso
 FALSE
-#Valor falso abreviado
+##Valor falso abreviado
 F
 ```
 
-## Caracteres
+<h2>Caracteres</h2>
 Los caracteres o *character* representan texto que comprende letras, palabras, frases o enunciados. Para ingresar un caracter es importante inseratrlo entre comillas:
 
 ```{r}
-#Letra
+##Letra
 "W"
 
-#Palabra
+##Palabra
 "Variable"
 
-#Frase
+##Frase
 "Linea de codigo"
 
-#Enunciado 
+##Enunciado 
 "Esta linea de codigo se escribe entre comillas"
 ```
 
 Una manera de verificar el tipo o la clase de los datos es empleando la función o comando `class()`
 
 ```{r}
-#La función class() para conocer el tipo de datos
+##La función class() para conocer el tipo de datos
 class(3)
 class(-5.4)
 class(TRUE)
@@ -138,35 +141,35 @@ class("Una cadena de caracteres")
 
 Un caso especial son los datos *faltantes*, a los cuales se les asigna el nombre **NA**.
 
-## Los comandos paste() y paste0()
+<h2>Los comandos paste() y paste0()</h2>
 En algunas ocasiones nos resulta útil unir o concatenar datos para formar una cadena o *string*. Para ello, R nos ofrece dos funciones o comandos:
 La función `paste()` permite combinar datos de diferente clase (numéricos, lógicos y de texto), separando cada elemento con un espacio en blanco:
 
 ```{r}
-#Cada elemento de la función paste() debe separarse con una coma
+##Cada elemento de la función paste() debe separarse con una coma
 paste("El número atómico del oxígeno es", 8, "porque contiene", 8, "protones en el núcleo")
 paste("Si el resultado de la operación es", TRUE, "entonces puedes terminar el trabajo de hoy")
 ```
 
 La función `paste0()` de manera similar concatena valores de cualquier clase pero **omitiendo** el espacio en blanco. Todos los elementos quedan juntos
 ```{r}
-#De manera similar a la función paste(), debed de separar los valores con comas
+##De manera similar a la función paste(), debes de separar los valores con comas
 paste0("Este", "mensaje", "no", "se", "puede", "leer")
 paste0(8575, "entre", 2)
 paste0("../labcanoctocat/octocat.txt", "/archivos.txt")
 ```
 
 
-# Variables
+<h1>Variables</h1>
 Una variable es un espacio en la memoria de la computadora en donde se almacenan datos de cualquier tipo. Para crear o declarar una variable se utilizan los siguientes signos de asignación:
 
 ```{r}
-#Método tradicional
+##Método tradicional
 numero <- 2
 texto <- "Pablito clavo un clavito"
 logico <- TRUE
 
-#Método no tradicional
+##Método alterno
 numero = -1
 texto = "Tres tristes tigres"
 logico = FALSE
@@ -177,7 +180,7 @@ Las variables que declares se almacenan en el cuadrante 3 que corresponde al **E
 Con las variables numéricas es posible realizar las operaciones algebraicas previamente mencionadas:
 
 ```{r}
-#Como primer paso, declara las variables
+##Como primer paso, declara las variables
 numero_1 <- 203
 numero_2 <- 64
 ```
@@ -185,12 +188,12 @@ numero_2 <- 64
 Una vez que declares una variable, es posible que realices operaciones algebraicas entre ellas. Además, es posible que verifiques el tipo de dato que almacena la variable y las concatenes:
 
 ```{r}
-#Declara las variables
+##Declara las variables
 galon <- 3.785
 litros <- 5
 conv <- litros/galon
 
-#Verifica la clase de cada variable
+##Verifica la clase de cada variable
 class(galon)
 class(litros)
 class(conv)
@@ -208,7 +211,7 @@ paste("Ayer compré", litros, "litros de nive de limon o", conv, "galones")
 4. Imprime el mensaje *El sujeto sano 1 tiene una altura de 1.50 metros, una masa de 47 kilogramos y un IMC de x* usando los valores de las variables
 </blockquote>
 
-# Datos complejos
+<h1>Datos complejos</h1>
 En R puedes manejar estructuras de datos más complejas. Esto es útil al momento de analizar tablas, matrices o listas de datos. Las principales estructures complejas de datos son:
 
 - Vectores
@@ -216,23 +219,25 @@ En R puedes manejar estructuras de datos más complejas. Esto es útil al moment
 - Data frames
 - Listas
 
-# Vectores
-Los vectores son grupos de datos acomodados en **una sola dimensión**. Pueden ser descritos como una lista de datos numéricos, lógicos, de texto o combinaciones entre ellos. Para crear un vector utiliza la función `c()` y dentro del parentesis coloca los datos separados por comas:
+```{r, fig.align='center', out.width="700", echo=FALSE}
+knitr::include_graphics("../Images/Data_structure.png")
+```
+
+<h1>Vectores</h1>
+Los vectores son grupos de datos acomodados en **una sola dimensión**. Pueden ser descritos como una lista de datos numéricos, lógicos o de texto. Para crear un vector utiliza la función concatenar `c()` y dentro del parentesis coloca los datos separados por comas:
 
 ```{r}
-#Crea un vector con datos numéricos
+##Crea un vector con datos numéricos
 c(1, 3, 5, 7, 9, 11)
-#Con datos lógicos
+##Con datos lógicos
 c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
-#Con datos de texto
+##Con datos de texto
 c("gato", "leon", "puma", "jaguar", "ocelote", "tigre")
-#Combinando datos
-c("mama", 1.65, "papa", 1.57, "hermano", 1.74)
 ```
 
 Es posible declarar una variable que contenga datos dentro de un vector:
 ```{r}
-#Declara una variable para almacenar el vector
+##Declara una variable para almacenar el vector
 volumenes <- c(2.3, 4.5, 9.0, 10.6, 1.3)
 volumenes
 
@@ -243,84 +248,108 @@ visitas <- c(TRUE, FALSE, FALSE, TRUE, FALSE)
 visitas
 ```
 
-Dentro de un vector se pueden almacenar otros vectores. En este caso R combina los vectores para formar un superverctor:
-```{r}
-#Crea un vector con vectores como elementos
-localizaciones <- c(c("Mexico", "Guatemala", "Belice", "Canada", "EUA"), 
-                    c("Guadalajara", "Tikal", "Belmopan", "Toronto", "Phoenix"), 
-                    c(123.2, 125.3), 450.4, 673.7, 987,3)
-localizaciones
-```
 
-## Propiedades de los vectores
+
+<h2>Propiedades de los vectores</h2>
 Los vectores al ser listas de datos tienen asociadas ciertas propiedades que son útiles al momento de de analizar datos. Por ejemplo, **la clase** de datos que contiene se obtiene con la función `class()`:
 ```{r}
 class(volumenes)
 class(escencias)
 class(visitas)
-class(localizaciones)
 ```
 
 El número de elementos que contiene el vector o **longitud** se obtiene con la function `length()`:
 ```{r}
 length(volumenes)
 length(escencias)
-length(localizaciones)
 ```
 
 Las veces que se repite un elemento en el vector, o **proporción**, se obtiene con la funcion `table()`:
 ```{r}
 table(volumenes)
-table(localizaciones)
 table(visitas)
 ```
 
 Cuando hay repetición de datos, aquellos denominados como **unicos** se obtienen con la función `unique()`:
 ```{r}
-#Crea un vector con datos repetidos
+##Crea un vector con datos repetidos
 calificaciones <- c(4, 5, 8, 8, 9, 6, 6, 6, 3, 10, 3, 3, 2, 2, 8)
-#Obten los valores unicos del vector
+##Obten los valores unicos del vector
 unique(calificaciones)
 ```
 
 Para **ordenar** los elementos de un vector (numerico o de texto) se emplea la función `sort()`:
 ```{r}
-#La funcion sort() ordena los elementos de forma ascendente por default
+##La funcion sort() ordena los elementos de forma ascendente por default
 sort(calificaciones)
 sort(escencias)
-sort(localizaciones)
 
-#Para ordenar de forma descendente, coloca la opción decreasing = T
+##Para ordenar de forma descendente, coloca la opción decreasing = T
 sort(calificaciones, decreasing = T)
 sort(escencias, decreasing = T)
-sort(localizaciones, decreasing = T)
 ```
 
-## Manipulación de vectores
+<h2>Creación de vectores con secuencias o elementos repetidos</h2>
+En R, es posible crear vectores con secuencias numéricas regulares que inicien en un número y finalicen en otro. La manera más sencilla de hacerlo es utilizando dos puntos que separen el primer y el último número de la secuencia:
+```{r}
+##Generar una secuencia numérica que inicie en el número 1 y finalice en el número 70
+1:70
+num <- 1:70
+num
+```
+
+En este caso, los elementos de la secuencia están separados por un solo valor. Si el intervalo de separación entre elementos se desea modificar, utilizar el comando `seq()`:
+```{r}
+##Generar una secuencia del 1 al 10 separanco cada cifra en intervalos de 0.5
+seq(1, 10, 0.5)
+```
+
+En ocasiones resulta útil generar dos secuencias que tengan diferente rango de valores o que el intervalo de separación entre cada cifra  Para ello emplear comando `sequence()` con sus diversos argumentos:
+```{r}
+##Generar dos secuencias. La primera del número 1 al 4 y la segunda del numero 1 al 5. Ambas secuencias están contenidas en el mismo vector
+sequence(4:5)
+##La opción from nos permite indicar la cifra con la cual inician las dos secuencias
+sequence(4:5, from = 2)
+##La opción by indica el número de valores separados netre cada elemento de la secuencia
+sequence(4:5, by = 3)
+```
+
+Finalmente, existe la posibilidad de generar vectores con elementos repetidos. Para ello se utiliza el comando `rep()`.
+```{r}
+##Generar un vector que repita 25 veces la letra a
+rep("a", 25)
+##Generar un vector que repita 50 veces la secuencia D1, D15, D40 y D100
+rep(c("D1", "D15", "D40", "D100"), 50)
+##La opción each nos permite repetir cada elemento las veces que se indica, colocando de manera consecutiva las repeticiones
+rep(c("D1", "D15", "D40", "D100"), each = 4)
+```
+
+<h2>Manipulación de vectores</h2>
 Al trabajar con datos, resulta útil extraer elementos de un vector de acuerdo a su posición dentro del vector o a un criterio. A esta operación de extracción se le conoce como *subset* y analizaremos el primer caso.
 Los elementos dentro de un vector se encuentran numerados o indexados. Al número que hace referencia a la posición de los elementos se le conoce como **índice**. La numeración siempre comienza desde **1**.  
 Para extraer elementos de un vector de acuerdo a su **posición** es necesario colocar entre corchetes `[]` la posición del elemento que queremos extraer:
 
 ```{r}
-#Crea un vector con n elementos
+##Crea un vector con n elementos
 simpson <- c("Marge", "Homero", "Lisa", "Bart", "Maggie", "Ned", "Ines", "Skinner", "Krusty", "Magda")
-#Extrae el cuarto elemento del vector
+##Extrae el cuarto elemento del vector
 simpson[4]
-#Extrae el séptimo elemento del vector
+##Extrae el séptimo elemento del vector
 simpson[7]
 ```
 
 Para extraer múltiples elementos de un vector, dentro de los corchetes se tiene que añadir los índices de los elementos a extraer dentro de un vector:
 ```{r}
-#Extrae el primer, tercer, cuarto y octavo elemento del vector
+##Extrae el primer, tercer, cuarto y octavo elemento del vector
 simpson[c(1, 3, 4, 8)]
 ```
 
 Para extraer elementos con índices consecutivos basta con indicar el indice de incio y de fin separados por `:` 
 ```{r}
-#Extrae del primer al quinto elemento del vector
+##Extrae del primer al quinto elemento del vector
 simpson[1:5]
-#Extrae del tercer al sexto elemento del vector
+
+##Extrae del tercer al sexto elemento del vector
 simpson[3:6]
 ```
 
@@ -345,25 +374,31 @@ El símbolo que acabamos de utilizar se le conoce como **operador relacional** y
 El resultado de emplear un operador relacional será un valor o dato lógico. Cuando hacemos *subseting* de elementos de un vector utilizando este método, se seleccionarán aquellos datos que cumplan con la condición, es decir, sean **TRUE**
 
 ```{r}
-#Genera un vector con 20 elementos numéricos
+##Genera un vector con 20 elementos numéricos
 numeros <- c(1:20)
-#Extrae los valores mayores a 5
+
+##Extrae los valores mayores a 5
 numeros[numeros > 5]
-#Extrae los valores menores a 17
+
+##Extrae los valores menores a 17
 numeros[numeros < 17]
+
 #Extrae los valores mayores o igual a 10
 numeros[numeros >= 10]
-#Extrae los valores menores a 12
+
+##Extrae los valores menores a 12
 numeros[numeros <= 12]
-#Extrae los numeros distintos a 15
+
+##Extrae los numeros distintos a 15
 numeros[numeros != 15]
 ```
 
-Cuando requerimos que se cumplan dos o maás condiciones debemos emplear los operadores **|** O, **&** Y:
+Cuando requerimos que se cumplan dos o más condiciones debemos emplear los operadores **|** O, **&** Y:
 ```{r}
-#Extrae los datos entre 10 y 15. Es decir, mayores a 10 y menores a 15
+##Extrae los datos entre 10 y 15. Es decir, mayores a 10 y menores a 15
 numeros[numeros > 10 & numeros < 15]
-#Extrae los primeros y ultimos cinco valores
+
+##Extrae los primeros y ultimos cinco valores
 numeros[numeros <= 5 | numeros >= 15]
 ```
 
@@ -377,46 +412,50 @@ numeros[numeros <= 5 | numeros >= 15]
 6. Extrae los elementos que coincidan con Balsas o Lerma
 </blockquote>
 
-# Matrices
-Las matrices en R representan arreglos en **dos dimensiones** n y m, en donde: 
+<h1>Matrices</h1>
+Las matrices en R representan arreglos en **dos dimensiones** n y m,, que contienen datos de la misma clase y en donde: 
 **n** es el número de filas y **m** de columnas.
 
 Las matrices pueden verse como la unión de dos o más vectores que contienen datos de las distintas clases. Para crear una matriz corremos la función `matrix()` e indicando el número de filas y columnas con las opciones `nrow` y `ncol`, respectivamente:
 
 ```{r}
-#Crea una matriz con doce elementos consecutivos ordenados en una sola columna
+##Crea una matriz con doce elementos consecutivos ordenados en una sola columna
 matrix(1:12)
 
-#Separa los elementos en tres filas y cuatro columnas
+##Separa los elementos en tres filas y cuatro columnas
 matrix(1:12, nrow = 3, ncol = 4)
 
-#Separa los elementos filas y columnas sin que sean múltiplos del número de datos
+##Separa los elementos filas y columnas sin que sean múltiplos del número de datos
 matrix(1:12, nrow = 4, ncol = 5)
+
+##La opción byrow permite acomodar los valores por fila y no por columna
+matrix(1:12, nrow = 3, ncol = 4, byrow = T)
 ```
 
 Las matrices también se pueden crear al juntar o concatenar varios vectores y empleando las funciones `rbind()` o `cbind()`:
 
 ```{r}
-#Crea cuatro vectores
+##Crea cuatro vectores
 x <- c(1, 2, 3, 4, 5)
 y <- c(6, 7, 8, 9, 10)
 z <- c(11, 12, 13, 14, 15)
 a <- c(16, 17, 18, 19, 20)
 
-#Une los vectores como si fueran filas
+##Une los vectores como si fueran filas
 rbind(x, y, z, a)
 
-#Une los vectores como si fueran columnas
+##Une los vectores como si fueran columnas
 cbind(x, y, z, a)
 ```
 
-## Propiedades de las matrices
+<h2>Propiedades de las matrices</h2>
 Al igual que los vectores, las matrices presentan propiedades muy características que nos permitirán manipularlas. De manera análoga a la longitud de los vectores, las matrices tienen un numero de **dimensiones** (renglones y columnas) que podemos obtener con la función `dim()`:
 
 ```{r}
-#Creamos una matriz
+##Creamos una matriz
 mi_matriz <- matrix(1:15, nrow = 5, ncol = 3)
-#Obtenemos el número de dimensiones o filas y columnas de la matriz
+
+##Obtenemos el número de dimensiones o filas y columnas de la matriz
 dim(mi_matriz)
 ```
 
@@ -427,60 +466,63 @@ class(mi_matriz)
 
 Los nombres de las filas y columnas los obtenemos con las funciones `rownames()` y `colnames()` 
 ```{r}
-#Obten el nombre de las filas y columnas de la matriz
+##Obten el nombre de las filas y columnas de la matriz
 rownames(mi_matriz)
 colnames(mi_matriz)
 ```
 
 En caso que la matriz no tenga asignados nombres de filas y columnas, estos pueden ser asignados usando las mismas funciones `rownames()` y `colnames()` de la siguiente manera:
 ```{r}
-#Asigna los nombres de las filas y columnas de la matriz
+##Asigna los nombres de las filas y columnas de la matriz
 rownames(mi_matriz) <- c("fila1", "fila2", "fila3", "fila4", "fila5")
 colnames(mi_matriz) <- c("columna1", "columna2", "columna3")
 
-#Verifica el resultado
+##Verifica el resultado
 rownames(mi_matriz)
 colnames(mi_matriz)
 ```
 
-## Manipulación de matrices
+<h2>Manipulación de matrices</h2>
 Al igual que los vectores, es posible extraer datos o hacer "subseting" en una matriz. Los datos a extraer pueden ser individuales, filas o columnas enteras. Para ello, usaremos el mismo procedimiento que con los vectores. En corchetes colocamos el índice de las **filas** seguido por el índice de las **columnas** y separados por comas:
 ```{r}
-#Extrae la primera fila de la matriz
+##Extrae la primera fila de la matriz
 mi_matriz[1, ]
-#Extrae la segunda columna de la matriz
+
+##Extrae la segunda columna de la matriz
 mi_matriz[, 2]
-#Extrae el dato de la fila 4 columna 3
+
+##Extrae el dato de la fila 4 columna 3
 mi_matriz[4, 3]
 ```
 
 La extracción de datos contenidos en dos o más filas o columnas es similar a la extracción en vectores. Dentro de un vector, indica los índices de las filas o columnas que deseas extraer:
 ```{r}
-#Extrae los datos de las primeras tres filas
+##Extrae los datos de las primeras tres filas
 mi_matriz[c(1:3), ]
-#Extrae los datos de las últimas dos columnas
+
+##Extrae los datos de las últimas dos columnas
 mi_matriz[, c(2, 3)]
 ```
 
 
 La extracción de elementos en una matriz se puede realizar por medio de los operadores relacionales. Veamos un ejemplo:
 ```{r}
-#Extrae los datos que tengan un valor menor o igual a 10
+##Extrae los datos que tengan un valor menor o igual a 10
 mi_matriz <= 10
 mi_matriz[mi_matriz <= 10]
 
-#Extrae los datos que sean mayores a 8
+##Extrae los datos que sean mayores a 8
 mi_matriz[mi_matriz > 8]
 ```
 
 Sin embargo, cuando queremos extraer datos de una matriz por fila o columna y además cumplan una condición, tendremos que usar la función `which()`. Esta función nos devuelve los índices de las filas o columnas que cumplen o no cierta condición:
 ```{r}
-#Obten los índices de los elementos (filas) de la columna 1 que sean distintos de tres usando la función which
+##Obten los índices de los elementos (filas) de la columna 1 que sean distintos de tres usando la función which
 which(mi_matriz[, 1] != 3)
-#Obten los índices de los elementos (columnas) de la fila 1 que sean menores a 9
+##Obten los índices de los elementos (columnas) de la fila 1 que sean menores a 9
 which(mi_matriz[1, ] < 9)
 
-#Extrae los datos de la matriz original
+##Extrae los datos de la matriz original
 mi_matriz[which(mi_matriz[, 1] != 3), 1]
 mi_matriz[1, which(mi_matriz[1, ] < 9)]
 ```
@@ -492,9 +534,10 @@ Como lo habras notado la función `which()` nos devuelve resultados de manera *c
 
 En ocasiones, resulta útil **transponer** los datos en una matriz, es decir, convertir filas en columnas y viceversa. La función `t()` nos permite realizar dicha operación:
 ```{r}
-#Visualiza la estructura original de la matriz
+#V#isualiza la estructura original de la matriz
 mi_matriz
-#Transpon la matriz
+
+##Transpon la matriz
 t(mi_matriz)
 ```
 
@@ -507,7 +550,7 @@ t(mi_matriz)
 5. Extrae los elementos de la columna 2 menores a 14 y mayores a 11  
 </blockquote>
 
-# Data Frame
+<h1>Data Frame</h1>
 
 Los cuadros de datos o *data frames* son tablas que contienen datos distribuidos en dos dimensiones, es decir, en **filas** y en **columnas**. De manera similar a las matrices, los data frames pueden ser visualizados como una concatenación o conjunción de venctores. A diferencia de las matrices, los data frames pueden contener datos de diferente clase, por lo que son estructuras heterogéneas.  Estrictamente, en un data frame los renglones representan individuos o casos y las columnas variables o rasgos.
 
@@ -522,13 +565,13 @@ Si incumplimos con la condición anterior, el número de elementos de los vector
 data.frame(numero = c(1, 2, 3, 4, 5), factor = c("a", "b", "c", "d"), decimal = c(1.1, 2.2, 3.3, 4.4), logico = c(T, F, F, T))
 ```
 
-## Propiedades de los data frames
+<h2>Propiedades de los data frames</h2>
 Al igual que las matrices, los data frames presentan una clase particular, dimensiones, nombres de filas y columnas. Con las funciones `class()`, `dim()`, `rownames()` y `colnames()` se obtienen estos atributos:
 ```{r}
 ##Crea un data frame y asignalo a una variable
 mi_df <- data.frame(numero = c(1, 2, 3, 4), factor = c("a", "b", "c", "d"), decimal = c(1.1, 2.2, 3.3, 4.4), logico = c(T, F, F, T))
 
-#Obten la clase, dimensiones y nombres de filas y columnas del data frame
+##Obten la clase, dimensiones y nombres de filas y columnas del data frame
 class(mi_df)
 dim(mi_df)
 rownames(mi_df)
@@ -537,27 +580,27 @@ colnames(mi_df)
 
 Adicionalmente, los nombres de las columnas de un data frame se obtienen con la función `names()`. Recuerda que esta función solamente es **exclusiva** de los data frames:
 ```{r}
-#Obten el nombre de las columnas del data frame usando la función names
+##Obten el nombre de las columnas del data frame usando la función names
 names(mi_df)
-#Intenta correr la función names en una matriz
+##Intenta correr la función names en una matriz
 names(mi_matriz)
 ```
 De lo contrario, en una matriz la función `names()` nos devuelve un objeto nulo o vacío
 
-## Manipulación de los data frames
+<h2>Manipulación de los data frames</h2>
 Manipular data frames resulta una operación común en el análisis de datos. Como se mencionó previamente, los data frames resultan ser estructuras preferidas sobre las matrices por la flexibilidad en su manipulación. Al igual que las matrices, es posible obtener todos los elementos de una fila o columna en particular utilizando corchetes:
 ```{r}
-#Obten la fila 1 del data frame
+##Obten la fila 1 del data frame
 mi_df[1, ]
-#Obten la columna 3 del data frame
+##Obten la columna 3 del data frame
 mi_df[, 3]
 ```
 
 Existe un método exclusivo de los data frames para seleccionar columnas y obtener sus elementos. Solo requerimos escribir el nombre del data frame y después agregar el signo <strong class="red">$</strong>. Esto nos desplegará un menú con los nombres de las columnas. Seleccionamos el que deseamos y concluimos:
 ```{r}
-#Selecciona la columna correspondiente a factor
+##Selecciona la columna correspondiente a factor
 mi_df$factor
-#O a decimal
+##O a decimal
 mi_df$decimal
 ```
 
@@ -565,17 +608,17 @@ mi_df$decimal
 
 Si deseas seleccionar múltiples filas o columnas hazlo de forma similar a las matrices. Dentro de los corchetes agrega dentro de un vector los índices de filas o columnas que deseas seleccionar:
 ```{r}
-#Selecciona las dos primeras filas
+##Selecciona las dos primeras filas
 mi_df[c(1, 2), ]
-#Selecciona las últimas tres columnas
+##Selecciona las últimas tres columnas
 mi_df[, c(2:4)]
 ```
 
 La extracción de datos que cumplen una o varias condiciones se realiza de la misma manera que en las matrices usando la función `which()`:
 ```{r}
-#Extrae los elementos menores a 3 de la columna 3
+##Extrae los elementos menores a 3 de la columna 3
 which(mi_df[, 3] < 3)
-#Corta los datos preservando todas las columnas
+##Corta los datos preservando todas las columnas
 mi_df[which(mi_df[, 3] < 3), ]
 ```
 
@@ -584,22 +627,22 @@ Sin embargo, para evitar usar la función `which()` y confundirnos con la sintax
 <blockquote>`subset(dataframe, Columna Condicion)`</blockquote>
 
 ```{r}
-#Extrae los elementos que sean menores a 3 de la columna decimal
+##Extrae los elementos que sean menores a 3 de la columna decimal
 subset(mi_df, decimal < 3)
 ```
 ¿Cuál método te pareció más útil? 
 
 Los data frames al igual que las matrices se transponen usando la función `t()`
 ```{r}
-#Transpon el data frame
+##Transpon el data frame
 t(mi_df)
 ```
 
 En ocasiones requerimos adicionar nuevas columnas cuyos valores dependen de una operación en otra columna. Para adicionar nuevas columnas al data frame tendrás que asignar la nueva columna usando el símbolo de <strong class="red">$</strong> y escribiendo el nombre de la nueva columna:
 ```{r}
-#Agrega una nueva columna que sea igual al logaritmo base 10 de los valores de decimal
+##Agrega una nueva columna que sea igual al logaritmo base 10 de los valores de decimal
 mi_df$logaritmo <- log(mi_df$decimal)
-#Verifica el resultado
+##Verifica el resultado
 mi_df
 ```
 
@@ -614,7 +657,7 @@ mi_df
 7. Obten los datos exclusivos de la especie *setosa*  
 </blockquote>
 
-# Lectura de datos
+<h1>Lectura de datos</h1>
 
 Las tablas de datos que se generan en un procesador de textos distinto a R requieren ser importadas ambiente de R. Cuando generes tablas hazlo desde excel o empleando un **procesador de texto plano**. Al generar las tablas ten en mente lo siguiente:
 
@@ -641,24 +684,24 @@ sep: Es el tipo de separador de las columnas en los datos. Si los datos están s
 
 Cuando la tabla sea importada a R se hará en formato de data frame
 
-# Listas
+<h1>Listas</h1>
 
 Las listas de R son vectores cuyos elementos son estructuras de datos (vectores, matrices o cuadros de datos) **homogéneas** (de la misma clase) o **heterogéneas** (diferente clase). Las listas resultan útiles cuando almacenamos estructuras de datos que se encuentran relacionadas entre si, es decir, contienen información similar entre ellas y por lo tanto serán sujetas al mismo flujo de trabajo.  
 Para crear una lista usarémos la función `list()` instalada por default dentro de las utilidades de R:
 ```{r}
-#Crear tres matrices las cuales serán almacenadas en una lista
+##Crear tres matrices las cuales serán almacenadas en una lista
 a <- matrix(1:20, nrow = 5, ncol = 4)
 b <- matrix(21:40, nrow = 5, ncol = 4)
 c <- matrix(41:60, nrow = 5, ncol = 4)
 
-#Usar la función list para guardar las tres matrices en una lista
+##Usar la función list para guardar las tres matrices en una lista
 mi_lista <- list(a, b, c)
 
-#Imprimir el resultado
+##Imprimir el resultado
 mi_lista
 ```
 
-## Propiedades de las listas
+<h2>Propiedades de las listas</h2>
 
 De manera similar a los vectores, las listas son arreglos unidimensionales que cuentan con un largo y que es el número de elementos almacenados. La función `length()` permite conocer este valor:
 ```{r}
@@ -672,7 +715,7 @@ Las listas también poseen una clase la cual se obtiene con la función `class()
 class(mi_lista)
 ```
 
-## Manipulación de listas
+<h2>Manipulación de listas</h2>
 
 Para acceder a los elementos de una lista, utilizaremos una sintaxis muy similar a la de los vectores. Empleando corchetes `[]` y los índices de los elementos podemos extraer los datos dentro de ellas. Un aspecto importante es que dentro de las listas existe una jerarquía. El uso de un solo corchete extrae una *sub-lista* que contiene el elemento seleccionado con clase de lista:
 ```{r}
@@ -706,7 +749,7 @@ mi_lista_nombres$A
 ```
 Cada elemento de la lista fue nombrado con las letras *A, B y C* 
 
-### Funciones sobre elementos de las listas
+<h2>Funciones sobre elementos de las listas</h2>
 
 Aplicar funciones que evaluen a cada uno de los elementos de las listas es posible mediante el uso de `lapply()` y `sapply()`. La sintaxis es la siguiente:
 
