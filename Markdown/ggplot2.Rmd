@@ -1,0 +1,133 @@
+---
+title: "ggplot_2"
+author: "Rodolfo Chavez"
+date: "`r Sys.Date()`"
+knit: (function(inputFile, encoding) { 
+      out_dir <- "../HTML";
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), out_dir, 'ggplot2')) })
+output:
+  rmarkdown::html_document:
+    css: "my_css.css"
+    toc: true
+    toc_float: true
+    highlight: pygments
+editor_options:
+  chunk_output_style: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, include = T, eval = T)
+#Load the required packages
+packages <- c("tidyverse", "bibtex")
+
+# install if needed and loading packages
+to_install <- packages[! packages %in% installed.packages()[, "Package"]]
+if (length(to_install)) { 
+  install.packages(to_install, repos = "https://cloud.r-project.org")
+}
+invisible(lapply(packages, library, character.only = TRUE))
+
+# get the packages version 
+packages_versions <- function(p) {
+  paste(packageDescription(p)$Package, packageDescription(p)$Version, sep = " ")
+}
+
+# Get the packages references
+write.bib(packages, "packages.bib")
+
+# merge the zotero references and the packages references
+cat(paste("% Automatically generated", Sys.time()), "\n% DO NOT EDIT",
+    { readLines("Taller.bib") %>% 
+      paste(collapse = "\n") },
+    { readLines("packages.bib") %>% 
+      paste(collapse = "\n") },
+    file = "biblio.bib",
+    sep = "\n")
+
+# Some packages reference keys must be modified
+# (their key is not the package name)
+# check in packages.bib
+packages_keys <- packages %>% 
+  enframe() %>% 
+  mutate(value = case_when(value == "knitr" ~ "@knitr1",
+                           #value == "boot" ~ "@boot1",
+                           TRUE ~ paste0("@", value)))
+```
+
+<h1>ggPlot2</h1>
+
+<blockquote class="blockquote">
+El gran valor de una imagen es cuando nos incita a notar lo que nunca esperabamos ver  
+- John Tukey
+
+Si no lo puedo dibujar, no lo puedo explicar  
+- Albert Einstein
+</blockquote>
+
+Además de ser un lenguaje de programación para ordenar datos y realizar análisis estadísticos, R nos permite crear gráficos para visualizar los datos.
+
+Por default, R cuenta con una serie de comandos básicos para crear y elaborar gráficos:
+```{r}
+plot(pressure)
+```
+
+Sin embargo, el código generado para crear estos gráficos es abstracto y difícil de comprender para los usuarios. Adicionalmente, el gráfico resultante carece de elementos estéticos que dificilmente satisfacen los requerimientos para publicarlo. Para solucionar este problema, **`ggplot2`** fue creado para customizar los gráficos y añadir elementos relacionados con el análisis de los datos (entre otras funciones).
+
+Como parte de **`tidyverse`**, la sintaxis para crear gráficos usando **`ggplot2`** se basa en el uso de verbos que facilitan al usuario comprender el código de lo que se está graficando. Principalmente, los gráficos se crean por el  apilamiento de capas de elementos gráficos uno encima de otro:
+
+<img src="../Images/ggplot_syntax.png">
+
+Te recomiendo visitar la página de *<a href="https://r-graph-gallery.com/">RGraph Gallery</a>* para que visualices la diversidad de gráficos que se pueden generar con **`ggplot2`**.
+
+<h1>Sintaxis de ggplot2</h1>
+
+<div class="warning">
+Previamente a la creación de gráficos con ggplot2 o cualquier otro software, es importante que definas el objetivo de crear un gráfico y conozcas la naturaleza de las variables a graficar (categóricas, numéricas, discretas, continuas...), así como su distribución.
+</div>
+
+La sintaxis para elaborar gráficos en **`ggplot2`** se compone de los siguientes elementos:
+
+- 1. Datos: *data frame* y las variables a graficar (*aesthetics*)
+- 2. Geometría: Tipo de gráfico (de barras, de puntos, de lineas, pastel, cajas/bigotes)
+- 3. Estadisticos: Transformaciones estadísticas que resumen los datos (media, mediana, intervalos de confianza)
+- 4. Escalas: Títulos de los ejes y valores para modificar la estética (color, forma, tamaño) de los datos
+- 5. Sistema de coordenadas: El  plano en el cual se está graficando
+- 6. Paneles: Valor opcional si se desean crear multiples gráficas a partir de variables categóricas
+
+<h2>Datos y *aestjetics*</h2>
+Para crear un gráfico en **`ggplot2`**, se requiere utilizar la función `ggplot()` y dentro de ella especificar el *data frame* que contiene los datos. En el argumento `aes()` se indican las variables (x y) a graficar. Como ejemplo utilizaremos el *data set* **`iris`**
+
+```{r}
+##Utiliza la función ggplot para crear un gráfico de dos variables (Sepal.Length, Petal.Length)
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length))
+```
+
+De esta manera se produce una gráfica de un solo plano en donde se visualizan los ejes x/y y las variables en cada uno. Sin embargo, no hay ningún dato graficado.
+
+<h2>Geometría</h2>
+Para graficar los datos se requiere adicionar una capa utilizando un símbolo **+** seguidamente de la función `ggplot()`. Para generar una gráfica de puntos, se utiliza la función `geom_point()`:
+```{r}
+##Genera una gráfica de puntos con los comandos previamente utilizados
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point()
+```
+
+Los atributos para modificar el color de relleno, contorno, la forma y el tamaño de los puntos indican con el argumento dentro del comando `geom_point()`:
+```{r}
+##Modificar el color de relleno, forma y tamaño de los puntos de la gráfica anterior
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point(shape  = 15, size = 3, color = "blue")
+```
+El color de relleno de los datos se indica entre comillas empleando los nombres de los colores contenidos dentro de esta esta lista:
+
+<img src="../Images/rcolors.png">
+
+Sin embargo, la lista no está limitada a estos colores. Puedes utilizar el valor hexadecimal del color que más te guste. Para ello, consulta la página <a href="https://coolors.co/">color.co</a> para generar paletas de colores y obtengas el valor hexadecimal
+
+<img src="../Images/palette.png">
+
+Para modificar la forma de los puntos, en el argumento shape se utilizan valores numéricos que hacen referencia a esta lista:
+
+<img src="../Images/shape.png">
