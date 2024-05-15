@@ -75,11 +75,11 @@ plot(pressure)
 
 Sin embargo, el código generado para crear estos gráficos es abstracto y difícil de comprender para los usuarios. Adicionalmente, el gráfico resultante carece de elementos estéticos que dificilmente satisfacen los requerimientos para publicarlo. Para solucionar este problema, **`ggplot2`** fue creado para customizar los gráficos y añadir elementos relacionados con el análisis de los datos (entre otras funciones).
 
-Como parte de **`tidyverse`**, la sintaxis para crear gráficos usando **`ggplot2`** se basa en el uso de verbos que facilitan al usuario comprender el código de lo que se está graficando. Principalmente, los gráficos se crean por el  apilamiento de capas de elementos gráficos uno encima de otro:
+Como parte de **`tidyverse`**, la sintaxis para crear gráficos usando **`ggplot2`** se basa en el uso de verbos que facilitan al usuario comprender el código de lo que se está graficando. Principalmente, los gráficos se crean por el apilamiento de capas de elementos gráficos:
 
 <img src="../Images/ggplot_syntax.png">
 
-Te recomiendo visitar la página de *<a href="https://r-graph-gallery.com/">RGraph Gallery</a>* para que visualices la diversidad de gráficos que se pueden generar con **`ggplot2`**.
+Te recomiendo visitar la página de *<a href="https://r-graph-gallery.com/">RGraph Gallery</a>* para que explores la diversidad de gráficos que se pueden generar con **`ggplot2`**.
 
 <h1>Sintaxis de ggplot2</h1>
 
@@ -90,36 +90,61 @@ Previamente a la creación de gráficos con ggplot2 o cualquier otro software, e
 La sintaxis para elaborar gráficos en **`ggplot2`** se compone de los siguientes elementos:
 
 - 1. Datos: *data frame* y las variables a graficar (*aesthetics*)
-- 2. Geometría: Tipo de gráfico (de barras, de puntos, de lineas, pastel, cajas/bigotes)
+- 2. Geometría: Tipo de gráfico (histogramas, de barras, de puntos, de lineas, pastel, cajas/bigotes...)
 - 3. Estadisticos: Transformaciones estadísticas que resumen los datos (media, mediana, intervalos de confianza)
 - 4. Escalas: Títulos de los ejes y valores para modificar la estética (color, forma, tamaño) de los datos
 - 5. Sistema de coordenadas: El  plano en el cual se está graficando
 - 6. Paneles: Valor opcional si se desean crear multiples gráficas a partir de variables categóricas
 
-<h2>Datos y *aestjetics*</h2>
-Para crear un gráfico en **`ggplot2`**, se requiere utilizar la función `ggplot()` y dentro de ella especificar el *data frame* que contiene los datos. En el argumento `aes()` se indican las variables (x y) a graficar. Como ejemplo utilizaremos el *data set* **`iris`**
+<h2>Datos y *aesthetics*</h2>
+Para crear un gráfico en **`ggplot2`**, se requiere utilizar la función `ggplot()` y dentro de ella especificar el *data frame* que contiene los datos. En el argumento `aes()` se indican las variables (x y) a graficar. Como ejemplo utilizaremos el *data set* **`mpg`**
 
 ```{r}
-##Utiliza la función ggplot para crear un gráfico de dos variables (Sepal.Length, Petal.Length)
-ggplot(iris, aes(x = Sepal.Length, y = Petal.Length))
+##Utiliza la función ggplot para crear un gráfico de una variable fl
+ggplot(mpg, aes(x = fl))
 ```
 
-De esta manera se produce una gráfica de un solo plano en donde se visualizan los ejes x/y y las variables en cada uno. Sin embargo, no hay ningún dato graficado.
+De esta manera se produce una gráfica de un solo plano en donde se visualizan los ejes x/y y la variable fl en x. Sin embargo, no hay ningún dato graficado.
 
 <h2>Geometría</h2>
-Para graficar los datos se requiere adicionar una capa utilizando un símbolo **+** seguidamente de la función `ggplot()`. Para generar una gráfica de puntos, se utiliza la función `geom_point()`:
+Para graficar los datos se requiere adicionar una capa utilizando un símbolo **+** seguidamente de la función `ggplot()`:
 ```{r}
 ##Genera una gráfica de puntos con los comandos previamente utilizados
-ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
+ggplot(mpg, aes(x = hwy)) +
+  geom_histogram()
+```
+
+<h3>Una variable continua</h3>
+Para graficar una sola variable continua, utilizaremos las funciones `geom_histogram()` y `geom_density()`
+```{r, fig.show='hold', out.width="50%"}
+##Graficar la frecuencia en la distribución del Sepal.Length
+ggplot(mpg, aes(x = hwy)) +
+  geom_histogram() 
+
+##Graficar la densidad en la distribución del Sepal.Length
+ggplot(mpg, aes(x = hwy)) +
+  geom_density()
+```
+
+En el caso de tener una variable categórica o discreta se emplea la función `geom_bar()`:
+
+```{r}
+##Crear una gráfica de barras de acuerdo al tipo de combustible de los autos 
+ggplot(mpg, aes(x = fl)) +
+  geom_bar()
+```
+
+
+<h3>Dos variables</h3>
+Cuando los datos provienen de dos variables contínuas, se emplea el gráfico de puntos o *scatter plot* con la función `geom_point()`.
+```{r}
+##Graficar las millas recorridas por galón de combustible en ciudad o carretera
+ggplot(mpg, aes(x = cty, y = hwy)) +
   geom_point()
 ```
 
-Los atributos para modificar el color de relleno, contorno, la forma y el tamaño de los puntos indican con el argumento dentro del comando `geom_point()`:
-```{r}
-##Modificar el color de relleno, forma y tamaño de los puntos de la gráfica anterior
-ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
-  geom_point(shape  = 15, size = 3, color = "blue")
-```
+Los atributos para modificar el color de relleno, contorno, la forma y el tamaño de los puntos indican con dentro del comando `geom_point()`:
+
 El color de relleno de los datos se indica entre comillas empleando los nombres de los colores contenidos dentro de esta esta lista:
 
 <img src="../Images/rcolors.png">
@@ -128,6 +153,101 @@ Sin embargo, la lista no está limitada a estos colores. Puedes utilizar el valo
 
 <img src="../Images/palette.png">
 
-Para modificar la forma de los puntos, en el argumento shape se utilizan valores numéricos que hacen referencia a esta lista:
+```{r, fig.show='hold', out.width="50%"}
+##Color utilizando nombres
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point(color = "firebrick")
+
+##Color utilizando valores hexadecimales
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point(color = "#C86FC9")
+```
+
+
+Para modificar la forma de los puntos, en el argumento `shape` se utilizan valores numéricos que hacen referencia a esta lista:
 
 <img src="../Images/shape.png">
+
+```{r, fig.show='hold', out.width="50%"}
+##Cambiar la forma 
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point(shape = 15)
+
+##Cambiar la forma y el tamaño de los puntos
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point(shape = 15, size = 5)
+```
+
+Una función útil de **`ggplot`** es que el color de los puntos o elementos de un gráfico se puede establecer de acuerdo a una variable categórica. Es decir, de acuerdo a los niveles de la variable categórica es el color de los elementos. 
+Para ello, visualicemos la estructura del *data frame* `mpg`
+```{r}
+str(mpg)
+```
+La columna **`class`** corresponde a una variable categórica con siete niveles: *2seater,compact, midsize, minivan, pickup, subcompact* y *suv*. Dentro del argumento `aes()` de la función `ggplot()` indicaremos que el color de los puntos sea de acuerdo a la variable o columna **`class`**:
+
+```{r}
+##Colorea los puntos de acuerdo a los valores de una variable categórica
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) +
+  geom_point()
+```
+
+La forma de los puntos también se puede modificar de acuerdo a una variable categórica. El tamaño de los puntos se modifica de acuerdo a una variable numérica y contínua.
+
+```{r, fig.show='hold', out.width="50%"}
+##Colorea los puntos y modifica su forma de acuerdo a los valores de una variable categórica
+ggplot(mpg, aes(x = cty, y = hwy, color = class, shape = fl)) +
+  geom_point()
+
+##Modifica el tamaño de los puntos de acuerdo a los valores de Sepal.Width
+ggplot(mpg, aes(x = cty, y = hwy, color = class, shape = fl, size = cyl)) +
+  geom_point()
+```
+
+Para datos provenientes de una variable contínua y una categórica se emplean los gráficos de cajas y bigotes, de violín, de puntos o de barras.
+Para crear un gráfico de cajas y bigotes la función a emplear es `geom_boxplot()`:
+```{r}
+##Crear un gráfico de cajas y bigotes visualizando las millas recorridas por galón en carretera de acuerdo a la clase del auto
+ggplot(mpg, aes(x = class, y = hwy)) +
+  geom_boxplot()
+```
+
+Las gráficas de violín se crean con la función `geom_violin()`:
+```{r}
+ggplot(mpg, aes(x = class, y = hwy)) +
+  geom_violin()
+```
+
+Para modificar el color de acuerdo a los grupos o niveles de la variable categórica, se procede de la misma manera cuando se generó el gráfico de puntos. En este caso se utiliza el argumento `fill`:
+
+```{r, fig.show='hold', out.width="50%"}
+##Modifica el color de las cajas y bigotes o violines de acuerdo a los niveles de la variable class
+ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
+  geom_boxplot()
+
+ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
+  geom_violin()
+```
+
+
+<h2>Estadísticos</h2>
+La transformaciones estadísticas de los datos, o *stat*, resume los valores estadísticos de los datos. Para realizar estas transformaciones estadísticas, se añade una capa con las funciones `stat_...()` En el siguiente ejemplo, se modifica el número de cajas de un histograma:
+```{r, fig.show='hold', out.width="50%"}
+##Codigo para crear un histograma con un número de cajas de 30 
+ggplot(mpg, aes(x = hwy)) +
+  geom_histogram()
+
+##Con la función stat_bin se modifica el número de cajas a 20
+ggplot(mpg, aes(x = hwy)) +
+  stat_bin(bins = 20)
+```
+
+Adicionalmente, con las funciones `stat` se calculan valores como la media de alguna variable y se grafica. En el siguiente ejemplo se calcula la media de *hwy* usando la función **`stat_summary()`**:
+
+```{r}
+##Transformar los datos calculando y añadiendo la media del Sepal.Length
+ggplot(mpg, aes(x = class, y = hwy)) +
+  geom_point() +
+  stat_summary(geom = "point", fun = "mean", color = "red", size = 4)
+```
+
+
