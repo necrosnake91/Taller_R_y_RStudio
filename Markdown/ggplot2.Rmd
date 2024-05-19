@@ -1,7 +1,4 @@
 ---
-title: "ggplot_2"
-author: "Rodolfo Chavez"
-date: "`r Sys.Date()`"
 knit: (function(inputFile, encoding) { 
       out_dir <- "../HTML";
       rmarkdown::render(inputFile,
@@ -15,12 +12,13 @@ output:
     highlight: pygments
 editor_options:
   chunk_output_style: console
+bibliography: biblio.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, include = T, eval = T)
 #Load the required packages
-packages <- c("tidyverse", "bibtex")
+packages <- c("tidyverse", "bibtex", "RColorBrewer", "viridis", "fontawesome", "ggplot2", "ggpubr", "ggsci", "paletteer")
 
 # install if needed and loading packages
 to_install <- packages[! packages %in% installed.packages()[, "Package"]]
@@ -56,7 +54,8 @@ packages_keys <- packages %>%
                            TRUE ~ paste0("@", value)))
 ```
 
-<h1>ggPlot2</h1>
+
+<h1 class="header">1 ggPlot2</h1>
 
 <blockquote class="blockquote">
 El gran valor de una imagen es cuando nos incita a notar lo que nunca esperabamos ver  
@@ -69,19 +68,22 @@ Si no lo puedo dibujar, no lo puedo explicar
 Además de ser un lenguaje de programación para ordenar datos y realizar análisis estadísticos, R nos permite crear gráficos para visualizar los datos.
 
 Por default, R cuenta con una serie de comandos básicos para crear y elaborar gráficos:
-```{r}
+```{r, out.width="60%", fig.align='center'}
 plot(pressure)
 ```
 
-Sin embargo, el código generado para crear estos gráficos es abstracto y difícil de comprender para los usuarios. Adicionalmente, el gráfico resultante carece de elementos estéticos que dificilmente satisfacen los requerimientos para publicarlo. Para solucionar este problema, **`ggplot2`** fue creado para customizar los gráficos y añadir elementos relacionados con el análisis de los datos (entre otras funciones).
+Sin embargo, el código generado para crear estos gráficos es abstracto y difícil de comprender para los usuarios. Adicionalmente, el gráfico resultante carece de elementos estéticos que dificilmente satisfacen los requerimientos para publicarlo. Para solucionar este problema, **`ggplot2`** [@ggplot2] fue creado para customizar los gráficos y añadir elementos relacionados con el análisis de los datos (entre otras funciones).
 
-Como parte de **`tidyverse`**, la sintaxis para crear gráficos usando **`ggplot2`** se basa en el uso de verbos que facilitan al usuario comprender el código de lo que se está graficando. Principalmente, los gráficos se crean por el apilamiento de capas de elementos gráficos:
+Como parte de **`tidyverse`** [@wickhamWelcomeTidyverse2019], la sintaxis para crear gráficos usando **`ggplot2`** se basa en el uso de verbos que facilitan al usuario comprender el código de lo que se está graficando. Principalmente, los gráficos se crean por el apilamiento de capas de elementos gráficos:
 
-<img src="../Images/ggplot_syntax.png">
+```{r, fig.align='center', out.width="600", echo=FALSE}
+knitr::include_graphics("../Images/ggplot_syntax.png")
+```
+<p class="footnote">Sintaxis y gramática para generar gráficos en ggplot2. Tomado de https://rpubs.com/Mentors_Ubiqum/ggplot_workshop</p>
 
 Te recomiendo visitar la página de *<a href="https://r-graph-gallery.com/">RGraph Gallery</a>* para que explores la diversidad de gráficos que se pueden generar con **`ggplot2`**.
 
-<h1>Sintaxis de ggplot2</h1>
+<h1 class="header">2 Sintaxis de ggplot2</h1>
 
 <div class="warning">
 Previamente a la creación de gráficos con ggplot2 o cualquier otro software, es importante que definas el objetivo de crear un gráfico y conozcas la naturaleza de las variables a graficar (categóricas, numéricas, discretas, continuas...), así como su distribución.
@@ -96,25 +98,25 @@ La sintaxis para elaborar gráficos en **`ggplot2`** se compone de los siguiente
 - 5. Sistema de coordenadas: El  plano en el cual se está graficando
 - 6. Paneles: Valor opcional si se desean crear multiples gráficas a partir de variables categóricas
 
-<h2>Datos y *aesthetics*</h2>
+<h2><font color="#6F7479">2.1</font> Datos y *aesthetics*</h2>
 Para crear un gráfico en **`ggplot2`**, se requiere utilizar la función `ggplot()` y dentro de ella especificar el *data frame* que contiene los datos. En el argumento `aes()` se indican las variables (x y) a graficar. Como ejemplo utilizaremos el *data set* **`mpg`**
 
-```{r}
+```{r, fig.align='center', fig.width=8}
 ##Utiliza la función ggplot para crear un gráfico de una variable fl
 ggplot(mpg, aes(x = fl))
 ```
 
 De esta manera se produce una gráfica de un solo plano en donde se visualizan los ejes x/y y la variable fl en x. Sin embargo, no hay ningún dato graficado.
 
-<h2>Geometría</h2>
+<h2><font color="#6F7479">2.2</font> Geometría</h2>
 Para graficar los datos se requiere adicionar una capa utilizando un símbolo **+** seguidamente de la función `ggplot()`:
-```{r}
+```{r, out.width="60%", fig.align='center'}
 ##Genera una gráfica de puntos con los comandos previamente utilizados
 ggplot(mpg, aes(x = hwy)) +
   geom_histogram()
 ```
 
-<h3>Una variable continua</h3>
+<h3><font color="#6F7479">2.2.1</font> Una variable continua</h3>
 Para graficar una sola variable continua, utilizaremos las funciones `geom_histogram()` y `geom_density()`
 ```{r, fig.show='hold', out.width="50%"}
 ##Graficar la frecuencia en la distribución del Sepal.Length
@@ -128,16 +130,16 @@ ggplot(mpg, aes(x = hwy)) +
 
 En el caso de tener una variable categórica o discreta se emplea la función `geom_bar()`:
 
-```{r}
+```{r, out.width="60%", fig.align='center'}
 ##Crear una gráfica de barras de acuerdo al tipo de combustible de los autos 
 ggplot(mpg, aes(x = fl)) +
   geom_bar()
 ```
 
 
-<h3>Dos variables</h3>
+<h3><font color="#6F7479">2.2.2</font> Dos variables</h3>
 Cuando los datos provienen de dos variables contínuas, se emplea el gráfico de puntos o *scatter plot* con la función `geom_point()`.
-```{r}
+```{r, out.width="60%", fig.align='center'}
 ##Graficar las millas recorridas por galón de combustible en ciudad o carretera
 ggplot(mpg, aes(x = cty, y = hwy)) +
   geom_point()
@@ -147,11 +149,17 @@ Los atributos para modificar el color de relleno, contorno, la forma y el tamañ
 
 El color de relleno de los datos se indica entre comillas empleando los nombres de los colores contenidos dentro de esta esta lista:
 
-<img src="../Images/rcolors.png">
+```{r, fig.align='center', out.width="550", echo=FALSE}
+knitr::include_graphics("../Images/rcolors.png")
+```
+<p class"footnote">Ejemplo de colores, tonos y sus nombres en R. Tomada de https://bookdown.org/hneth/ds4psy/2.3-visualize:essential-ggplot.html</p>
 
 Sin embargo, la lista no está limitada a estos colores. Puedes utilizar el valor hexadecimal del color que más te guste. Para ello, consulta la página <a href="https://coolors.co/">color.co</a> para generar paletas de colores y obtengas el valor hexadecimal
 
-<img src="../Images/palette.png">
+```{r, fig.align='center', out.width="550", echo=FALSE}
+knitr::include_graphics("../Images/palette.png")
+```
+
 
 ```{r, fig.show='hold', out.width="50%"}
 ##Color utilizando nombres
@@ -166,7 +174,10 @@ ggplot(mpg, aes(x = cty, y = hwy)) +
 
 Para modificar la forma de los puntos, en el argumento `shape` se utilizan valores numéricos que hacen referencia a esta lista:
 
-<img src="../Images/shape.png">
+```{r, fig.align='center', out.width="400", echo=FALSE}
+knitr::include_graphics("../Images/shape.png")
+```
+<p class="footnote">Variantes de figuras a utilizar en R para gráficos de puntos. Tomada de https://osoramirez.github.io/R_Para_Biologos/intro.html</p>
 
 ```{r, fig.show='hold', out.width="50%"}
 ##Cambiar la forma 
@@ -185,7 +196,7 @@ str(mpg)
 ```
 La columna **`class`** corresponde a una variable categórica con siete niveles: *2seater,compact, midsize, minivan, pickup, subcompact* y *suv*. Dentro del argumento `aes()` de la función `ggplot()` indicaremos que el color de los puntos sea de acuerdo a la variable o columna **`class`**:
 
-```{r}
+```{r, out.width="60%", fig.align='center'}
 ##Colorea los puntos de acuerdo a los valores de una variable categórica
 ggplot(mpg, aes(x = cty, y = hwy, color = class)) +
   geom_point()
@@ -212,7 +223,7 @@ ggplot(mpg, aes(x = class, y = hwy)) +
 ```
 
 Las gráficas de violín se crean con la función `geom_violin()`:
-```{r}
+```{r, out.width="60%", fig.align='center'}
 ggplot(mpg, aes(x = class, y = hwy)) +
   geom_violin()
 ```
@@ -229,7 +240,7 @@ ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
 ```
 
 
-<h2>Estadísticos</h2>
+<h2><font color="#6F7479">2.3</font> Estadísticos</h2>
 La transformaciones estadísticas de los datos, o *stat*, resume los valores estadísticos de los datos. Para realizar estas transformaciones estadísticas, se añade una capa con las funciones `stat_...()` En el siguiente ejemplo, se modifica el número de cajas de un histograma:
 ```{r, fig.show='hold', out.width="50%"}
 ##Codigo para crear un histograma con un número de cajas de 30 
@@ -243,11 +254,153 @@ ggplot(mpg, aes(x = hwy)) +
 
 Adicionalmente, con las funciones `stat` se calculan valores como la media de alguna variable y se grafica. En el siguiente ejemplo se calcula la media de *hwy* usando la función **`stat_summary()`**:
 
-```{r}
+```{r, out.width="60%", fig.align='center'}
 ##Transformar los datos calculando y añadiendo la media del Sepal.Length
 ggplot(mpg, aes(x = class, y = hwy)) +
   geom_point() +
   stat_summary(geom = "point", fun = "mean", color = "red", size = 4)
 ```
 
+Finalmente, las transformaciones estadísticas permiten añadir líneas de tendencia para análisis de regresión. La función `stat_smooth()` añade una linea de tendencia en gráficos de puntos para dos variables continuas:
+```{r, out.width="60%", fig.align='center'}
+##Añadir una línea de tendencia a un gráfico de puntos
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point() +
+  stat_smooth(geom = "smooth", method = "lm")
+```
 
+La variedad de transformaciones estadísiticas que se pueden realizar alos gráficos de ggplot2 las puedes consultar en <a ref="https://ggplot2-book.org/statistical-summaries">https://ggplot2-book.org/statistical-summaries</a>.
+
+<h2><font color="#6F7479">2.4</font> Escalas</h2>
+Las escalas en **`ggplot2`** controlan los valores estéticos de una gráfica. En otras palabras, convierten los valores de las variables de los datos en algo graficable como el color, la forma, el tamaño o la posición.
+
+Las escalas se dividen en tres categorías:
+- Escalas de posición y ejes
+- Escalas de color y leyendas
+- Escalas para tamaño, forma, grosor y tipo de figuras
+
+<h3><font color="#6F7479">2.4.1</font> Escalas de posición y ejes</h3>
+Las escalas de posición y ejes controlan la localización de los elementos visuales de una gráfica. En el caso de gráficos en dos dimensiones, existen dos escalas correspondientes a los elementos en los ejes x y. Para variables contínuas, ggplot utiliza por default las funciones `scale_x_continous()` y `scale_y_continous()` para graficar de forma lineal ambos ejes. Sin embargo, existen otro tipos de escalas y transformaciones como `scale_x_log10()` la cual transforma logaritmicamente los datos:
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+  
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point() +
+  scale_x_log10()
+```
+
+Ggplot2, establece los límites numéricos de los ejes al determinar el rango de cada un de ellos. Sin embargo, resulta conveniente modificar los limites de los ejes en algunos gráficos. Para ello se utiliza el argumento `limits` dentro de los comandos `scale_x_continous()` y `scale_y_continous()` y los limites se indican como un vector:
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point() +
+  scale_x_continuous(limits = c(0, 50)) +
+  scale_y_continuous(limits = c(0, 50))
+```
+
+En ggplot tambien es posible ajustar las marcas de los ejes *axis breaks*, lo cual es una tarea indispensable para mejorar nuestros gráficos. Dentro de los comandos `scale_x_continous()` y `scale_y_continous()` colocamos el argumento `breaks`:
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), 
+                     limits = c(0, 50))
+```
+
+
+<blockquote class="hint">
+`r fa("circle-info", fill="#182fdc")` Para colocar secuencias numéricas recuerda utilizar las funciones `seq()` y `sequence()`.
+</blockquote>
+
+Para un mayor conocimiento de todas las escalas de posición que **`ggplot2`** controla, te recomiendo visitar la página de <a href="https://ggplot2-book.org/scales-position">https://ggplot2-book.org/scales-position"</a>.
+
+<h3><font color="#6F7479">2.5.2</font> Escalas de color</h3>
+Las escalar de color utilizan gradientes que se acoplan de acuerdo a las variables de nuestros datos:
+
+- `scale_fill_continous()` es el comando para generar gradientes de color usando como base variables continuas.  
+- `scale_fill_discrete()` es el comando para generar gradientes de color usando como base variables categóricas
+
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = cty, y = hwy, color = displ)) +
+  geom_point() +
+  scale_color_continuous()
+
+ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
+  geom_boxplot() +
+  scale_fill_discrete()
+```
+
+Sin embargo, en ambos casos existen paletas de colores establecidas y que forman parte de los paquetes **`viridis`** y **`RColorBrewer`**.  
+**`RColorBrewer`** [@RColorBrewer]utiliza colores de las paletas de <a href="https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3">https://colorbrewer2.org</a>. Existen distintas paletas:
+
+```{r, fig.width=5, fig.height=10, fig.align='center'}
+display.brewer.all()
+```
+
+Usando el comando `scale_fill_brewer(palette=)` se coloca la capa de color a las graficas:
+
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Spectral")
+
+ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
+  geom_violin() +
+  scale_fill_brewer(palette = "YlOrRd")
+```
+
+Para variables contínuas, las paletas del paquete **`viridis`** [@viridis]ofrecen una amplia de colores y gradientes:
+```{r, fig.align='center', out.width="400", echo=FALSE}
+knitr::include_graphics("../Images/viridis.png")
+```
+<p class="footnote">Paletas de colores del paquete viridis. Tomada de https://bookdown.org/hneth/ds4psy/D-4-apx-colors-pkgs.html</p>
+
+Al usarlas solo se requieren usar la función `scale_fill_viridis(option=)` e indicar el nombre de la paleta:
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = cty, y = hwy, color = displ, size = displ)) +
+  geom_point() +
+  scale_color_viridis(option = "viridis")
+
+ggplot(mpg, aes(x = cty, y = hwy, color = displ, size = displ)) +
+  geom_point() +
+  scale_color_viridis(option = "magma")
+```
+
+Si ninguna de las paletas de colores o gradientes te convence, puedes optar por utilizar tus colores favoritos empleando la función `scale_fill_manual()`. Esta función resulta útil cuando quieres resaltar algún dato importante en los gráficos. Dentro de la función debes indicar, con el argumento values, en un vector los  nombres de los colores (nombres o valores hexadecimales)
+
+```{r, fig.show='hold', out.width="50%"}
+ggplot(mpg, aes(x = drv, y = displ, fill = drv)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("darkblue", "cornflowerblue", "lightblue2"))
+
+ggplot(mpg, aes(x = fl, y = cty, fill = fl)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("gray", "firebrick", "gray", "gray", "gray"))
+```
+
+Sin embargo, si requieres descargar más escalas de colores (discretas o contínuas) te recomiendo instalar los paquetes **`ggpubr`** [@ggpubr], **`ggsci`**[@ggsci] y **`paletteer`** [@paletteer] para crear gráficos con paletas de colores listas para publicaciones:
+```{r, echo=F, include=FALSE}
+p1 <- ggplot(
+  subset(diamonds, carat >= 2.2),
+  aes(x = table, y = price, colour = cut)
+) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "loess", alpha = 0.05, linewidth = 1, span = 1) +
+  theme_bw()
+```
+
+```{r, fig.show='hold', out.width="50%"}
+p1 + 
+  scale_color_npg()
+
+p1 + 
+  scale_color_jco()
+```
+
+
+<h1 class="header">Referencias</h1>

@@ -1,7 +1,4 @@
 ---
-title: "Tidyverse"
-author: "Rodolfo Chavez"
-date: "`r Sys.Date()`"
 knit: (function(inputFile, encoding) { 
       out_dir <- "../HTML";
       rmarkdown::render(inputFile,
@@ -59,12 +56,12 @@ packages_keys <- packages %>%
                            TRUE ~ paste0("@", value)))
 ```
 
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(fontawesome)
+library(tidyverse)
+```
 
-
-
-<img src="../Images/tidyverse.png" width="100px">
-
-<h1>Tidyverse</h1>
+<h1 class ="header">1 Tidyverse</h1>
 
 **Tidyverse** [@wickhamWelcomeTidyverse2019] es una colección de paquetes que nos permiten manipular juegos de datos para hacer análisis simples, reproducibles y ordenados. Constantemente los paquetes dentro de tidyverse son actualizados, para ello te recomiendo visitar la página de [tidyverse](https://www.tidyverse.org/) para estar al día con las noticias.
 
@@ -82,10 +79,10 @@ library(tidyverse)
 En la consola de R observa como es que se han cargado los paquetes de **ggplot, tibble, tidyr, readr, purr, dplyr, stringr y forcats**.
 
 <div class="alert alert-warning">
-Solo necesitas instalar una sola vez el paquete de tidyverse. Cada vez que inicies una nueva sesión en RStudio, no es necesario que lo vuelvas a instalar.
+`r fa("triangle-exclamation", fill = "#f9c80e")` Solo necesitas instalar una sola vez el paquete de tidyverse. Cada vez que inicies una nueva sesión en RStudio, no es necesario que lo vuelvas a instalar.
 </div>
 
-<h1>Tibble</h1>
+<h1 class="header">2 Tibble</h1>
 
 En tidyverse trabajar con *dataframes* es problemático por:
 - Al teclear su nombre se despliegan las primeras 1000 o 999 filas  
@@ -120,9 +117,7 @@ iris_tibble <- as_tibble(iris)
 
 ¿Cuál tabla te pareció más útil? ¿Dataframe? ¿Tibble? Utiliza la que creas más conveniente para tus análisis
 
-
-
-<h1>Dplyr</h1>
+<h1 class="header">3 Dplyr</h1>
 
 El paquete de **dplyr** utiliza una sintaxis a base *verbos* (en inglés) que permiten manipular cuadros de datos o tibbles para extraer información de una manera amigable. Existen diversas funciones (o verbos) en el paquete dplyr y son:
 
@@ -138,7 +133,7 @@ Una de las principales utilidades de dplyr (y de todos los paquetes de tidyverse
 
 El resultado de la función 1 se transfiere y evalúa con la función 2. Posteriormente, el resultado de la función 2 se transfiere a la función 3. En los argumentos de la función 1 se evalúa el objeto (data frame o tibble) y se omite en las siguientes funciones. Es muy importante que haya una lógica en la secuencia de las funciones para que el pipe no se rompa.
 
-## Select
+<h2><font color="#6F7479">3.1</font> Select</h2>
 
 La función `select()` permite extraer una o varias columnas de un cuadro de datos o tibble para su análisis en concreto. La sintaxis es la siguiente:
 
@@ -195,17 +190,17 @@ En donde nosotros podemos indicarle a dplyr cuál es el nuevo orden de las colum
 relocate(my_starwars, name, height, mass, species)
 ```
 
-<blockquote class="blockquote">
+<blockquote class="excercise">
 Ejercicio 1  
 Emplea la base de datos *my_starwars*:
 
 * 1. Obten el nombre de las columnas del tibble  
-* 2. Selecciona las columnas relacionadas con el **Edad_D_1, Hipertg_1, Colesterol_1 y Apo_B_2 ** 
-* 3. Selecciona las todas columnas excepto las que se asocian con consumo de golosinas (Refresco_1, Pand_Dulce_1, Chocolate, Golosinas)  
-* 4. Relocaliza la columna del Colesterol_1 entre Trigliceridos_2 y Fibrato_2
+* 2. Selecciona las columnas relacionadas con el **color de cabello, color de ojos, año de nacimiento y sexo** 
+* 3. Selecciona las todas columnas excepto las que se asocian con **la altura, masa y la especie** 
+* 4. Relocaliza la columna de la especie entre la masa y el color de cabello
 </blockquote>
 
-## Filter
+<h2><font color="#6F7479">3.2</font> Filter</h2>
 `filter()` es una alternativa más amigable a las funciones `which()` y `subset()` para extraer datos que cumplan con ciertas condiciones. La sintaxis es la siguiente:
 
 > `filter(objeto, condicion_1, condicion_2, condicion_3, ..., condicion_N)`
@@ -221,9 +216,8 @@ mean(my_starwars$height)
 filter(my_starwars, height > 178)
 ```
 
-<blockquote class="blockquote">
-HINT  
-Recuerda hacer uso de los operadores relacionales **==, !=, >, <, >=, <=** y de los nexos **| y &** para comparar multiples condiciones
+<blockquote class="hint">
+`r fa("circle-info", fill="#182fdc")` Recuerda hacer uso de los operadores relacionales **==, !=, >, <, >=, <=** y de los nexos **| y &** para comparar multiples condiciones
 </blockquote>
 
 `filter()` permite evaluar dos o mas condiciones, por ejemplo seleccionemos aquellos personajes mayores a 178 cm y que sean "Humanos"
@@ -252,7 +246,7 @@ group_by(my_starwars, sex) %>%
 
 La función `group_by()` identifica los grupos en variables categóricas y con funciones de dplyr subsecuentes podemos conocer las características de cada grupo con respecto a una o más variables.
 
-<blockquote class="blockquote">
+<blockquote class="excercise">
 Ejercicio 2  
 Utiliza la base de datos my_starwars y realiza lo siguiente:
 
@@ -262,7 +256,7 @@ Utiliza la base de datos my_starwars y realiza lo siguiente:
 
 </blockquote>
 
-## Mutate
+<h2><font color="#6F7479">3.3</font> Mutate</h2>
 
 `mutate()` es una función de dplyr que permite crear nuevas columnas o modificar las existentes. Es una manera alternativa al uso del operador <strong class="red">$</strong> para crear o modificar columnas. La sintaxis es:
 
@@ -276,7 +270,7 @@ Por ejemplo, convirtammos la masa de los personajes en kg a g el índice de masa
 mutate(my_starwars, mass = mass*1000)
 ```
 
-## Arrange
+<h2><font color="#6F7479">3.4</font> Arrange</h2>
  La función `arrange()` es equivalente a `sort()` de la unidad de **vectores**. Con `arrange()` podemos organizar datos de manera ascendente o descendente respecto a una columna del data frame o tibble. La sintaxis es la siguiente:
  
 > `arrange(objeto, columna)` 
@@ -291,29 +285,20 @@ O de forma inversa, deseamos ordenar los datos de los pacientes con respecto a l
 arrange(my_starwars, desc(birth_year))
 ```
 
-<blockquote class="blockquote">
-Hint:  
-La opción `desc()` es equivalente a `decreasing = ` de la función `sort()`
+<blockquote class="hint">
+`r fa("circle-info", fill="#182fdc")` La opción `desc()` es equivalente a `decreasing = ` de la función `sort()`
 </blockquote>
 
 Como lo hemos visto dplyr es un paquete al cual se le puede extraer mucho jugo para realizar análisis de datos. Gracias a su sintaxis simple y al uso de pipes los análisis se vuelven altamente reproducibles y simples.
 
-<body>
-<div class="container">
-<div class="image">
-<img src="../Images/tibble.png" width="100px">
-</div>
-<div class="text">
-# Tidyr
-</div>
-</div>
-</body>
+
+<h1>4 Tidyr</h1>
 
 Tidyr es otro paquete de tidyverse que permite estructurar y organizar datos de una manera más simple. Como lo hemos visto, una tabla de datos organizada se analiza con una facilidad mayor. Además, su estructura organizada nos permite entender o comprender su contenido.
 
 Tidyr nos ofrece una serie de funciones para estructurar nuestros datos en tibbles. Exploremos algunas de sus funciones:
 
-## Drop_na, fill y replace_na
+<h2><font color="#6F7479">4.1</font> Drop_na, fill y replace_na</h2>
 
 Al crear bases de datos y tablas es comun encontrar datos faltantes en algunas columnas. Para ello, la celda **no debe dejarse vacía** y se debe de llenar con el valor <strong class="red">NA</strong>. Existen diversas maneras de verificar la presencia de valores *NA* en las columnas de una tabla:
 
@@ -343,6 +328,6 @@ drop_na(billboard, wk5)
 fill(billboard, wk5)
 ```
 
-# Referencias
+<h1>5 Referencias</h1>
 
 
