@@ -74,6 +74,8 @@
     background-color: #363946;
     color: #F7F7FF;
     padding: 20px;
+    text-align: center;
+    vertical-align: middle;
   }
   
   /* Main column */
@@ -288,4 +290,44 @@
     .topnav input[type=text] {
       border: 1px solid #ccc;  
     }
+  }
+
+  img {
+    opacity: 0.25;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+  a:link {
+    color: greenyellow;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #5DA9E9;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #F7F7FF;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  img.two {
+    height: 10%;
+    width: 90%;
   }
