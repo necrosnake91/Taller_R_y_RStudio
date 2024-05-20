@@ -55,13 +55,17 @@ packages_keys <- packages %>%
 ```
 
 
+```{r, fig.align='center', echo=F, out.width="800"}
+knitr::include_graphics("../Images/Felipe_CP.png")
+```
+
 <h1 class="header">1 ggPlot2</h1>
 
 <blockquote class="blockquote">
-El gran valor de una imagen es cuando nos incita a notar lo que nunca esperabamos ver  
+*El gran valor de una imagen es cuando nos incita a notar lo que nunca esperabamos ver*  
 - John Tukey
 
-Si no lo puedo dibujar, no lo puedo explicar  
+*Si no lo puedo dibujar, no lo puedo explicar*  
 - Albert Einstein
 </blockquote>
 

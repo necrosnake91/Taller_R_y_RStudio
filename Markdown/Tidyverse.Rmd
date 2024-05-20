@@ -61,6 +61,10 @@ library(fontawesome)
 library(tidyverse)
 ```
 
+```{r, fig.align='center', echo=F, out.width="800"}
+knitr::include_graphics("../Images/Felipe_CP.png")
+```
+
 <h1 class ="header">1 Tidyverse</h1>
 
 **Tidyverse** [@wickhamWelcomeTidyverse2019] es una colección de paquetes que nos permiten manipular juegos de datos para hacer análisis simples, reproducibles y ordenados. Constantemente los paquetes dentro de tidyverse son actualizados, para ello te recomiendo visitar la página de [tidyverse](https://www.tidyverse.org/) para estar al día con las noticias.
@@ -96,10 +100,16 @@ Para solucionar estos "problemas" tidyverse desarrolló una tabla de datos más 
 
 
 Generando un tibble con la función `tibble()`
-```{r}
+```{r, eval=FALSE}
 #Genera un tibble de manera similar al dataframe
 tibble(Aerolinea = c("Aeromexico", "KLM", "Lufthansa", "Avianca"), Pais = c("Mexico", "Paises Bajos", "Alemania", "Colombia"), Vuelos_anuales = c(300, 1200, 1500, 200), Pista = 23)
 ```
+
+```{r, include=T, echo=F}
+#Genera un tibble de manera similar al dataframe
+knitr::kable(tibble(Aerolinea = c("Aeromexico", "KLM", "Lufthansa", "Avianca"), Pais = c("Mexico", "Paises Bajos", "Alemania", "Colombia"), Vuelos_anuales = c(300, 1200, 1500, 200), Pista = 23))
+```
+
 Observa como para la columna de la **pista**  no fue necesario repetir 4 veces el número 23. `tibble()` entiende que se trata del mismo valor para todas las filas
 
 Convirtiendo un dataframe existente a un tibble usando la función `as_tibble()` 
@@ -265,7 +275,7 @@ Utiliza la base de datos my_starwars y realiza lo siguiente:
 <img src="../Images/mutate.png">
 
 Por ejemplo, convirtammos la masa de los personajes en kg a g el índice de masa corporal de los pacientes*:
-```{r, eval=F}
+```{r, eval=T}
 #Modifica la columna de la masa y convierte los valores de kg a g
 mutate(my_starwars, mass = mass*1000)
 ```

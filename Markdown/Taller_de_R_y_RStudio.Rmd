@@ -39,6 +39,10 @@ cat(paste("% Automatically generated", Sys.time()), "\n% DO NOT EDIT",
 library(fontawesome)
 ```
 
+```{r, fig.align='center', echo=F, out.width="800"}
+knitr::include_graphics("../Images/Felipe_CP.png")
+```
+
 
 <h1 class="header"><font color="#6F7479">1</font>R y RStudio</h1>
 
