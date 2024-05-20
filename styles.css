@@ -73,7 +73,7 @@
     flex: 30%;
     background-color: #363946;
     color: #F7F7FF;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     vertical-align: middle;
   }
@@ -84,7 +84,7 @@
     flex: 70%;
     background-color: #363946;
     color: #F7F7FF;
-    padding: 20px;
+    padding: 10px;
   }
   
   /* Sidebar/left column */
