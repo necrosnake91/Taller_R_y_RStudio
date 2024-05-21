@@ -2342,9 +2342,7 @@ columnas<br />
 2. Asigna el nombre de las filas y de las columnas a la matriz. Las
 filas nombralas como f1, f2, f3, etcétera y las columnas como c1, c2,
 c3, …<br />
-3. Extrae los elementos de la fila 2 y los de la columna 4<br />
-4. Extrae los elementos de la fila 3 menores o iguales a 15<br />
-5. Extrae los elementos de la columna 2 menores a 14 y mayores a 11
+3. Extrae los elementos de la fila 2 y después los de la columna 4
 </blockquote>
 <h1 class="header">
 <font color="#6F7479">6</font> Data Frame
@@ -2447,34 +2445,168 @@ vector los índices de filas o columnas que deseas seleccionar:</p>
 ## 2      b     2.2  FALSE
 ## 3      c     3.3  FALSE
 ## 4      d     4.4   TRUE</code></pre>
-<p>La extracción de datos que cumplen una o varias condiciones se
-realiza de la misma manera que en las matrices usando la función
-<code>which()</code>:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" tabindex="-1"></a><span class="do">##Extrae los elementos menores a 3 de la columna 3</span></span>
-<span id="cb215-2"><a href="#cb215-2" tabindex="-1"></a><span class="fu">which</span>(mi_df[, <span class="dv">3</span>] <span class="sc">&lt;</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1] 1 2</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" tabindex="-1"></a><span class="do">##Corta los datos preservando todas las columnas</span></span>
-<span id="cb217-2"><a href="#cb217-2" tabindex="-1"></a>mi_df[<span class="fu">which</span>(mi_df[, <span class="dv">3</span>] <span class="sc">&lt;</span> <span class="dv">3</span>), ]</span></code></pre></div>
+<p>En ocasiones los data frame están compuestos por un número grande de
+datos. Las funciones <code>head()</code> y <code>tail()</code> permiten
+imprimir en la consola de R los primeros o los últimos 6 valores,
+respectivamente:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" tabindex="-1"></a><span class="fu">head</span>(mi_df)</span></code></pre></div>
 <pre><code>##   numero factor decimal logico
 ## 1      1      a     1.1   TRUE
-## 2      2      b     2.2  FALSE</code></pre>
-<p>Sin embargo, para evitar usar la función <code>which()</code> y
-confundirnos con la sintaxis, existe la función <code>subset()</code>
-que nos permitirá extraer datos de un data frame de una manera más
-amigable. La sintaxis es:</p>
+## 2      2      b     2.2  FALSE
+## 3      3      c     3.3  FALSE
+## 4      4      d     4.4   TRUE</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" tabindex="-1"></a><span class="fu">tail</span>(mi_df)</span></code></pre></div>
+<pre><code>##   numero factor decimal logico
+## 1      1      a     1.1   TRUE
+## 2      2      b     2.2  FALSE
+## 3      3      c     3.3  FALSE
+## 4      4      d     4.4   TRUE</code></pre>
+<p>La visualización de estos elementos puede modificarse a cualquier
+otro numero distinto de 6 de la siguiente manera
+<code>head(, *numero de filas a imprimir*)</code>:</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" tabindex="-1"></a><span class="fu">dim</span>(lakers)</span></code></pre></div>
+<pre><code>## [1] 34624    13</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" tabindex="-1"></a><span class="fu">head</span>(lakers, <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>##        date opponent game_type  time period      etype team              player
+## 1  20081028      POR      home 12:00      1  jump ball  OFF                    
+## 2  20081028      POR      home 11:39      1       shot  LAL           Pau Gasol
+## 3  20081028      POR      home 11:37      1    rebound  LAL Vladimir Radmanovic
+## 4  20081028      POR      home 11:25      1       shot  LAL        Derek Fisher
+## 5  20081028      POR      home 11:23      1    rebound  LAL           Pau Gasol
+## 6  20081028      POR      home 11:22      1       shot  LAL           Pau Gasol
+## 7  20081028      POR      home 11:22      1       foul  POR           Greg Oden
+## 8  20081028      POR      home 11:22      1 free throw  LAL           Pau Gasol
+## 9  20081028      POR      home 11:00      1       foul  LAL Vladimir Radmanovic
+## 10 20081028      POR      home 10:53      1       shot  POR   LaMarcus Aldridge
+## 11 20081028      POR      home 10:45      1       shot  LAL        Derek Fisher
+## 12 20081028      POR      home 10:32      1       shot  POR   LaMarcus Aldridge
+## 13 20081028      POR      home 10:31      1    rebound  LAL         Kobe Bryant
+## 14 20081028      POR      home 10:21      1       shot  LAL           Pau Gasol
+## 15 20081028      POR      home 10:04      1       shot  POR       Travis Outlaw
+## 16 20081028      POR      home 09:50      1       shot  LAL        Andrew Bynum
+## 17 20081028      POR      home 09:48      1    rebound  LAL         Kobe Bryant
+## 18 20081028      POR      home 09:41      1       shot  LAL           Pau Gasol
+## 19 20081028      POR      home 09:24      1       shot  POR         Brandon Roy
+## 20 20081028      POR      home 09:21      1    rebound  POR           Greg Oden
+## 21 20081028      POR      home 09:20      1       shot  POR           Greg Oden
+## 22 20081028      POR      home 09:20      1    rebound  POR           Greg Oden
+## 23 20081028      POR      home 09:20      1       foul  LAL        Andrew Bynum
+## 24 20081028      POR      home 09:11      1       shot  POR           Greg Oden
+## 25 20081028      POR      home 09:09      1    rebound  LAL Vladimir Radmanovic
+## 26 20081028      POR      home 09:04      1       foul  POR         Steve Blake
+## 27 20081028      POR      home 08:51      1       shot  LAL        Andrew Bynum
+## 28 20081028      POR      home 08:50      1    rebound  POR       Travis Outlaw
+## 29 20081028      POR      home 08:39      1       shot  POR         Brandon Roy
+## 30 20081028      POR      home 08:38      1    rebound  LAL        Andrew Bynum
+##    result points          type  x  y
+## 1              0               NA NA
+## 2  missed      0          hook 23 13
+## 3              0           off NA NA
+## 4  missed      0         layup 25  6
+## 5              0           off NA NA
+## 6    made      2          hook 25 10
+## 7              0      shooting NA NA
+## 8    made      1               NA NA
+## 9              0      personal NA NA
+## 10   made      2          jump 36 21
+## 11   made      2   pullup jump 30 21
+## 12 missed      0          jump 34 10
+## 13             0           def NA NA
+## 14   made      2          jump 15 17
+## 15   made      2          jump 46  9
+## 16 missed      0          jump 21 10
+## 17             0           off NA NA
+## 18   made      2          jump 39  9
+## 19 missed      0 driving layup 25  6
+## 20             0           off NA NA
+## 21 missed      0         layup 25  6
+## 22             0           off NA NA
+## 23             0      personal NA NA
+## 24 missed      0          jump 20  9
+## 25             0           def NA NA
+## 26             0      personal NA NA
+## 27 missed      0          jump 26 12
+## 28             0           def NA NA
+## 29 missed      0          jump 36 18
+## 30             0           def NA NA</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" tabindex="-1"></a><span class="fu">tail</span>(lakers, <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>##           date opponent game_type  time period      etype team           player
+## 34595 20090414      UTA      home 02:46      4    timeout  UTA                 
+## 34596 20090414      UTA      home 02:46      4        sub  UTA                 
+## 34597 20090414      UTA      home 02:46      4        sub  UTA                 
+## 34598 20090414      UTA      home 02:46      4        sub  UTA                 
+## 34599 20090414      UTA      home 02:32      4       shot  UTA      Kyle Korver
+## 34600 20090414      UTA      home 02:31      4    rebound  UTA   Kyrylo Fesenko
+## 34601 20090414      UTA      home 02:30      4       shot  UTA   Kyrylo Fesenko
+## 34602 20090414      UTA      home 02:27      4       shot  UTA   Kyrylo Fesenko
+## 34603 20090414      UTA      home 02:27      4    rebound  UTA   Kyrylo Fesenko
+## 34604 20090414      UTA      home 02:12      4       shot  LAL    Jordan Farmar
+## 34605 20090414      UTA      home 02:11      4    rebound  UTA      Kyle Korver
+## 34606 20090414      UTA      home 02:06      4       foul  LAL    Jordan Farmar
+## 34607 20090414      UTA      home 02:06      4 free throw  UTA   Kyrylo Fesenko
+## 34608 20090414      UTA      home 02:06      4    rebound  UTA                 
+## 34609 20090414      UTA      home 02:06      4 free throw  UTA   Kyrylo Fesenko
+## 34610 20090414      UTA      home 01:52      4       shot  LAL     Andrew Bynum
+## 34611 20090414      UTA      home 01:28      4       shot  UTA    Brevin Knight
+## 34612 20090414      UTA      home 01:27      4    rebound  LAL      Josh Powell
+## 34613 20090414      UTA      home 01:12      4       shot  LAL      Josh Powell
+## 34614 20090414      UTA      home 01:09      4    rebound  UTA Andrei Kirilenko
+## 34615 20090414      UTA      home 01:04      4   turnover  UTA Andrei Kirilenko
+## 34616 20090414      UTA      home 00:54      4       foul  UTA   Kyrylo Fesenko
+## 34617 20090414      UTA      home 00:54      4 free throw  LAL     Andrew Bynum
+## 34618 20090414      UTA      home 00:54      4 free throw  LAL     Andrew Bynum
+## 34619 20090414      UTA      home 00:42      4       foul  LAL      Luke Walton
+## 34620 20090414      UTA      home 00:42      4 free throw  UTA      Kyle Korver
+## 34621 20090414      UTA      home 00:42      4 free throw  UTA      Kyle Korver
+## 34622 20090414      UTA      home 00:27      4   turnover  LAL     Andrew Bynum
+## 34623 20090414      UTA      home 00:21      4       shot  UTA      Kyle Korver
+## 34624 20090414      UTA      home 00:20      4    rebound  LAL      Luke Walton
+##       result points      type  x  y
+## 34595             0   regular NA NA
+## 34596             0           NA NA
+## 34597             0           NA NA
+## 34598             0           NA NA
+## 34599 missed      0      jump  5  7
+## 34600             0       off NA NA
+## 34601 missed      0     layup 25  6
+## 34602   made      2 slam dunk 25  6
+## 34603             0       off NA NA
+## 34604 missed      0      jump 40  7
+## 34605             0       def NA NA
+## 34606             0  shooting NA NA
+## 34607 missed      0           NA NA
+## 34608             0           NA NA
+## 34609   made      1           NA NA
+## 34610   made      2      dunk 25  6
+## 34611 missed      0       3pt 42 27
+## 34612             0       def NA NA
+## 34613 missed      0      dunk 25  6
+## 34614             0       def NA NA
+## 34615             0           NA NA
+## 34616             0  shooting NA NA
+## 34617   made      1           NA NA
+## 34618   made      1           NA NA
+## 34619             0  personal NA NA
+## 34620   made      1           NA NA
+## 34621   made      1           NA NA
+## 34622             0           NA NA
+## 34623 missed      0       3pt 41 25
+## 34624             0       def NA NA</code></pre>
+<p>Para extraer datos que cumplan con un valor, la función
+<code>subset()</code> permitirá filtrar datos de un data frame de una
+manera más amigable. La sintaxis es:</p>
 <blockquote>
 <code>subset(dataframe, Columna Condicion)</code>
 </blockquote>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" tabindex="-1"></a><span class="do">##Extrae los elementos que sean menores a 3 de la columna decimal</span></span>
-<span id="cb219-2"><a href="#cb219-2" tabindex="-1"></a><span class="fu">subset</span>(mi_df, decimal <span class="sc">&lt;</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" tabindex="-1"></a><span class="do">##Extrae los elementos que sean menores a 3 de la columna decimal</span></span>
+<span id="cb225-2"><a href="#cb225-2" tabindex="-1"></a><span class="fu">subset</span>(mi_df, decimal <span class="sc">&lt;</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##   numero factor decimal logico
 ## 1      1      a     1.1   TRUE
 ## 2      2      b     2.2  FALSE</code></pre>
-<p>¿Cuál método te pareció más útil?</p>
 <p>Los data frames al igual que las matrices se transponen usando la
 función <code>t()</code></p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" tabindex="-1"></a><span class="do">##Transpon el data frame</span></span>
-<span id="cb221-2"><a href="#cb221-2" tabindex="-1"></a><span class="fu">t</span>(mi_df)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" tabindex="-1"></a><span class="do">##Transpon el data frame</span></span>
+<span id="cb227-2"><a href="#cb227-2" tabindex="-1"></a><span class="fu">t</span>(mi_df)</span></code></pre></div>
 <pre><code>##         [,1]   [,2]    [,3]    [,4]  
 ## numero  &quot;1&quot;    &quot;2&quot;     &quot;3&quot;     &quot;4&quot;   
 ## factor  &quot;a&quot;    &quot;b&quot;     &quot;c&quot;     &quot;d&quot;   
@@ -2485,10 +2617,10 @@ dependen de una operación en otra columna. Para adicionar nuevas
 columnas al data frame tendrás que asignar la nueva columna usando el
 símbolo de <strong class="red">$</strong> y escribiendo el nombre de la
 nueva columna:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" tabindex="-1"></a><span class="do">##Agrega una nueva columna que sea igual al logaritmo base 10 de los valores de decimal</span></span>
-<span id="cb223-2"><a href="#cb223-2" tabindex="-1"></a>mi_df<span class="sc">$</span>logaritmo <span class="ot">&lt;-</span> <span class="fu">log</span>(mi_df<span class="sc">$</span>decimal)</span>
-<span id="cb223-3"><a href="#cb223-3" tabindex="-1"></a><span class="do">##Verifica el resultado</span></span>
-<span id="cb223-4"><a href="#cb223-4" tabindex="-1"></a>mi_df</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" tabindex="-1"></a><span class="do">##Agrega una nueva columna que sea igual al logaritmo base 10 de los valores de decimal</span></span>
+<span id="cb229-2"><a href="#cb229-2" tabindex="-1"></a>mi_df<span class="sc">$</span>logaritmo <span class="ot">&lt;-</span> <span class="fu">log</span>(mi_df<span class="sc">$</span>decimal)</span>
+<span id="cb229-3"><a href="#cb229-3" tabindex="-1"></a><span class="do">##Verifica el resultado</span></span>
+<span id="cb229-4"><a href="#cb229-4" tabindex="-1"></a>mi_df</span></code></pre></div>
 <pre><code>##   numero factor decimal logico  logaritmo
 ## 1      1      a     1.1   TRUE 0.09531018
 ## 2      2      b     2.2  FALSE 0.78845736
@@ -2528,7 +2660,7 @@ valores se separen (por tabuladores, comas, espacios…)</p></li>
 <p>Para leer una tabla de datos externa, R implementa varias funciones.
 La más común es <code>read.table()</code>. Leamos la tabla de datos que
 tenemos en nuestro directorio:</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" tabindex="-1"></a><span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;./top50.txt&quot;</span>, <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" tabindex="-1"></a><span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;./top50.txt&quot;</span>, <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
 <p>Las opciones son:</p>
 <p>file: Es el directorio donde está ubicada la tabla. Para ello debes
 indicar la ruta usando .. y / hacia el archivo</p>
