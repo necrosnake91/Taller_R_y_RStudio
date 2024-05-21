@@ -555,9 +555,7 @@ t(mi_matriz)
 **Ejercicio 3**  
 1. Genera una matriz con los números del 5 al 24 de 5 filas x 4 columnas  
 2. Asigna el nombre de las filas y de las columnas a la matriz. Las filas nombralas como f1, f2, f3, etcétera y las columnas como c1, c2, c3, ...  
-3. Extrae los elementos de la fila 2 y los de la columna 4  
-4. Extrae los elementos de la fila 3 menores o iguales a 15  
-5. Extrae los elementos de la columna 2 menores a 14 y mayores a 11  
+3. Extrae los elementos de la fila 2 y después los de la columna 4  
 </blockquote>
 
 <h1 class="header"><font color="#6F7479">6</font> Data Frame</h1>
@@ -624,15 +622,22 @@ mi_df[c(1, 2), ]
 mi_df[, c(2:4)]
 ```
 
-La extracción de datos que cumplen una o varias condiciones se realiza de la misma manera que en las matrices usando la función `which()`:
+En ocasiones los data frame están compuestos por un número grande de datos. Las funciones `head()` y `tail()` permiten imprimir en la consola de R los primeros o los últimos 6 valores, respectivamente:
+
 ```{r}
-##Extrae los elementos menores a 3 de la columna 3
-which(mi_df[, 3] < 3)
-##Corta los datos preservando todas las columnas
-mi_df[which(mi_df[, 3] < 3), ]
+head(mi_df)
+tail(mi_df)
 ```
 
-Sin embargo, para evitar usar la función `which()` y confundirnos con la sintaxis, existe la función `subset()` que nos permitirá extraer datos de un data frame de una manera más amigable. La sintaxis es:
+La visualización de estos elementos puede modificarse a cualquier otro numero distinto de 6  de la siguiente manera `head(, *numero de filas a imprimir*)`:
+```{r}
+dim(lakers)
+head(lakers, 30)
+tail(lakers, 30)
+```
+
+
+Para extraer datos que cumplan con un valor, la función `subset()`  permitirá filtrar datos de un data frame de una manera más amigable. La sintaxis es:
 
 <blockquote>`subset(dataframe, Columna Condicion)`</blockquote>
 
@@ -640,7 +645,6 @@ Sin embargo, para evitar usar la función `which()` y confundirnos con la sintax
 ##Extrae los elementos que sean menores a 3 de la columna decimal
 subset(mi_df, decimal < 3)
 ```
-¿Cuál método te pareció más útil? 
 
 Los data frames al igual que las matrices se transponen usando la función `t()`
 ```{r}
