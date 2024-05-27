@@ -8,19 +8,6 @@
     margin: 0;
   }
   
-  /* Header/logo Title */
-  .header {
-    padding: 50px;
-    text-align: center;
-    background: #1D3461;
-    color: #F7F7FF;
-  }
-  
-  /* Increase the font size of the heading */
-  .header h1 {
-    font-size: 40px;
-  }
-  
   /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
   .navbar {
     overflow: hidden;
@@ -57,54 +44,6 @@
     background-color: #666;
     color: white;
   }
-  
-  /* Column container */
-  .row {  
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-  }
-  
-  /* Create two unequal columns that sits next to each other */
-  /* Sidebar/left column */
-  .side {
-    -ms-flex: 30%; /* IE10 */
-    flex: 30%;
-    background-color: #eff1f3;
-    color: black;
-    padding: 10px;
-    text-align: center;
-    vertical-align: middle;
-  }
-  
-  /* Main column */
-  .main {   
-    -ms-flex: 70%; /* IE10 */
-    flex: 70%;
-    background-color: #eff1f3;
-    color: black;
-    padding: 10px;
-  }
-  
-  /* Sidebar/left column */
-  .sidealt {
-    -ms-flex: 50%; /* IE10 */
-    flex: 50%;
-    background-color: #363946;
-    color: #F7F7FF;
-    padding: 20px;
-  }
-  
-  /* Main column */
-  .mainalt {   
-    -ms-flex: 50%; /* IE10 */
-    flex: 50%;
-    background-color: #363946;
-    color: #F7F7FF;
-    padding: 20px;
-  }
-  
   
   /* Footer */
   .footer {
@@ -150,12 +89,7 @@
      text-decoration: none !important;
   }
   
-  /* Align elements of a list */
-  ul.myUL {
-    display: inline-block;
-    text-align: left;
-  }
-  
+
   /* Colored button */
   
   .button {
@@ -292,10 +226,6 @@
     }
   }
 
-  img {
-    opacity: 0.25;
-  }
-
   .centered {
     position: absolute;
     top: 50%;
@@ -310,7 +240,7 @@
   }
 
   a:link {
-    color: greenyellow;
+    color: #4b4e6d;
     background-color: transparent;
     text-decoration: none;
   }
@@ -373,28 +303,54 @@
   background-color: #eff1f3;
     color: black;
     padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section .text-content {
+  flex: 1;
+  margin-right: 0; /* Espacio entre el texto y la imagen */
+  max-width: 40%;
+}
+
+.section p, .section ul {
+    margin-left: 0; /* Elimina márgenes predeterminados */
 }
 
 .section p {
-    margin: 1em 0 1em 10em; /* Elimina márgenes predeterminados */
+  margin: 1em 0;
+  font-size: 20px;
 }
 
 .section ul {
     list-style: none; /* Elimina viñetas de la lista */
     padding-left: 0; /* Ajusta el relleno izquierdo para alinear con los párrafos */
-    margin: 0;
+    margin: 1em 0;
 }
 
 .section ul li {
     margin-bottom: 0.75em; /* Espaciado entre elementos de la lista */
-    margin-left: 10em;
-    margin-top: 0.5em;
     display: flex;
     align-items: center;
 }
 
 .section ul li i {
     margin-right: 1%; /* Espacio entre el icono y el texto */
+    font-size: 20px;
+}
+
+.section .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 40%;
+}
+
+.section .image-container img {
+  max-width: 100%; /* Ajusta la imagen al contenedor */
+  height: auto; /* Mantén la proporción de la imagen */
+  width: 550px;
 }
 
 .custom-strong {
