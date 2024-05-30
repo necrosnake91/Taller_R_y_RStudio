@@ -52,7 +52,7 @@ Las bases del desarrollo de R se remontan a los años 70 cuando en los laborator
 ```{r, fig.align='center', out.width="600", echo=FALSE}
 knitr::include_graphics("../Images/R_history.png")
 ```
-<p class="footnote">Historia del desarrollo de R. Tomada de [@bibliography: biblio.bib]</p>
+<p class="footnote">Historia del desarrollo de R. Tomada de [@giorgiLanguageEngineBioinformatics2022]</p>
 
 RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **R**. La ventana de RStudio se conforma de 4 cuadrantes:
 
