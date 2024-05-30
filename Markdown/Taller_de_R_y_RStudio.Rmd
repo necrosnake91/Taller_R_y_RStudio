@@ -74,6 +74,16 @@ Desde el menú principal puedes crear, salvar o abrir un nuevo script. Asímismo
 <div class="alert alert-warning">`r fa("triangle-exclamation", fill = "#f9c80e")` Para realizar esta práctica es necesario que tengas instalado [R](https://cran.itam.mx/) y [RStudio](https://posit.co/download/rstudio-desktop/) o bien generes una cuenta en [Positcloud](https://login.posit.cloud/login?redirect=%2F) para hacer uso de la nube.
 </div>
 
+<blockquote class="hint">
+`r fa("circle-info", fill="#182fdc")` Visita la página de <a href="https://rstudio.github.io/cheatsheets/html/rstudio-ide.html?_gl=1*1yvoblb*_ga*MTA1NDQ2OTQ3Ny4xNzExNDk1MDU2*_ga_2C0WZ1JHG0*MTcxNzEwMDkyOS4yNC4xLjE3MTcxMDExNTUuMC4wLjA." target="_blank">PositCloud</a> para descargar las _cheatsheets_ disponibles para su consulta.
+</blockquote>
+
+```{r, echo=FALSE, fig.show='hold', out.width="50%"}
+knitr::include_graphics("../Images/R_cheatsheet.png")
+knitr::include_graphics("../Images/RStudio_cheatsheet.png")
+```
+
+
 <h1 class="header"><font color="#6F7479">2</font> Tipos de datos</h1>
 
 Una de las principales funciones de R es el manejo y análisis de una diversidad de datos. Para ello R los clasifica en tres principales grupos:
