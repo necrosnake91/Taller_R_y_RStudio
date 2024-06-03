@@ -39,20 +39,17 @@ cat(paste("% Automatically generated", Sys.time()), "\n% DO NOT EDIT",
 library(fontawesome)
 ```
 
-```{r, fig.align='center', echo=F, out.width="800"}
-knitr::include_graphics("../Images/Felipe_CP.png")
-```
-
-
 <h1 class="header"><font color="#6F7479">1 </font>R y RStudio</h1>
 
 Las bases del desarrollo de R se remontan a los años 70 cuando en los laboratorios Bell se desarrollo S, un lenguaje de programación para realizar análisis estadísticos.  
 **`R`** es un lenguaje de programación orientado a objetos enfocado al análisis estadístico de una diversidad de datos. Sin embargo, las aplicaciones recientes de R incluyen desarrollo de inteligencia artificial y desarrollo web [@giorgiLanguageEngineBioinformatics2022].
 
 ```{r, fig.align='center', out.width="600", echo=FALSE}
-knitr::include_graphics("../Images/R_history.png")
+knitr::include_graphics("../Images/R_time_line.png")
 ```
 <p class="footnote">Historia del desarrollo de R. Tomada de [@giorgiLanguageEngineBioinformatics2022]</p>
+
+<h2>1.1 RStudio</h2>
 
 RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **R**. La ventana de RStudio se conforma de 4 cuadrantes:
 
@@ -71,6 +68,17 @@ knitr::include_graphics("../Images/rstudiolayout.jpeg")
 
 Desde el menú principal puedes crear, salvar o abrir un nuevo script. Asímismo, es posible buscar funciones, comandos u objetos dentro del script dando click en la lupa.
 
+<h2>1.2 Comunidades de R</h2>
+
+Alrededor del mundo existen diferentes comunidades de usuarios con distintos niveles de manejo de R (desde nivel inicial hasta experto). Estas comunidades permiten a los usuarios interactuar entre ellos para la resolución de dudas, la publicación de tutoriales e incluso la organización de cursos y eventos (presenciales o en línea) para llevar a cabo el análisis de distintos tipos de datos.
+
+
+<li>1. <a href="https://blog.r-project.org/" target="_blank">R-project:</a> Página oficial de R</li>
+<li><a href="https://dslcio.slack.com/join/shared_invite/zt-2jwth02fk-KPKe~Wh_j6mzLQJ7m9QrtA#/shared-invite/email" target="_blank">Tidy Tuesday:</a> Comunidad encargada de ublicar flujos de trabajo para la curación de bases de datos. Enfocada en los paquetes de **`tidyverse`**</li>
+<li><a href="https://rladies.org/" target="_blank">R-Ladies:</a> Comunidad enfocada en promover la equidad de género dentro del ámbito de la programación. Cuentan con una serie y programa de cursos para que personas (de todos los géneros) practiquen y mejoren sus habilidades en ciencia de datos</li>
+<li><a href="https://www.r-bloggers.com/" target="_blank">R-bloggers:</a> Comunidad organizada en blog en donde se publican ejemplos de código, análisis de datos y visualización.
+
+
 <div class="alert alert-warning">`r fa("triangle-exclamation", fill = "#f9c80e")` Para realizar esta práctica es necesario que tengas instalado [R](https://cran.itam.mx/) y [RStudio](https://posit.co/download/rstudio-desktop/) o bien generes una cuenta en [Positcloud](https://login.posit.cloud/login?redirect=%2F) para hacer uso de la nube.
 </div>
 
@@ -78,9 +86,8 @@ Desde el menú principal puedes crear, salvar o abrir un nuevo script. Asímismo
 `r fa("circle-info", fill="#182fdc")` Visita la página de <a href="https://rstudio.github.io/cheatsheets/html/rstudio-ide.html?_gl=1*1yvoblb*_ga*MTA1NDQ2OTQ3Ny4xNzExNDk1MDU2*_ga_2C0WZ1JHG0*MTcxNzEwMDkyOS4yNC4xLjE3MTcxMDExNTUuMC4wLjA." target="_blank">PositCloud</a> para descargar las _cheatsheets_ disponibles para su consulta.
 </blockquote>
 
-```{r, echo=FALSE, fig.show='hold', out.width="50%"}
-knitr::include_graphics("../Images/R_cheatsheet.png")
-knitr::include_graphics("../Images/RStudio_cheatsheet.png")
+```{r, echo=FALSE, fig.show='hold', out.width="70%", fig.align='center'}
+knitr::include_graphics("../Images/RStudio_cheat.jpg")
 ```
 
 <h1 class="header"><font color="#6F7479">2</font> Referencias</h1>
