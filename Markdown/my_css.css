@@ -95,3 +95,22 @@ body{
     text-align: center;
     font-style: italic;
 }
+
+.next-link {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+  
+  .next-link a {
+    text-decoration: none;
+    color: #007bff;
+}
+  
+  .next-link a:hover {
+    text-decoration: underline;
+}
