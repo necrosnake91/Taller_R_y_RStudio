@@ -78,6 +78,8 @@ Alrededor del mundo existen diferentes comunidades de usuarios con distintos niv
 <li><a href="https://rladies.org/" target="_blank">R-Ladies:</a> Comunidad enfocada en promover la equidad de género dentro del ámbito de la programación. Cuentan con una serie y programa de cursos para que personas (de todos los géneros) practiquen y mejoren sus habilidades en ciencia de datos</li>
 <li><a href="https://www.r-bloggers.com/" target="_blank">R-bloggers:</a> Comunidad organizada en blog en donde se publican ejemplos de código, análisis de datos y visualización.
 
+<strong>¿Dónde más puedo buscar ayuda?</strong> Existen comunidades de programadores especializados en otros lenguajes en <a href="https://stackoverflow.com/collectives/r-language" target="_blank">Stackoverflow</a>, <a href="https://www.biostars.org/" target="_blank">BioStars</a> y <a href="https://support.bioconductor.org/" target="_blank">Bioconductor</a> que resuelven problemas de código, intsalación de paquetes o análisis de datos en R para ciencia de datos o bioinformática, respectivamente.
+
 
 <div class="alert alert-warning">`r fa("triangle-exclamation", fill = "#f9c80e")` Para realizar esta práctica es necesario que tengas instalado [R](https://cran.itam.mx/) y [RStudio](https://posit.co/download/rstudio-desktop/) o bien generes una cuenta en [Positcloud](https://login.posit.cloud/login?redirect=%2F) para hacer uso de la nube.
 </div>
@@ -89,5 +91,9 @@ Alrededor del mundo existen diferentes comunidades de usuarios con distintos niv
 ```{r, echo=FALSE, fig.show='hold', out.width="70%", fig.align='center'}
 knitr::include_graphics("../Images/RStudio_cheat.jpg")
 ```
+
+<div class="next-link">
+<a href="../HTML/1.Datos_variables_y_objetos.html">Siguiente</a>
+</div>
 
 <h1 class="header"><font color="#6F7479">2</font> Referencias</h1>
