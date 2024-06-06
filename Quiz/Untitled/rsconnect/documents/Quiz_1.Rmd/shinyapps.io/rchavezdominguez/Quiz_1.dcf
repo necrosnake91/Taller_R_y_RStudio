@@ -1,0 +1,12 @@
+name: Quiz_1
+title: Quiz_1
+username: rchavezdominguez
+account: rchavezdominguez
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12134962
+bundleId: 8707026
+url: https://rchavezdominguez.shinyapps.io/Quiz_1/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

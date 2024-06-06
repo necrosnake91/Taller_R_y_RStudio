@@ -1,0 +1,12 @@
+name: Quiz_RStudio
+title: Quiz_RStudio
+username: rchavezdominguez
+account: rchavezdominguez
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12134997
+bundleId: 8707048
+url: https://rchavezdominguez.shinyapps.io/Quiz_RStudio/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

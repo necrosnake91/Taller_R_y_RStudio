@@ -1,0 +1,43 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Quiz
+
+Contesta las siguientes preguntas:
+
+```{r quiz}
+quiz(
+  question("¿Cuál de las siguientes es una característica de R?",
+    answer("Es un procesador de textos"),
+    answer("Lenguaje especializado para análisis de bases de datos"),
+    answer("Lenguaje de código abierto (gratuito)", correct = TRUE),
+    answer("Solamente funciona con sistemas operativos base LINUX")
+  ),
+  question("¿En cuál de los siguientes cuadrantes de RStudio escribimos el código sin ejecutarlo?",
+    answer("Editor de scripts", correct = TRUE),
+    answer("Consola"),
+    answer("Espacio de Trabajo"),
+    answer("Resultados y navegador")
+  ), 
+  question("¿Para instalar RStudio de manera local se requiere instalar previamente R?", 
+    answer("VERDADERO", correct = T), 
+    answer("FALSO")
+  ),
+  question("¿Cuál de las siguientes comunidades de R promueve la equidad de genero y promueve el aprendizaje mediante la impartición de cursos y seminarios?",
+    answer("R-bloggers"),
+    answer("Stackoverflow"), 
+    answer("Tidy Tuesday"), 
+    answer("R-Ladies", correct = T)
+    
+  )
+)
+```
+
