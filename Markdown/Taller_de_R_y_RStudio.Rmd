@@ -92,6 +92,11 @@ Alrededor del mundo existen diferentes comunidades de usuarios con distintos niv
 knitr::include_graphics("../Images/RStudio_cheat.jpg")
 ```
 
+<blockquote class="excercise">
+<strong>Ejercicio 1</strong>  
+`r fa("chalkboard-user", fill="#182fdc")` Visita la siguiente liga y contesta el <a href="https://rchavezdominguez.shinyapps.io/Quiz_RStudio/" target="_blank">cuestionario</a>
+</blockquote>
+
 <div class="next-link">
 <a href="../HTML/1.Datos_variables_y_objetos.html">Siguiente</a>
 </div>
