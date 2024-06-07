@@ -49,9 +49,30 @@ knitr::include_graphics("../Images/R_time_line.png")
 ```
 <p class="footnote">Historia del desarrollo de R. Tomada de [@giorgiLanguageEngineBioinformatics2022]</p>
 
-<h2>1.1 RStudio</h2>
+Actualmente, **`R`** se encuentra alojado en la web dentro del repositorio <a href="https://cran.r-project.org/" target="_blank">CRAN</a> (*Comprehensive R Archive Network*). Por default, **`R`** se instala con 14 paquetes base dentro de los cuales destacan `base`, `compiler`, `datasets`, `graphics`, `stats`, entre otros. Sin embargo en el repositorio CRAN se aloja el código para que descargues todos los paquetes que requieras para tus análisis.
 
-RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **R**. La ventana de RStudio se conforma de 4 cuadrantes:
+<h2>1.2 Comunidades de R</h2>
+
+El crecimiento de R como lenguaje de programación enfocado al análisis estadístico se debe a las comunidades de ususarios. Alrededor del mundo existen diferentes comunidades de usuarios con distintos niveles de manejo de R (desde nivel inicial hasta experto). Estas comunidades permiten a los usuarios interactuar entre ellos para la resolución de dudas, la publicación de tutoriales e incluso la organización de cursos y eventos (presenciales o en línea) para llevar a cabo el análisis de distintos tipos de datos.
+
+
+<li><a href="https://blog.r-project.org/" target="_blank">R-project:</a> Página oficial de R</li>
+<li><a href="https://dslcio.slack.com/join/shared_invite/zt-2jwth02fk-KPKe~Wh_j6mzLQJ7m9QrtA#/shared-invite/email" target="_blank">Tidy Tuesday:</a> Comunidad encargada de ublicar flujos de trabajo para la curación de bases de datos. Enfocada en los paquetes de **`tidyverse`**</li>
+<li><a href="https://rladies.org/" target="_blank">R-Ladies:</a> Comunidad enfocada en promover la equidad de género dentro del ámbito de la programación. Cuentan con una serie y programa de cursos para que personas (de todos los géneros) practiquen y mejoren sus habilidades en ciencia de datos</li>
+<li><a href="https://www.r-bloggers.com/" target="_blank">R-bloggers:</a> Comunidad organizada en blog en donde se publican ejemplos de código, análisis de datos y visualización.
+
+<strong>¿Dónde más puedo buscar ayuda?</strong> Existen comunidades de programadores especializados en otros lenguajes en <a href="https://stackoverflow.com/collectives/r-language" target="_blank">Stackoverflow</a>, <a href="https://www.biostars.org/" target="_blank">BioStars</a> y <a href="https://support.bioconductor.org/" target="_blank">Bioconductor</a> que resuelven problemas de código, intsalación de paquetes o análisis de datos en R para ciencia de datos o bioinformática, respectivamente.
+
+
+<h2>1.3 RStudio</h2>
+
+RStudio es una interfaz conocido como *entorno de desarrollo integrado* o *IDE* que nos permite interactuar con el lenguaje de programación **`R`** y ejecutar su código. Adicionalmente, RStudio permite a los usuarios escribir código para otros lenguajes de programación (python, C++, SQL, HTML). Para la instalación y uso de este IDE es **necesario** que previamente hayas instalado **`R`** en tu computadora. Actualmente existen dos maneras de utilizar RStudio:  
+
+<li>Descargándolo directamente desde la página de <a href="https://posit.co/download/rstudio-desktop/" target="_blank">PositCloud</a></li>
+<li>Haciendo uso de la nubde de <a href="https://posit.cloud/plans/free?_gl=1*1o4p5wf*_ga*MjEyOTQ1NDkwNi4xNzE3MDQyMjA1*_ga_2C0WZ1JHG0*MTcxNzcxMTk1MS4zLjEuMTcxNzcxMjAxMS4wLjAuMA.." target="_blank">PositCloud</a></li>
+
+La ventaja de utilizar RStudio en la nube es que no requieres instalar ningún programa en tu computadora, solo necesitas crear una cuenta. Sin embargo, el plan básico solo te permite trabajar algunas horas y tiene un número límitado de tareas para procesar.  
+Una vez que instales o abras RStudio en la nube visualizaras la ventana de RStudio. Esta ventana se conforma de 4 cuadrantes:
 
 ```{r, fig.align='center', out.width="600", echo=FALSE}
 knitr::include_graphics("../Images/rstudiolayout.jpeg")
@@ -68,17 +89,6 @@ knitr::include_graphics("../Images/rstudiolayout.jpeg")
 
 Desde el menú principal puedes crear, salvar o abrir un nuevo script. Asímismo, es posible buscar funciones, comandos u objetos dentro del script dando click en la lupa.
 
-<h2>1.2 Comunidades de R</h2>
-
-Alrededor del mundo existen diferentes comunidades de usuarios con distintos niveles de manejo de R (desde nivel inicial hasta experto). Estas comunidades permiten a los usuarios interactuar entre ellos para la resolución de dudas, la publicación de tutoriales e incluso la organización de cursos y eventos (presenciales o en línea) para llevar a cabo el análisis de distintos tipos de datos.
-
-
-<li>1. <a href="https://blog.r-project.org/" target="_blank">R-project:</a> Página oficial de R</li>
-<li><a href="https://dslcio.slack.com/join/shared_invite/zt-2jwth02fk-KPKe~Wh_j6mzLQJ7m9QrtA#/shared-invite/email" target="_blank">Tidy Tuesday:</a> Comunidad encargada de ublicar flujos de trabajo para la curación de bases de datos. Enfocada en los paquetes de **`tidyverse`**</li>
-<li><a href="https://rladies.org/" target="_blank">R-Ladies:</a> Comunidad enfocada en promover la equidad de género dentro del ámbito de la programación. Cuentan con una serie y programa de cursos para que personas (de todos los géneros) practiquen y mejoren sus habilidades en ciencia de datos</li>
-<li><a href="https://www.r-bloggers.com/" target="_blank">R-bloggers:</a> Comunidad organizada en blog en donde se publican ejemplos de código, análisis de datos y visualización.
-
-<strong>¿Dónde más puedo buscar ayuda?</strong> Existen comunidades de programadores especializados en otros lenguajes en <a href="https://stackoverflow.com/collectives/r-language" target="_blank">Stackoverflow</a>, <a href="https://www.biostars.org/" target="_blank">BioStars</a> y <a href="https://support.bioconductor.org/" target="_blank">Bioconductor</a> que resuelven problemas de código, intsalación de paquetes o análisis de datos en R para ciencia de datos o bioinformática, respectivamente.
 
 
 <div class="alert alert-warning">`r fa("triangle-exclamation", fill = "#f9c80e")` Para realizar esta práctica es necesario que tengas instalado [R](https://cran.itam.mx/) y [RStudio](https://posit.co/download/rstudio-desktop/) o bien generes una cuenta en [Positcloud](https://login.posit.cloud/login?redirect=%2F) para hacer uso de la nube.
