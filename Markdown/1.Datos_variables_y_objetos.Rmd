@@ -177,7 +177,6 @@ class(conv)
 <blockquote class="excercise">
 <strong>Ejercicio 1</strong>  
 `r fa("chalkboard-user", fill="#182fdc")` Visita la siguiente liga y resuelve el <a href="https://rchavezdominguez.shinyapps.io/Quiz_1/" target="_blank">ejercicio</a>
-
 </blockquote>
 
 <h1 class="header"><font color="#6F7479">4</font> Datos complejos</h1>
@@ -256,39 +255,35 @@ rep(c("D1", "D15", "D40", "D100"), each = 4)
 <h2><font color="#6F7479">4.3</font> Propiedades de los vectores</h2>
 Los vectores al ser listas de datos tienen asociadas ciertas propiedades que son útiles al momento de de analizar datos. Por ejemplo, **la clase** de datos que contiene se obtiene con la función `class()`:
 ```{r}
-class(volumenes)
-class(escencias)
-class(visitas)
+v1 <- seq(1, 19, 2)
+v2 <- rep(c("a", "b", "c", "d"), 5)
+
+class(v1)
+class(v2)
 ```
 
 El número de elementos que contiene el vector o **longitud** se obtiene con la function `length()`:
 ```{r}
-length(volumenes)
-length(escencias)
+length(v1)
 ```
 
-Las veces que se repite un elemento en el vector, o **proporción**, se obtiene con la funcion `table()`:
+Las veces que se aparece un elemento en el vector, o **proporción**, se obtiene con la funcion `table()`:
 ```{r}
-table(volumenes)
-table(visitas)
+table(v1)
+table(v2)
 ```
 
 Cuando hay repetición de datos, aquellos denominados como **unicos** se obtienen con la función `unique()`:
 ```{r}
-##Crea un vector con datos repetidos
-calificaciones <- c(4, 5, 8, 8, 9, 6, 6, 6, 3, 10, 3, 3, 2, 2, 8)
-##Obten los valores unicos del vector
-unique(calificaciones)
+unique(v2)
 ```
 
 Para **ordenar** los elementos de un vector (numerico o de texto) se emplea la función `sort()`:
 ```{r}
-sort(calificaciones)
-sort(escencias)
+sort(v1)
 
 ##Para ordenar de forma descendente, coloca la opción decreasing = T
-sort(calificaciones, decreasing = T)
-sort(escencias, decreasing = T)
+sort(v1, decreasing = T)
 ```
 
 <h2><font color="#6F7479">4.4</font> Manipulación de vectores</h2>
@@ -341,42 +336,34 @@ El símbolo que acabamos de utilizar se le conoce como **operador relacional** y
 El resultado de emplear un operador relacional será un valor o dato lógico. Cuando hacemos *subseting* de elementos de un vector utilizando este método, se seleccionarán aquellos datos que cumplan con la condición, es decir, sean **TRUE**
 
 ```{r}
-##Genera un vector con 20 elementos numéricos
-numeros <- c(1:20)
-
 ##Extrae los valores mayores a 5
-numeros[numeros > 5]
+v1[v1 > 5]
 
 ##Extrae los valores menores a 17
-numeros[numeros < 17]
+v1[v1 < 17]
 
 #Extrae los valores mayores o igual a 10
-numeros[numeros >= 10]
+v1[v1 >= 10]
 
 ##Extrae los valores menores a 12
-numeros[numeros <= 12]
+v1[v1 <= 12]
 
 ##Extrae los numeros distintos a 15
-numeros[numeros != 15]
+v1[v1 != 15]
 ```
 
 Cuando requerimos que se cumplan dos o más condiciones debemos emplear los operadores **|** O, **&** Y:
 ```{r}
 ##Extrae los datos entre 10 y 15. Es decir, mayores a 10 y menores a 15
-numeros[numeros > 10 & numeros < 15]
+v1[v1 > 10 & v1 < 15]
 
 ##Extrae los primeros y ultimos cinco valores
-numeros[numeros <= 5 | numeros >= 15]
+v1[v1 <= 5 | v1 >= 15]
 ```
 
 <blockquote class="excercise">
-**Ejercicio 2**  
-1. Declara una variable que se llame "rios" que contenga un vector con los siguientes datos: Balsas, Usumacinta, Grijalva, Lerma, Balsas, Bravo, Grijalva, Balsas, Lerma y Bravo  
-2. Obten la clase, longitud, proporción y elementos únicos.  
-3. Ordena los elementos alfabéticamente (A a la Z)  
-4. Extrae los elementos 1, 3, 7 y 8  
-5. Extrae los elementos del 2 al 9  
-6. Extrae los elementos que coincidan con Balsas o Lerma
+<strong>Ejercicio 2</strong>  
+`r fa("chalkboard-user", fill="#182fdc")` Visita la siguiente liga y resuelve el <a href="https://rchavezdominguez.shinyapps.io/Quiz_1/" target="_blank">ejercicio</a>
 </blockquote>
 
 <h1 class="header"><font color="#6F7479">5</font> Matrices</h1>
