@@ -55,41 +55,41 @@ Una de las principales funciones de R es el manejo y análisis de una diversidad
 Existen dos principales tipos de datos nuéricos: los números **enteros** o *integer* con valores positivos o negativos y los números **decimales** o *numeric* con valores positivos o negativos:
 
 ```{r, eval=FALSE}
-##Número entero positivo
+
 4
 
-##Número entero negativo
+
 -36
 
-##Número decimal positivo
+
 7.65
 
-##Número decimal negativo 
+
 -5.47
 ```
 
 Con los valores numéricos es posible realizar todo tipo de operaciones algebraicas:
 
 ```{r}
-##Suma
+
 3+4
 
-##Resta
+
 100-60
 
-##Multiplicación
+
 9.7*6
 
-##División
+
 450/9
 
-##Potencias 
+
 2^5
 
-##Raices
+
 sqrt(121)
 
-##Logaritmos
+
 log10(100)
 ```
 
@@ -97,14 +97,13 @@ log10(100)
 Son datos que toman el valor de una variable dicotómica, es decir con dos categorías: verdadero *TRUE* (T) o falso *FALSE* (F). También se le conoce como valores *boleanos* o *logical*. Siempre se esciben con letras MAYUSCULAS
 
 ```{r}
-##Valor verdadero
 TRUE
-##Valor verdadero abreviado
+
 T
 
-##Valor falso
+
 FALSE
-##Valor falso abreviado
+
 F
 ```
 
@@ -112,16 +111,16 @@ F
 Los caracteres o *character* representan texto que comprende letras, palabras, frases o enunciados. Para ingresar un caracter es importante inseratrlo entre comillas:
 
 ```{r}
-##Letra
+
 "W"
 
-##Palabra
+
 "Variable"
 
-##Frase
+
 "Linea de codigo"
 
-##Enunciado 
+
 "Esta linea de codigo se escribe entre comillas"
 ```
 
@@ -143,23 +142,19 @@ Un caso especial son los datos *faltantes*, a los cuales se les asigna el nombre
 Una variable es un espacio en la memoria de la computadora en donde se almacenan datos de cualquier tipo. Para crear o declarar una variable se utilizan los siguientes signos de asignación:
 
 ```{r}
-##Método tradicional
 numero <- 2
 texto <- "Pablito clavo un clavito"
 logico <- TRUE
 
-##Método alterno
 numero = -1
 texto = "Tres tristes tigres"
 logico = FALSE
 ```
 
-Se recomienda que utilices el método tradicional para evitar confusiones al momento de ingresar opciones en las funciones (más adelante).  
 Las variables que declares se almacenan en el cuadrante 3 que corresponde al **Entorno de variables**.  
 Con las variables numéricas es posible realizar las operaciones algebraicas previamente mencionadas:
 
 ```{r}
-##Como primer paso, declara las variables
 numero_1 <- 203
 numero_2 <- 64
 ```
@@ -167,26 +162,22 @@ numero_2 <- 64
 Una vez que declares una variable, es posible que realices operaciones algebraicas entre ellas. Además, es posible que verifiques el tipo de dato que almacena la variable y las concatenes:
 
 ```{r}
-##Declara las variables
 galon <- 3.785
 litros <- 5
 conv <- litros/galon
 
-##Verifica la clase de cada variable
 class(galon)
 class(litros)
 class(conv)
 
-paste("Ayer compré", litros, "litros de nive de limon o", conv, "galones")
 ```
 
 
 
 <blockquote class="excercise">
-**Ejercicio 1**  
-1. Declara o crea cuatro variables que se llamen *altura* con un valor **1.50**, *masa* **47**, *unidad1* **metros** y *unidad2* **kilogramos**  
-2. Obten el índice de masa corporal dividiendo la masa entre el cuadrado de la altura y almacena este valor en una nueva variable llamada **IMC**  
-3. Verifica la clase que tienen las variables *altura*, *masa*, *unidad1* e *IMC*  
+<strong>Ejercicio 1</strong>  
+`r fa("chalkboard-user", fill="#182fdc")` Visita la siguiente liga y resuelve el <a href="https://rchavezdominguez.shinyapps.io/Quiz_1/" target="_blank">ejercicio</a>
+
 </blockquote>
 
 <h1 class="header"><font color="#6F7479">4</font> Datos complejos</h1>
@@ -206,17 +197,17 @@ knitr::include_graphics("../Images/Data_structure.png")
 Los vectores son grupos de datos acomodados en **una sola dimensión**. Pueden ser descritos como una lista de datos numéricos, lógicos o de texto. Para crear un vector utiliza la función concatenar `c()` y dentro del parentesis coloca los datos separados por comas:
 
 ```{r}
-##Crea un vector con datos numéricos
+##vector con datos numéricos
 c(1, 3, 5, 7, 9, 11)
-##Con datos lógicos
+##datos lógicos
 c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
-##Con datos de texto
+##datos de texto
 c("gato", "leon", "puma", "jaguar", "ocelote", "tigre")
 ```
 
 Es posible declarar una variable que contenga datos dentro de un vector:
 ```{r}
-##Declara una variable para almacenar el vector
+
 volumenes <- c(2.3, 4.5, 9.0, 10.6, 1.3)
 volumenes
 
@@ -227,47 +218,7 @@ visitas <- c(TRUE, FALSE, FALSE, TRUE, FALSE)
 visitas
 ```
 
-
-<h2><font color="#6F7479">4.2</font> Propiedades de los vectores</h2>
-Los vectores al ser listas de datos tienen asociadas ciertas propiedades que son útiles al momento de de analizar datos. Por ejemplo, **la clase** de datos que contiene se obtiene con la función `class()`:
-```{r}
-class(volumenes)
-class(escencias)
-class(visitas)
-```
-
-El número de elementos que contiene el vector o **longitud** se obtiene con la function `length()`:
-```{r}
-length(volumenes)
-length(escencias)
-```
-
-Las veces que se repite un elemento en el vector, o **proporción**, se obtiene con la funcion `table()`:
-```{r}
-table(volumenes)
-table(visitas)
-```
-
-Cuando hay repetición de datos, aquellos denominados como **unicos** se obtienen con la función `unique()`:
-```{r}
-##Crea un vector con datos repetidos
-calificaciones <- c(4, 5, 8, 8, 9, 6, 6, 6, 3, 10, 3, 3, 2, 2, 8)
-##Obten los valores unicos del vector
-unique(calificaciones)
-```
-
-Para **ordenar** los elementos de un vector (numerico o de texto) se emplea la función `sort()`:
-```{r}
-##La funcion sort() ordena los elementos de forma ascendente por default
-sort(calificaciones)
-sort(escencias)
-
-##Para ordenar de forma descendente, coloca la opción decreasing = T
-sort(calificaciones, decreasing = T)
-sort(escencias, decreasing = T)
-```
-
-<h2><font color="#6F7479">4.3</font> Creación de vectores con secuencias o elementos repetidos</h2>
+<h2><font color="#6F7479">4.2</font> Creación de vectores con secuencias o elementos repetidos</h2>
 En R, es posible crear vectores con secuencias numéricas regulares que inicien en un número y finalicen en otro. La manera más sencilla de hacerlo es utilizando dos puntos que separen el primer y el último número de la secuencia:
 ```{r}
 ##Generar una secuencia numérica que inicie en el número 1 y finalice en el número 70
@@ -300,6 +251,44 @@ rep("a", 25)
 rep(c("D1", "D15", "D40", "D100"), 50)
 ##La opción each nos permite repetir cada elemento las veces que se indica, colocando de manera consecutiva las repeticiones
 rep(c("D1", "D15", "D40", "D100"), each = 4)
+```
+
+<h2><font color="#6F7479">4.3</font> Propiedades de los vectores</h2>
+Los vectores al ser listas de datos tienen asociadas ciertas propiedades que son útiles al momento de de analizar datos. Por ejemplo, **la clase** de datos que contiene se obtiene con la función `class()`:
+```{r}
+class(volumenes)
+class(escencias)
+class(visitas)
+```
+
+El número de elementos que contiene el vector o **longitud** se obtiene con la function `length()`:
+```{r}
+length(volumenes)
+length(escencias)
+```
+
+Las veces que se repite un elemento en el vector, o **proporción**, se obtiene con la funcion `table()`:
+```{r}
+table(volumenes)
+table(visitas)
+```
+
+Cuando hay repetición de datos, aquellos denominados como **unicos** se obtienen con la función `unique()`:
+```{r}
+##Crea un vector con datos repetidos
+calificaciones <- c(4, 5, 8, 8, 9, 6, 6, 6, 3, 10, 3, 3, 2, 2, 8)
+##Obten los valores unicos del vector
+unique(calificaciones)
+```
+
+Para **ordenar** los elementos de un vector (numerico o de texto) se emplea la función `sort()`:
+```{r}
+sort(calificaciones)
+sort(escencias)
+
+##Para ordenar de forma descendente, coloca la opción decreasing = T
+sort(calificaciones, decreasing = T)
+sort(escencias, decreasing = T)
 ```
 
 <h2><font color="#6F7479">4.4</font> Manipulación de vectores</h2>
