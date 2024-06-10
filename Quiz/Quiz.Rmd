@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-## Ejercicios de código
+## Ejercicios de código 1
 
 ### Ejercicio 1
 
@@ -24,3 +24,22 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
+## Ejercicios de código 2
+
+### Ejercicio 2
+
+- Genera un vector llamado v3 con una numeración del 0 al 200 separando las cifras por 10 valores 
+
+- Obten la clase, longitud, proporción y elementos únicos.  
+
+- Ordena los elementos de menor a mayor
+
+- Extrae los elementos 1, 3, 7 y 8 
+
+- Extrae los elementos del 2 al 9  
+
+- Extrae los elementos que sean mayores o iguales a 40 y menores o iguales a 120
+
+```{r vectores, exercise=TRUE, exercise.eval=TRUE, exercise.lines = 5}
+
+```
