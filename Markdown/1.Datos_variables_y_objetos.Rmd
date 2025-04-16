@@ -437,7 +437,7 @@ colnames(mi_matriz)
 ```
 
 <h2><font color="#6F7479">5.2</font> Manipulación de matrices</h2>
-Al igual que los vectores, es posible extraer datos o hacer *"subseting"* en una matriz. Los datos a extraer pueden ser individuales, filas o columnas enteras. Para ello, usaremos el mismo procedimiento que con los vectores. En corchetes colocamos el índice de las **filas** seguido por el índice de las **columnas** y separados por comas:
+Al igual que los vectores, es posible extraer datos o hacer *subseting* en una matriz. Los datos a extraer pueden ser individuales, filas o columnas enteras. Para ello, usaremos el mismo procedimiento que con los vectores. En corchetes colocamos el índice de las **filas** seguido por el índice de las **columnas** y separados por comas:
 ```{r}
 ##Extrae la primera fila de la matriz
 mi_matriz[1, ]
@@ -497,10 +497,10 @@ t(mi_matriz)
 
 <blockquote class="excercise">
 **Ejercicio 3**  
-1. Genera una matriz con los números del 5 al 24 de 5 filas x 4 columnas  
-2. Asigna el nombre de las filas y de las columnas a la matriz. Las filas nombralas como f1, f2, f3, etcétera y las columnas como c1, c2, c3, ...  
-3. Extrae los elementos de la fila 2 y después los de la columna 4  
+`r fa("chalkboard-user", fill="#182fdc")` Visita la siguiente liga y resuelve el <a href=" https://rchavezdominguez.shinyapps.io/Quiz_3/" target="_blank">ejercicio</a>
 </blockquote>
+
+
 
 <h1 class="header"><font color="#6F7479">6</font> Data Frame</h1>
 
