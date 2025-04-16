@@ -367,10 +367,10 @@ v1[v1 <= 5 | v1 >= 15]
 </blockquote>
 
 <h1 class="header"><font color="#6F7479">5</font> Matrices</h1>
-Las matrices en R representan arreglos en **dos dimensiones** n y m,, que contienen datos de la misma clase y en donde: 
+Las matrices en R representan arreglos en **dos dimensiones** n y m, que contienen datos de la misma clase y en donde: 
 **n** es el número de filas y **m** de columnas.
 
-Las matrices pueden verse como la unión de dos o más vectores que contienen datos de las distintas clases. Para crear una matriz corremos la función `matrix()` e indicando el número de filas y columnas con las opciones `nrow` y `ncol`, respectivamente:
+Las matrices pueden entenderse como la unión de dos o más vectores que contienen datos de las distintas clases. La función `matrix()` crea matrices indicando el número de filas y columnas con las opciones `nrow` y `ncol`, respectivamente:
 
 ```{r}
 ##Crea una matriz con doce elementos consecutivos ordenados en una sola columna
@@ -437,7 +437,7 @@ colnames(mi_matriz)
 ```
 
 <h2><font color="#6F7479">5.2</font> Manipulación de matrices</h2>
-Al igual que los vectores, es posible extraer datos o hacer "subseting" en una matriz. Los datos a extraer pueden ser individuales, filas o columnas enteras. Para ello, usaremos el mismo procedimiento que con los vectores. En corchetes colocamos el índice de las **filas** seguido por el índice de las **columnas** y separados por comas:
+Al igual que los vectores, es posible extraer datos o hacer *"subseting"* en una matriz. Los datos a extraer pueden ser individuales, filas o columnas enteras. Para ello, usaremos el mismo procedimiento que con los vectores. En corchetes colocamos el índice de las **filas** seguido por el índice de las **columnas** y separados por comas:
 ```{r}
 ##Extrae la primera fila de la matriz
 mi_matriz[1, ]
@@ -486,7 +486,7 @@ Como lo habras notado la función `which()` nos devuelve resultados de manera *c
 - Cuando preguntas cuáles elementos de una <em class="red">columna</em> cumplen o no una condición el resultado son índices de <em class="green">filas</em>  
 - Cuando preguntas cuáles elementos de una <em class="red">fila</em> cumplen o no una condición el resultado son índices de <em class="green">columnas</em>  
 
-En ocasiones, resulta útil **transponer** los datos en una matriz, es decir, convertir filas en columnas y viceversa. La función `t()` nos permite realizar dicha operación:
+La transposición de matrices es útil cuando se desea convertir filas en columnas y viceversa. La función `t()` nos permite realizar dicha operación:
 ```{r}
 #V#isualiza la estructura original de la matriz
 mi_matriz
