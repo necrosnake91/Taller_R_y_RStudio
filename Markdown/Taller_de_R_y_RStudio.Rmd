@@ -47,7 +47,7 @@ Las bases del desarrollo de R se remontan a los años 70 cuando en los laborator
 ```{r, fig.align='center', out.width="600", echo=FALSE}
 knitr::include_graphics("../Images/R_time_line.png")
 ```
-<p class="footnote">Historia del desarrollo de R. Tomada de [@giorgiLanguageEngineBioinformatics2022]</p>
+<p class="footnote">Historia del desarrollo de R. Tomada de [@giorgi_r_2022]</p>
 
 Actualmente, **`R`** se encuentra alojado en la web dentro del repositorio <a href="https://cran.r-project.org/" target="_blank">CRAN</a> (*Comprehensive R Archive Network*). Por default, **`R`** se instala con 14 paquetes base dentro de los cuales destacan `base`, `compiler`, `datasets`, `graphics`, `stats`, entre otros. Sin embargo en el repositorio CRAN se aloja el código para que descargues todos los paquetes que requieras para tus análisis.
 
@@ -101,6 +101,7 @@ Desde el menú principal puedes crear, salvar o abrir un nuevo script. Asímismo
 ```{r, echo=FALSE, fig.show='hold', out.width="70%", fig.align='center'}
 knitr::include_graphics("../Images/RStudio_cheat.jpg")
 ```
+<p class="footnote">Guía rápida de RStudio. Tomada de [@RStudioIDECheatsheet]</p>
 
 <blockquote class="excercise">
 <strong>Ejercicio 1</strong>  
